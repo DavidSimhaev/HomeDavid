@@ -6,10 +6,6 @@ datahelp = DataHelp()
 
 
 
-
-
-
-
 def main(page: Page):
     
     page.window_width = 1000 
