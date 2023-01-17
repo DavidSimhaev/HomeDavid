@@ -30,7 +30,11 @@ while True:
     print('1)income grouped by business for all period, \n2)income  grouped by years for all period\n3)maximum income of a month in a year')
     choice = input('Enter your choice: ')
     if choice == '1':
+<<<<<<< HEAD
         query = 'SELECT business, sum(income) from predicator.train group by business order by business;'
+=======
+        query = 'SELECT sum(income), business from predicator.train group by business order by business;'
+>>>>>>> c335fb768606763bd81c6e933e0430d7101617fe
         l = dataHelp.executeQuery(query)
         print(l)
         pass

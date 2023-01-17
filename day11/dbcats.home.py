@@ -50,7 +50,10 @@ ddd = {}
 for k in groupby(cats, key = lambda x: x[0]):
     ddd[k[0]] = list(map(lambda e: e[3], k[1]))
 print(ddd)
+<<<<<<< HEAD
 print(cats)
+=======
+>>>>>>> c335fb768606763bd81c6e933e0430d7101617fe
 print(newcats)
 
 
