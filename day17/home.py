@@ -7,25 +7,30 @@ from superclassapi import GetFromApi
 
 url = "https://datausa.io/api"
 method = "data"
-parameters = {'drilldowns': 'State', 'measures': 'Population', 'year': '2018'}
+parameters = {"drilldowns": "State", "measures": "Population", "year": "2018"}
 
-l = GetFromApi(url).addMethod(method=method, parameters=parameters).GetDataFromApi().GetValueFromKey("data")
+l = (
+    GetFromApi(url)
+    .addMethod(method=method, parameters=parameters)
+    .GetDataFromApi()
+    .GetValueFromKey("data")
+)
 
 
-
-state =[]
+state = []
 for x in l:
     state.append(x["State"])
 
-poplation =[]
+poplation = []
 for y in l:
     poplation.append(y["Population"])
 
-fig, axs = plt.subplots(1,1)
-axs.bar(state, height= poplation)
-axs.set_xlabel("Штат", fontsize = 14,)
-axs.set_ylabel("Популяция", fontsize = 14)
+fig, axs = plt.subplots(1, 1)
+axs.bar(state, height=poplation)
+axs.set_xlabel(
+    "Штат",
+    fontsize=14,
+)
+axs.set_ylabel("Популяция", fontsize=14)
 plt.xticks(state, rotation=90)
 plt.show()
-
-
