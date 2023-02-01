@@ -14,5 +14,17 @@ def Incomes(request):
 
 def year(request):
     year = Year.objects.all()
-    context = {"Year": year}
-    return render(request, "FinancesAppCount/income.html", context)
+    context = {"Year":year}
+    
+    return render(request, "FinancesAppCount/yearincome.html", context)
+
+
+
+
+#def year(request, year_id):
+    year = Year.objects.get(year=year_id)
+    idY = year.id
+    incomes = Income.objects.filter(year=idY)
+    entries = incomes.order_by('income')
+    context = {"Year":year,"yearincome": entries}
+    return render(request, "FinancesAppCount/yearincome.html", context) # Здесь возращаем запрос, 

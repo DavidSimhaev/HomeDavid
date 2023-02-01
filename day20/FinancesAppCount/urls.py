@@ -9,5 +9,6 @@ urlpatterns = [
     #Home Page
     path("", views.index, name= "index"),
     path("incomes/",views.Incomes, name ="incomes"),
-    path("income/",views.year, name ="income")
+    path("yearincome/", views.year, name ="yearincome")
 ]
+

@@ -2,11 +2,10 @@
 {% block content %}
   <p>Year</p>
   <ul>
-    {% for income in Year %}
-    <p><a href="{% url 'FinancesAppCount:income' %}">{{ income }}</a></p>
+    {% for yearincome in Year %}
+    <p><a href="{% url 'FinancesAppCount:yearincome' %}">{{ yearincome }}</a></p>
     {% empty %}
       <li>No topics have been added yet.</li>
     {% endfor %}
   </ul>
 {% endblock content %}
-
