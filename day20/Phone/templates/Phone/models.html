@@ -1,0 +1,14 @@
+{% extends "Phone/base.html" %}
+{% block content %}
+  <p>Year</p>
+  <ul>
+    {% for model in MODELS %}
+        <li>
+            <p>{{ model }}</p>  
+        </li>
+    {% empty %}
+      <li>No have models, check letter.</li>
+    {% endfor %}
+  </ul>
+{% endblock content %}
+

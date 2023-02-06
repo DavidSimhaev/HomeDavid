@@ -1,0 +1,11 @@
+{% extends "Phone/base.html" %}
+{% block content %}
+  <p>Recording</p>
+  <ul>
+    {% for allrecording in RECORDING %}
+      <li>{{ allrecording }}</li>
+    {% empty %}
+      <li>No topics have been added yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

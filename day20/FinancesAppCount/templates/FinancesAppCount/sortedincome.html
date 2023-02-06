@@ -2,10 +2,13 @@
 {% block content %}
   <p>Year</p>
   <ul>
-    {% for year in YEARS %}
-    <p><a href="{% url 'FinancesAppCount:mlist' year.id %}">{{ year }}</a></p>
+    {% for income in incomes %}
+        <li>
+            <p>{{ income }}</p>  
+        </li>
     {% empty %}
       <li>No topics have been added yet.</li>
     {% endfor %}
   </ul>
 {% endblock content %}
+
