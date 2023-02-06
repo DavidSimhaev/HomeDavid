@@ -3,7 +3,7 @@
   <p></p>
   <ul>
     {% for models in ALLMODELS %}
-    <p><a href="{% url 'Phone:model' %}">{{ models }}</p>
+    <p>{{ models }}</p>
     {% empty %}
       <li>No have phones, check letter.</li>
     {% endfor %}
