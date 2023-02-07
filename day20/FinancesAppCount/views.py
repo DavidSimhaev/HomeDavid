@@ -29,7 +29,7 @@ def yearswithincome(request):
         yunit = Year.objects.get(id=i["year"])
         s.append(yunit)
     s = set(s)
-    #s = list(s)
+    # s = list(s)
     mapper = {"YEARS": s}
     return render(request, "FinancesAppCount/yearincome.html", mapper)
 
@@ -40,7 +40,7 @@ def monthwithincome(request, year_id):
     for income in m:
         months.append(income.month)
     months = set(months)
-    #months = list(months)
+    # months = list(months)
     # month.sort()
     mapper = {"MONTHS": months, "yearid": year_id}
     return render(request, "FinancesAppCount/monthincome.html", mapper)

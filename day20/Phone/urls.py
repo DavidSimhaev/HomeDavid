@@ -11,9 +11,5 @@ urlpatterns = [
     path("date/", views.allPhones, name="date"),
     path("brand/", views.allBrand, name="brand"),
     path("model/<str:brand_id>", views.choicemodel, name="Choisemodel"),
-    path("spicmodel/", views.model, name="model")
-    
-    
-    
-    
+    path("spicmodel/", views.model, name="model"),
 ]

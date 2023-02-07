@@ -1,6 +1,6 @@
 {% extends "Phone/base.html" %}
 {% block content %}
-  <p>Brand</p>
+  <p></p>
   <ul>
     {% for brand in ALLBRAND %}
     <p><a href="{% url 'Phone:Choisemodel' brand.id %}">{{ brand }}</a></p>

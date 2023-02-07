@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from .models import Brand, Model, Color, Recording
+
 # Create your views here.
+
 
 def index(request):
     """Home page of application"""
     return render(request, "Phone/index.html")
+
 
 def allPhones(request):
     recording = Recording.objects.order_by("date_added")
@@ -20,7 +23,8 @@ def allBrand(request):
         listbrand.append(bunit)
     listbrand = set(listbrand)
     mapper = {"ALLBRAND": listbrand}
-    return render(request, "Phone/allbrand.html", mapper )
+    return render(request, "Phone/allbrand.html", mapper)
+
 
 def choicemodel(request, brand_id):
     r = Recording.objects.filter(brand=brand_id)
@@ -29,10 +33,10 @@ def choicemodel(request, brand_id):
         models.append(i.model)
     models = set(models)
     mapper = {"ALLMODELS": models}
-    return render(request, "Phone/allmodels.html", mapper )
+    return render(request, "Phone/allmodels.html", mapper)
 
 
 def model(request, brand, model):
-    models= Recording.objects.filter(brand=brand, model=model)
+    models = Recording.objects.filter(brand=brand, model=model)
     mapper = {"MODELS": models}
     return render(request, "Phone/models.html", mapper)
