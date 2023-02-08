@@ -10,6 +10,6 @@ class TempForm(forms.ModelForm):
         
 class BreedForm(forms.ModelForm):
     class Meta:
-        model = Breed # Я застрял
+        model = Price # Я застрял
         fields = ['breed']
         labels = {'breed': ''}
