@@ -1,9 +1,10 @@
 {% extends "Cats/base.html" %}
 {% block content %}
-  <p>All breed of Cats</p>
+  <p>Порода котиков</p>
   <ul>
     {% for breed in BREED %}
-    <p><a href="{% url 'Cats:statetemperament' breed.id %}">{{ breed }}</a></p>
+    <p>Порода:{{ breed.breed }}<br>
+      Характер:{{ breed.temperament}}</p>
     {% empty %}
       <li>No breed have been added yet.</li>
     {% endfor %}

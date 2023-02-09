@@ -1,15 +1,31 @@
 from django import forms
 
-from .models import Temperament, Breed, Price
+from .models import Temperament, Breed, Color, Price
 
+
+class ColorForm(forms.ModelForm):
+    class Meta:
+        model = Color
+        fields = ["color"]
+        labels = {"Color": "Цвет"}
+        
+        
+        
 class TempForm(forms.ModelForm):
     class Meta:
         model = Temperament
         fields = ['temperament']
-        labels = {'temperament': ''}
+        labels = {'temperament': 'Характер'}
         
 class BreedForm(forms.ModelForm):
     class Meta:
-        model = Price # Я застрял
-        fields = ['breed']
-        labels = {'breed': ''}
+        model = Breed # Я застрял
+        fields = ['temperament','breed']
+        labels = {'breed': 'Порода', "temperament": "Характер"}
+        
+class CatForm(forms.ModelForm):
+    class Meta:
+        model = Price
+        fields = ['breed',"color", "age", "price"]
+        labels = {"breed": "Порода","color": "Окрас","age": "Возраст","price": "Цена"}
+        

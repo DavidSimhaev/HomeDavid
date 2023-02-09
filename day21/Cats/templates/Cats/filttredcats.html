@@ -1,0 +1,13 @@
+{% extends "Cats/base.html" %}
+{% block content %}
+  <p>Витрина</p>
+  <ul>
+    {% for cat in LISTBYCOLOR %}
+      <p>{{ cat }}</p>
+    {% empty %}
+      <li>На витрине нет котов, приходите позже.</li>
+    {% endfor %}
+  </ul>
+
+
+{% endblock content %}

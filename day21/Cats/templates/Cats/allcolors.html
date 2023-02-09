@@ -1,0 +1,19 @@
+{% extends "Cats/base.html" %}
+{% block content %}
+  <p>Окрасы</p>
+  <ul>
+    {% for temp in COLORS %}
+    <p>
+      {% if temp.n > 0 %}
+        {{ temp.color }} 
+         <a href = "{% url "Cats:catsbyColor" temp.color.id %}">{{ temp.text }}</a>
+      {% else %}
+         {{ temp.n }}
+      {% endif %}
+     </p>
+    {% empty %}
+      <li>No color have been added yet.</li>
+    {% endfor %}
+  </ul>
+  <p><a href="{% url "Cats:addColor" %}">Добавить окрас</a></p>
+{% endblock content %}

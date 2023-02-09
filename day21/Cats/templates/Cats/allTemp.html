@@ -1,0 +1,14 @@
+{% extends "Cats/base.html" %}
+{% block content %}
+  <p>Характер котов</p>
+  <ul>
+    {% for temp in TEMP %}
+    <p>{{ temp }}</p>
+    {% empty %}
+      <li>No breed have been added yet.</li>
+    {% endfor %}
+  </ul>
+
+  <p><a href="{% url "Cats:addTemp" %}">Add new Temperament</a></p>
+
+{% endblock content %}

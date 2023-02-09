@@ -1,7 +1,8 @@
 
 from django.shortcuts import render, redirect
-from .models import Breed, Temperament, Color, Age, Price
-from .forms import TempForm, BreedForm
+from .models import Breed, Temperament, Color, Price
+from .forms import TempForm, BreedForm, ColorForm, CatForm
+from .Colorplus import ColorPlus
 
 
 
@@ -11,27 +12,50 @@ def index(request):
 
 
 def allbreed(request):
-    breed = Price.objects.values("breed")
-    listbreed = []
-    for i in breed:
-        breedunit = Breed.objects.get(id=i["breed"])
-        listbreed.append(breedunit)
-    listbreed = set(listbreed)
-    mapper = {"BREED": listbreed}
+    breedname = Breed.objects.all()
+    mapper = {"BREED": breedname }
     return render(request, "Cats/allbreed.html", mapper)
+
+
+def allTemp(request):
+    temps = Temperament.objects.all()
+    mapper = {"TEMP": temps }
+    return render(request, "Cats/allTemp.html", mapper)
+
+def allColor(request):
+    temps = Color.objects.all()
+    catsnumbers = []
+    for color in temps:
+        c = ColorPlus()
+        c.color = color
+        c.text = "<-Есть в наличии"
+        c.n = Price.objects.filter(color=color.id).count()
+        if c.n == 0:
+            c.n = ""
+        catsnumbers.append(c)
+    mapper = {"COLORS": catsnumbers}
+    return render(request, "Cats/allcolors.html", mapper)
+
+
+
+def allcats(request):
+    listcats = Price.objects.all()
+    mapper = {"CATS": listcats}
+    return render(request, "Cats/date_cats.html", mapper)
+
+
+def catsbycolor(request, color_id):
+    listcats = Price.objects.filter(color=color_id)
+    mapper = {"LISTBYCOLOR": listcats}
+    return render(request, "Cats/filttredcats.html" ,mapper)
+    
 
 
 def statetemperament(request, breed_id):
     b = Price.objects.filter(breed=breed_id)
     temper = []
-    for i in b:
-        temper.append(i.temperament)
-    temper = set(temper)
-    mapper = {"TEMPERAMENTS": temper}
+    mapper = {"TEMPERAMENTS": b}
     return render(request, "Cats/Temp.html", mapper)
-
-
-
 
 
 
@@ -61,8 +85,38 @@ def add_temp(request):
         form = TempForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect("Cats:statetemperament")
+            return redirect("Cats:allTemp")
 
     mapper= {"FORM": form}
     return render(request, "Cats/addTemp.html", mapper)
+
+
+def add_color(request):
+    
+    if request.method != "POST":
+        # NO DATE IN REQUEST
+        form = ColorForm()
+    else:
+        form = ColorForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("Cats:allColor")
+
+    mapper= {"FORM": form}
+    return render(request, "Cats/addColor.html", mapper)
+
+def add_cat(request):
+    
+    if request.method != "POST":
+        # NO DATE IN REQUEST
+        form = CatForm()
+    else:
+        form = CatForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("Cats:allCats")
+
+    mapper= {"FORM": form}
+    return render(request, "Cats/addCat.html", mapper)
+
 

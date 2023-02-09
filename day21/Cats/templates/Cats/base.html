@@ -1,5 +1,13 @@
-<p><a href="{% url 'Cats:index' %}">This is sait for Cats</a></p>
-<p><a href="{% url 'Cats:allbreed' %}">Breed</a></p>
+<p><a href="{% url 'Cats:index' %}">Information Cats </a></p>
+<p>
+    <a href="{% url 'Cats:allTemp' %}">Характер</a>
+    <a href="{% url 'Cats:allbreed' %}">Порода</a>
+    <a href="{% url 'Cats:allColor' %}">Окрас</a>
+    <a href="{% url 'Cats:allCats' %}">Витрина</a>
+    
+
+
+</p>
 
 {% block content %}{% endblock content %}
 

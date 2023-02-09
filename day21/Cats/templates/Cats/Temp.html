@@ -3,7 +3,7 @@
   <p></p>
   <ul>
     {% for temperament in TEMPERAMENTS %}
-    <p>{{ temperament }}</p>
+    <p>Возраст: {{ temperament.age }} Цвет: {{ temperament.color }} Цена: {{ temperament.price }}</p>
     {% empty %}
       <li>No have temperament, check letter.</li>
     {% endfor %}
