@@ -16,8 +16,9 @@ def all_cat(request):
     return render(request,"Cats/allcats.html", mapper)
 
 
-def catsbycolor(request, color_name):
-    listcats= Price.objects.get(color=f"{color_name}")
+def catsbycolor(request,color_name):
+    
+    listcats= Price.objects.filter(color=color_name)
     
     
     

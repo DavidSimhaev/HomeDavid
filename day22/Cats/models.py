@@ -10,6 +10,5 @@ class Price(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=10, primary_key=False)
     
     date_added = models.DateTimeField(auto_now_add=True, primary_key=False)
-
     def __str__(self):
-        return f"Порода: {self.breed} Характер: {self.temperament} Окрас: {self.color} Возрас: {self.age} ЦЕНА: {self.price}"    
+        return f"Порода: {self.breed} Характер: {self.temperament} Окрас: {self.color} Возраст: {self.age} ЦЕНА: {self.price}"    
