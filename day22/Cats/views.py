@@ -1,14 +1,23 @@
 from django.shortcuts import render, redirect
-from .models import Price     
-from .forms import PriceForm
+from .models import Price, Image
+from .forms import PriceForm, ResumeForm, ImageForm
 from .ColorsPlus import ColorPlus
 from itertools import groupby
 from django.db.models import Count
+from django.http import HttpResponseRedirect
+
 # Create your views here.
+
+
+
+
+
 
 def index(request):
     """Home page of application"""
     return render(request, "Cats/index.html")
+
+
 
 def all_cat(request):
     Cats = Price.objects.all()
@@ -44,8 +53,6 @@ def all_color(request):
 
 
 
-
-
 def add_cat(request):
     
     if request.method != "POST":
@@ -59,3 +66,26 @@ def add_cat(request):
     return render(request, "Cats/add_Cat.html", mapper)
         
     
+
+
+
+
+def upload_resume(request):
+    if request.method == 'POST':
+        form = ResumeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("Cats:allCats")
+    else:
+        form = ResumeForm
+        
+    mapper = {'form':form}
+    return render(request, 'Cats/upload.html', mapper)
+
+
+
+def upload_images(request):
+    if request.method == 'GET':
+        images = Image.objects.order_by('title')
+        return render(request, "Cats/images.html", {"images": images })
+

@@ -1,0 +1,15 @@
+{% for image in images %}
+<div>
+   {{ image.title }}
+</div>
+<div>
+   <img src="{{ image.image.url }}" >
+</div>
+{% endfor %}
+
+
+
+{% block additional_style %}
+<style>
+    body {background-color:aquamarine;}
+{% endblock additional_style %}
