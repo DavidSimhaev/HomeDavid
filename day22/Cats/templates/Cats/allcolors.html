@@ -7,10 +7,6 @@
       
       {{ c.color }} есть в наличии кол:{{ c.n }} <a href = "{% url "Cats:catbycolor" c.color %}">{{ c.text }}</a>
       
-      
-      
-      
-     
     </p>
     {% empty %}
       <li>No cats have been added yet.</li>

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "FinancesAppCount",
     "Cats",
     "django.contrib.admin",
     "django.contrib.auth",

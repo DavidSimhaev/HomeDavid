@@ -1,0 +1,11 @@
+{% extends "FinancesAppCount/base.html" %}
+{% block content %}
+  <p>Incomes</p>
+  <ul>
+    {% for income in incomes %}
+      <li>{{ income }}</li>
+    {% empty %}
+      <li>No topics have been added yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

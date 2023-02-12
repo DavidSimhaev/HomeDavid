@@ -1,0 +1,14 @@
+{% extends "FinancesAppCount/yearincome.html" %}
+{% block content %}
+  <p>Year</p>
+  <ul>
+    {% for month in MONTHS %}
+        <li>
+            <p><a href="{% url 'FinancesAppCount:ilist' yearid month.id %}">{{ month }}</a></p>  
+        </li>
+    {% empty %}
+      <li>No topics have been added yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock content %}
+

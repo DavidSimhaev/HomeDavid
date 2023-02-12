@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Price, Image
 from .forms import PriceForm, ResumeForm, ImageForm
 from .ColorsPlus import ColorPlus
+from .urlsPlus import urlsPlus
+
 from itertools import groupby
 from django.db.models import Count
 from django.http import HttpResponseRedirect
@@ -25,18 +27,25 @@ def all_cat(request):
     return render(request,"Cats/allcats.html", mapper)
 
 
-def catsbycolor(request,color_name):
+def catsbycolor(request, color_name):
+    catsbycolors= Price.objects.filter(color=color_name)
+    cat =[]
     
-    listcats= Price.objects.filter(color=color_name)
+    for cats in catsbycolors:
+        lc = urlsPlus()
+        lc.filterby = cats
+        lc.text = "Добавить картинку"
+        cat.append(lc)
+    if request.method == 'GET':
+        image =  Image.objects.filter(id=7)
     
-    
-    
-    mapper = {"LISTBYCOLOR": listcats}
+    mapper = {"LISTBYCOLOR": cat, "images": image}
     return render(request, "Cats/catsbycolor.html" ,mapper)
     
+    
 
-
-
+    
+    
 def all_color(request):
     colors = Price.objects.values("color").distinct()
     catnumber =[]
@@ -75,7 +84,7 @@ def upload_resume(request):
         form = ResumeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect("Cats:allCats")
+            return redirect("Cats:catbycolor")
     else:
         form = ResumeForm
         
@@ -87,5 +96,6 @@ def upload_resume(request):
 def upload_images(request):
     if request.method == 'GET':
         images = Image.objects.order_by('title')
-        return render(request, "Cats/images.html", {"images": images })
+        mapper = {"images": images }
+        return render(request, "Cats/images.html", mapper)
 
