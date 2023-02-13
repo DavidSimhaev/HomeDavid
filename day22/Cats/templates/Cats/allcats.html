@@ -3,11 +3,11 @@
   <p>Все коты с картинками</p>
 
   {% for c in images %}
-    <p>{{ c.cats_id }}<span>{{ c.cats_id }}</span><div><img src="{{ c.image_id.image.url }}" ></div></p>
-    {% endfor %}
-    <div><img src="{{ c.image_id.image.url }}" ></div>
-
- 
+    <p>{{ c.cats_id }} 
+    
+     <div><img src="{{ c.image_id.image.url }}" ></div>
+    </p>
+  {% endfor %}
   
   <p><a href="{% url "Cats:addCat" %}">Добавить котенка</a></p>
 
