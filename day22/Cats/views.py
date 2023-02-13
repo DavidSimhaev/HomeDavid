@@ -20,10 +20,35 @@ def index(request):
     return render(request, "Cats/index.html")
 
 
-
 def all_cat(request):
-    Cats = Price.objects.all()
-    mapper = {"CATS": Cats}
+    
+    
+    
+    
+    Imagesbycat = []
+
+
+    
+    
+    if request.method == 'GET':
+        images = Image.objects.order_by('title')
+        cats_id = Image.objects.values('title')
+        for id_cat in cats_id:
+            c = urlsPlus()
+            c.cats_id = Price.objects.filter(id=id_cat["title"]) 
+            Imagesbycat.append(c)
+            
+             
+        for images_id in images:
+            c = urlsPlus()
+            c.image_id = images_id
+            Imagesbycat.append(c)   
+           
+  
+     
+    
+    
+    mapper = {"images": Imagesbycat}
     return render(request,"Cats/allcats.html", mapper)
 
 
@@ -38,6 +63,8 @@ def catsbycolor(request, color_name):
         cat.append(lc)
     if request.method == 'GET':
         image =  Image.objects.filter(id=7)
+        
+    
     
     mapper = {"LISTBYCOLOR": cat, "images": image}
     return render(request, "Cats/catsbycolor.html" ,mapper)
@@ -67,35 +94,12 @@ def add_cat(request):
     if request.method != "POST":
         form = PriceForm()
     else:
-        form = PriceForm(data=request.POST)
+        form = PriceForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect("Cats:allCats")
     mapper = {"FORM": form}
     return render(request, "Cats/add_Cat.html", mapper)
         
-    
 
-
-
-
-def upload_resume(request):
-    if request.method == 'POST':
-        form = ResumeForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect("Cats:catbycolor")
-    else:
-        form = ResumeForm
-        
-    mapper = {'form':form}
-    return render(request, 'Cats/upload.html', mapper)
-
-
-
-def upload_images(request):
-    if request.method == 'GET':
-        images = Image.objects.order_by('title')
-        mapper = {"images": images }
-        return render(request, "Cats/images.html", mapper)
 
