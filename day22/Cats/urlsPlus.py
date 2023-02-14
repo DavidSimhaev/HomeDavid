@@ -4,5 +4,6 @@ class urlsPlus():
     text : str
     cats_id : int
     image_id : str
+    spisok = []
         
     

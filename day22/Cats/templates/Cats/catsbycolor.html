@@ -5,13 +5,11 @@
   <p>Витрина</p>
   <ul>
     {% for cat in LISTBYCOLOR %} 
-      <p>{{ cat.filterby }} <a href="{% url 'Cats:files' %}"> {{ cat.text }}</a></p>
+      <p>{{ cat.filterby }}</p>
       {% for image in images %}
       <div>
-        {{ image.title }}
-      </div>
-      <div>
-        <img src="{{ image.image.url }}" >
+        <img src="{{c.image }}"height="250" style="max-width: 270px">       
+
       </div>
       {% endfor %}
     {% empty %}

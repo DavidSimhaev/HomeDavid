@@ -4,20 +4,14 @@ g = [{'color': 'Черный'}, {'color': 'Черный'}]
 d = list(map(lambda x: x[0] , groupby(g, key=lambda x: x["color"])  ))
 print(d)
 
+for (int i = 0; i < 10; i++)
+{
+    // Выводим одну строку из 10 звездочек.
+    for (int j = 0; j < 10; j++)
+    {
+        Console.Write("*");
+    }
 
-text = ['James\n', 'Peter, Paul, Mary\n','James\n']
-
-newlist = ['James', 'Fennimore', 'Cooper\n', 'Peter', 'Paul,', 'and', 'Mary\n',
-        'James', 'Gosling\n']
-
-
-
-newlist = []
-
-for item in text:
-    newlist.extend(item.split())
-    print(newlist)
-    
-
-          
-
+    // Переход на новую строку.
+    Console.WriteLine();
+}

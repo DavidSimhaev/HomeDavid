@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import Price, Breed, Resume, Image
+from .catwithimage import CatWithImage
 
 class BreedForm(forms.ModelForm):
    class Meta:
@@ -15,6 +16,9 @@ class PriceForm(forms.ModelForm):
         labels = {"breed": "Порода", "color": "Окрас", "age": "Возраст", "price": "ЦЕНА" }
 
 class ResumeForm(forms.ModelForm):
+
+
+
 
    class Meta:
       model = Resume

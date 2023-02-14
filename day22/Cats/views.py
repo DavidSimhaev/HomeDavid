@@ -3,6 +3,7 @@ from .models import Price, Image
 from .forms import PriceForm, ResumeForm, ImageForm
 from .ColorsPlus import ColorPlus
 from .urlsPlus import urlsPlus
+from .catwithimage import CatWithImage
 
 from itertools import groupby
 from django.db.models import Count
@@ -20,33 +21,15 @@ def index(request):
     return render(request, "Cats/index.html")
 
 
-def all_cat(request):
-    
-    
-    
-    
+def all_cat(request):    
     Imagesbycat = []
 
-
-    
-    
-    if request.method == 'GET':
-        images = Image.objects.order_by('title')
-        cats_id = Image.objects.values('title')
-        for id_cat in cats_id:
-            c = urlsPlus()
-            c.cats_id = Price.objects.filter(id=id_cat["title"]) 
-            Imagesbycat.append(c)
-            
-             
-        for images_id in images:
-            c = urlsPlus()
-            c.image_id = images_id
-            Imagesbycat.append(c)   
-           
-  
-     
-    
+    cats_images = Image.objects.all()
+    for image in cats_images:
+        cwi = CatWithImage()          
+        cwi.cat = Price.objects.get(id=image.id)
+        cwi.image = "/media/"+image.image.path
+        Imagesbycat.append(cwi)
     
     mapper = {"images": Imagesbycat}
     return render(request,"Cats/allcats.html", mapper)
@@ -92,14 +75,20 @@ def all_color(request):
 def add_cat(request):
     
     if request.method != "POST":
-        form = PriceForm()
+        catform = PriceForm()
+        imageform = ImageForm()
     else:
-        form = PriceForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        catform = PriceForm(request.POST)
+        imageform = ImageForm(request.POST, request.FILES)
+        
+        if catform.is_valid() and imageform.is_valid()  :
+            catform.save()
+            imageform.save()
             return redirect("Cats:allCats")
-    mapper = {"FORM": form}
+    mapper = {"catform": catform, "imageform": imageform}
     return render(request, "Cats/add_Cat.html", mapper)
         
 
+
+        
 
