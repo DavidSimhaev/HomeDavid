@@ -6,12 +6,10 @@
   <ul>
     {% for cat in LISTBYCOLOR %} 
       <p>{{ cat.filterby }}</p>
-      {% for image in images %}
+      <p>{{ cat.cats_id }}</p>
       <div>
-        <img src="{{c.image }}"height="250" style="max-width: 270px">       
-
+        <img src="{{cat.images }}"height="250" style="max-width: 270px">       
       </div>
-      {% endfor %}
     {% empty %}
       <li>На витрине нет котов, приходите позже.</li>
     {% endfor %}

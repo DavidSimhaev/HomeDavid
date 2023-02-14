@@ -42,14 +42,12 @@ def catsbycolor(request, color_name):
     for cats in catsbycolors:
         lc = urlsPlus()
         lc.filterby = cats
-        lc.text = "Добавить картинку"
+        lc.cats_id = Image.objects.get(id=cats.id)
+        lc.images="/media/"+lc.cats_id.image.path
         cat.append(lc)
-    if request.method == 'GET':
-        image =  Image.objects.filter(id=7)
-        
     
     
-    mapper = {"LISTBYCOLOR": cat, "images": image}
+    mapper = {"LISTBYCOLOR": cat}
     return render(request, "Cats/catsbycolor.html" ,mapper)
     
     
