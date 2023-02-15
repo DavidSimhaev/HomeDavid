@@ -4,7 +4,7 @@ from .forms import PriceForm, ResumeForm, ImageForm
 from .ColorsPlus import ColorPlus
 from .urlsPlus import urlsPlus
 from .catwithimage import CatWithImage
-
+from django.contrib.auth.decorators import login_required
 from itertools import groupby
 from django.db.models import Count
 from django.http import HttpResponseRedirect
@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 
 
-
+ 
 
 
 
@@ -20,7 +20,7 @@ def index(request):
     """Home page of application"""
     return render(request, "Cats/index.html")
 
-
+@login_required
 def all_cat(request):    
     Imagesbycat = []
 
@@ -34,7 +34,7 @@ def all_cat(request):
     mapper = {"images": Imagesbycat}
     return render(request,"Cats/allcats.html", mapper)
 
-
+@login_required
 def catsbycolor(request, color_name):
     catsbycolors= Price.objects.filter(color=color_name)
     cat =[]
@@ -53,7 +53,7 @@ def catsbycolor(request, color_name):
     
 
     
-    
+@login_required    
 def all_color(request):
     colors = Price.objects.values("color").distinct()
     catnumber =[]
@@ -69,7 +69,7 @@ def all_color(request):
     return render(request,"Cats/allcolors.html", mapper)
 
 
-
+@login_required
 def add_cat(request):
     
     if request.method != "POST":

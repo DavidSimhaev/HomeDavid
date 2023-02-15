@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Breed(models.Model):
@@ -24,7 +25,6 @@ class Resume(models.Model):
 class Image(models.Model):
     title = models.CharField(max_length= 255, blank=False, null=False)
     image = models.ImageField(upload_to='images/', null=True, max_length=255)
-
     def __repr__(self):
         return 'Image(%s, %s)' % (self.title, self.image)
 

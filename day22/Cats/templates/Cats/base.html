@@ -5,7 +5,14 @@
 
 
 </p>
-
+{%if user.is_authenticated%}
+    Hello, {{user.username}}
+    <a href= "{% url "users:logout" %}">---Выход---</a>
+    
+    {% else %}
+    <a href="{% url "users:register" %}">---Регистрация---</a>
+    <a href="{% url "users:login" %}">---Вход---</a>
+{% endif %}
 {% block content %}{% endblock content %}
 
 
