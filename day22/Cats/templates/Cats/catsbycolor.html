@@ -1,14 +1,15 @@
 {% extends "Cats/base.html" %}
+
 {% block content %}
 
 
   <p>Витрина</p>
   <ul>
     {% for cat in LISTBYCOLOR %} 
-      <p>{{ cat.filterby }}</p>
+      <p>{{ cat.cat }}</p>
       <p>{{ cat.cats_id }}</p>
       <div>
-        <img src="{{cat.images }}"height="250" style="max-width: 270px">       
+        <img src="{{cat.image }}"height="250" style="max-width: 270px">       
       </div>
     {% empty %}
       <li>На витрине нет котов, приходите позже.</li>

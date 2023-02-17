@@ -7,5 +7,4 @@ class ColorPlus():
     n : int
     text : str
     notext : str
-    zero : int
     

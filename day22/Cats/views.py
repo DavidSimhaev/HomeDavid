@@ -23,13 +23,13 @@ def index(request):
 @login_required
 def all_cat(request):    
     Imagesbycat = []
-    cats_images = Image.objects.filter(owner=request.user)
+    cats_images = Price.objects.filter(owner=request.user)
     for image in cats_images:
         cwi = CatWithImage()          
         cwi.cat = Price.objects.filter(owner=request.user).get(id=image.id)
         cwi.image = "/media/"+image.image.path
         Imagesbycat.append(cwi)
-    
+
     mapper = {"images": Imagesbycat}
     return render(request,"Cats/allcats.html", mapper)
 
@@ -39,11 +39,10 @@ def catsbycolor(request, color_name):
     cat =[]
     
     for cats in catsbycolors:
-        lc = urlsPlus()
-        lc.filterby = cats
-        lc.cats_id = Image.objects.filter(owner=request.user).get(id=cats.id)
-        lc.images="/media/"+lc.cats_id.image.path
-        cat.append(lc)
+        cwi= CatWithImage()
+        cwi.cat = Price.objects.filter(owner=request.user).get(id=cats.id)
+        cwi.image = "/media/"+cats.image.path
+        cat.append(cwi)
     
     
     mapper = {"LISTBYCOLOR": cat}
@@ -63,7 +62,6 @@ def all_color(request):
         c.text = "<---Посмотреть--->"
         c.n = Price.objects.filter(owner=request.user,color=c.color).count()
         c.notext =""
-        c.zero = 0
         catnumber.append(c)
     
     mapper = {"COLORS": catnumber}
@@ -75,26 +73,24 @@ def add_cat(request):
     
     if request.method != "POST":
         catform = PriceForm()
-        imageform = ImageForm()
     else:
-        catform = PriceForm(request.POST)
-        imageform = ImageForm(request.POST, request.FILES)
+        catform = PriceForm(request.POST,  request.FILES)
         
-        if catform.is_valid() and imageform.is_valid()  :
+        if catform.is_valid():
             cat = catform.save(commit=False)
             cat.owner = request.user
             cat.save()
-            image = imageform.save(commit=False)
-            image.owner = request.user
-            image.save()
             
             catform.save()
-            imageform.save()
             return redirect("Cats:allCats")
-    mapper = {"catform": catform, "imageform": imageform}
+    mapper = {"catform": catform}
     return render(request, "Cats/add_Cat.html", mapper)
         
-
+@login_required
+def del_cat(request,cat_id):
+    cat = Price.objects.get(id=cat_id)
+    cat.delete()
+    return render(request, "Cats/del_Cat.html")
 
         
 
