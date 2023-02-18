@@ -1,7 +1,7 @@
 from .models import Price, Image
 class CatWithImage():
     cat: Price
-    cat2: Price
+    catdate: Price
     image: str
     id_image : Image
     imageForm: Image

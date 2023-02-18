@@ -40,6 +40,7 @@ class Price(models.Model):
     date_added = models.DateTimeField(auto_now_add=True, primary_key=False)
     image = models.ImageField(upload_to='images/', null=True, max_length=255)
     title = models.CharField(max_length= 255, blank=False, null=False)
+    date_added = models.DateTimeField(auto_now_add=True, primary_key=False)
     
     def __repr__(self):
         return 'Image(%s, %s)' % (self.image)

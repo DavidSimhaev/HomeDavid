@@ -13,17 +13,17 @@
 
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 border">
-            <a class= "navbar-brand" href="{% url 'Cats:index' %}">Information about the site</a>
-            <button class = "navbar-toggler-icon" type= "button" data-toggle= "collapse"
-                data-toggler="#navbarCollapse" aria-controls
-                aria-expand = "false" aria-label= "Toggle navigation">
-                <span class ="navbar-toggler-icon"></span></button
+            <a class= "navbar-brand" href="{% url 'Cats:index' %}">Общая информация</a>
+            <button class ="navbar-toggler" type= "button" data-toggle= "collapse"
+                data-target="#navbarCollapse" aria-controls ="navbarCollapse"
+                aria-expanded = "false" aria-label="Toggle navigation">
+                <span class ="navbar-toggler-icon"></span></button>
             <div class ="collapse navbar-collapse" id="navbarCollapse">
-                <ul class= "navbar-nav mr-auto">
+                <ul class= "navbar-nav mr-left">
                     <a class = "nav-link" href="{% url 'Cats:allCats' %}"> Витрина кошек </a>
                 </ul>
-                <ul class= "navbar-nav mr-auto">
-                    <a class = "nav-link" href="{% url 'Cats:allColors' %}"> Поиск </a>
+                <ul class= "navbar-nav mr-left">
+                    <a class = "nav-link" href="{% url 'Cats:allColors' %}"> Поиск по окрасу </a>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     {%if user.is_authenticated%}
@@ -41,6 +41,7 @@
                             <a class= "nav-link" href="{% url "users:login" %}">Вход</a>
                         </li>
                     {% endif %}
+            
                 </ul>
             </div>
         </nav>
@@ -64,5 +65,5 @@
 
 {% block additional_style %}
 <style>
-    body {background-color:#008080;}
+    body {background-color:#2F4F4F;}
 {% endblock additional_style %}
