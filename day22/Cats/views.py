@@ -21,10 +21,15 @@ def index(request):
     return render(request, "Cats/index.html")
 
 @login_required
-def all_cat(request):    
+def all_cat(request): 
+    
+    
     Imagesbycat = []
     cats_images = Price.objects.filter(owner=request.user)
     for image in cats_images:
+        
+        
+        
         cwi = CatWithImage()          
         cwi.cat = Price.objects.filter(owner=request.user).get(id=image.id)
         cwi.image = "/media/"+image.image.path
@@ -93,4 +98,24 @@ def del_cat(request,cat_id):
     return render(request, "Cats/del_Cat.html")
 
         
-
+def PermissionCatsPost(request):
+    
+    post = []
+    cats= Price.objects.all()
+    for postscats in cats:
+        isowner = True
+            
+        if postscats.owner != request.user:           
+            isowner = False        
+            
+                    
+        
+        cwi = CatWithImage()          
+        cwi.cat = Price.objects.all().get(id=postscats.id)
+        cwi.cat.approved = 1
+        
+        cwi.image = "/media/"+postscats.image.path
+        post.append(cwi)
+            
+    mapper = {"postcats": post, "isowner": isowner}
+    return render(request,"Cats/postcats.html", mapper)

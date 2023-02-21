@@ -9,9 +9,10 @@ urlpatterns = [
     # Home Page
     path("", views.index, name="index"),
     
+    
     path("deletecats/<str:cat_id>", views.del_cat, name="delCat"),
     
-    
+    path("PermissionCatPost/", views.PermissionCatsPost, name="PermissionCatsPost"),
     path("dateCats/", views.all_cat, name="allCats"),
     
     

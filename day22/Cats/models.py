@@ -37,16 +37,13 @@ class Price(models.Model):
     color = models.CharField(max_length= 20)
     age = models.CharField(max_length= 2)
     price = models.DecimalField(decimal_places=2, max_digits=10, primary_key=False)
-    date_added = models.DateTimeField(auto_now_add=True, primary_key=False)
     image = models.ImageField(upload_to='images/', null=True, max_length=255)
-    title = models.CharField(max_length= 255, blank=False, null=False)
     date_added = models.DateTimeField(auto_now_add=True, primary_key=False)
+    approved = models.DecimalField(decimal_places=2, max_digits=2, default=0 ,primary_key=False)
     
     def __repr__(self):
         return 'Image(%s, %s)' % (self.image)
     
-    def __str__ (self):
-        return self.title
     
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
