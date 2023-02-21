@@ -52,6 +52,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "Cats.midlleware.CurrentRequestMiddlewareUser",
 ]
 
 ROOT_URLCONF = "Shope.urls"
@@ -128,7 +129,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_URL = "users/login/"
 
 # Heroku settings
 import django_heroku

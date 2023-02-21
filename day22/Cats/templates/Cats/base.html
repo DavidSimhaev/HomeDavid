@@ -19,15 +19,19 @@
                 aria-expanded = "false" aria-label="Toggle navigation">
                 <span class ="navbar-toggler-icon"></span></button>
             <div class ="collapse navbar-collapse" id="navbarCollapse">
-                <ul class= "navbar-nav mr-left">
-                    <a class = "nav-link" href="{% url 'Cats:allCats' %}"> Витрина кошек </a>
-                </ul>
-                <ul class= "navbar-nav mr-left">
-                    <a class = "nav-link" href="{% url 'Cats:allColors' %}"> Поиск по окрасу </a>
-                </ul>
-                <ul class= "navbar-nav mr-left">
-                    <a class = "nav-link" href="{% url 'Cats:PermissionCatsPost' %}"> Неразрешенные публикации </a>
-                </ul>
+                {% if request.user.is_authenticated %}
+                    <ul class= "navbar-nav mr-left">
+                        <a class = "nav-link" href="{% url 'Cats:allCats' %}"> Витрина кошек </a>
+                    </ul>
+                    <ul class= "navbar-nav mr-left">
+                        <a class = "nav-link" href="{% url 'Cats:allColors' %}"> Поиск по окрасу </a>
+                    </ul>
+                {% endif%}
+                {% if request.user.is_authenticated and request.user.is_staff %}
+                    <ul class= "navbar-nav mr-left">
+                        <a class = "nav-link" href="{% url 'Cats:PermissionCatsPost' %}"> Неразрешенные публикации </a>
+                    </ul>
+                {% endif%}
                 <ul class="navbar-nav ml-auto">
                     {%if user.is_authenticated%}
                         <li class="nav-item">

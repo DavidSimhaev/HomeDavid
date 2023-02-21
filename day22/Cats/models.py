@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from .midlleware import get_current_user
+from django.db.models import Q
 # Create your models here.
 class Breed(models.Model):
     breed = models.CharField(max_length=40)
@@ -31,6 +32,13 @@ class Image(models.Model):
     def __str__ (self):
         return self.title
 
+class StatusFiltredPost(models.Manager):
+    def get_queryset(self):
+        print("_________")
+        print(get_current_user())
+        print("_______")
+        
+        return super().get_queryset().filter()
     
 class Price(models.Model):
     breed = models.ForeignKey(Breed, on_delete=models.CASCADE, primary_key=False) 
@@ -39,8 +47,8 @@ class Price(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=10, primary_key=False)
     image = models.ImageField(upload_to='images/', null=True, max_length=255)
     date_added = models.DateTimeField(auto_now_add=True, primary_key=False)
-    approved = models.DecimalField(decimal_places=2, max_digits=2, default=0 ,primary_key=False)
-    
+    approved = models.BooleanField(verbose_name="Видимость записи", default= False)
+    objects= StatusFiltredPost()     
     def __repr__(self):
         return 'Image(%s, %s)' % (self.image)
     

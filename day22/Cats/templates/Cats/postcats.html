@@ -16,17 +16,17 @@
               <img src="{{c.image }}"height="250" style="max-width: 270px ">       
             </ul>
           </div> 
-          {% if isowner %}
+          
           <div class="d-flex justify-content-end">
           {% buttons%}
             <button type="button" class=" btn btn-danger mr-3">
             <a href = "{% url "Cats:delCat" c.cat.id %}">Отказ</a>
             </button>
             <button type="button" class=" btn btn-success mr-3">
-            <a href = "{% url "Cats:delCat" c.cat.id %}">Прнять</a>
+            <a href = "{% url "Cats:updatepost" %}">Прнять</a>
             </button>
           {% endbuttons%}
-          {% endif %}
+          
           </div>
         </small>
     </div>

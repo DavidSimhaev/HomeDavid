@@ -13,7 +13,8 @@ from django.http import HttpResponseRedirect
 
 
  
-
+def redirect_blog(request):
+    return redirect("users:login")
 
 
 def index(request):
@@ -22,12 +23,10 @@ def index(request):
 
 @login_required
 def all_cat(request): 
-    
-    
     Imagesbycat = []
     cats_images = Price.objects.filter(owner=request.user)
-    for image in cats_images:
         
+    for image in cats_images:
         
         
         cwi = CatWithImage()          
@@ -99,23 +98,18 @@ def del_cat(request,cat_id):
 
         
 def PermissionCatsPost(request):
-    
     post = []
     cats= Price.objects.all()
     for postscats in cats:
-        isowner = True
-            
-        if postscats.owner != request.user:           
-            isowner = False        
-            
-                    
-        
         cwi = CatWithImage()          
         cwi.cat = Price.objects.all().get(id=postscats.id)
-        cwi.cat.approved = 1
-        
         cwi.image = "/media/"+postscats.image.path
         post.append(cwi)
             
-    mapper = {"postcats": post, "isowner": isowner}
+    mapper = {"postcats": post}
     return render(request,"Cats/postcats.html", mapper)
+
+
+def updatepost(request):
+    return render(request,"Cats/getdate.html" )
+    
