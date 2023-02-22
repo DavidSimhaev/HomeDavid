@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from itertools import groupby
 from django.db.models import Count
 from django.http import HttpResponseRedirect
-
+from django.http import Http404
 # Create your views here.
 
 
@@ -103,11 +103,19 @@ def del_cat(request,cat_id):
 @login_required        
 def PermissionCatsPost(request):
     post = []
-    cats= Price.objects.all()
+    cats= Price.objects.filter(approved=0)
+    
+    
     
     for postscats in cats:
+        
+        
         cwi = CatWithImage()          
         cwi.cat = Price.objects.all().get(id=postscats.id)
+        if cwi.cat.owner == request.user.is_staff:
+            raise Http404
+        
+        
         cwi.image = "/media/"+postscats.image.path
         post.append(cwi)
         

@@ -21,7 +21,7 @@
             <div class ="collapse navbar-collapse" id="navbarCollapse">
                 {% if request.user.is_authenticated %}
                     <ul class= "navbar-nav mr-left">
-                        <a class = "nav-link" href="{% url 'Cats:allCats' %}"> Витрина кошек </a>
+                        <a class = "nav-link" href="{% url 'Cats:allCats' %}"> Мои кошки </a>
                     </ul>
                     <ul class= "navbar-nav mr-left">
                         <a class = "nav-link" href="{% url 'Cats:allColors' %}"> Поиск по окрасу </a>
