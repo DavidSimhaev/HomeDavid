@@ -23,7 +23,7 @@
             <a href = "{% url "Cats:delCat" c.cat.id %}">Отказ</a>
             </button>
             <button type="button" class=" btn btn-success mr-3">
-            <a href = "{% url "Cats:updatepost" %}">Прнять</a>
+            <a href = "{% url "Cats:updatepost" c.cat.id %}">Прнять</a>
             </button>
           {% endbuttons%}
           

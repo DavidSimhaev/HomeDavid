@@ -21,19 +21,23 @@ def index(request):
     """Home page of application"""
     return render(request, "Cats/index.html")
 
+
 @login_required
 def all_cat(request): 
+    
     Imagesbycat = []
-    cats_images = Price.objects.filter(owner=request.user)
-        
+    cats_images = Price.objects.filter(owner=request.user)    
     for image in cats_images:
-        
         
         cwi = CatWithImage()          
         cwi.cat = Price.objects.filter(owner=request.user).get(id=image.id)
         cwi.image = "/media/"+image.image.path
-        Imagesbycat.append(cwi)
-
+        
+        
+        if cwi.cat.approved == 1:
+            Imagesbycat.append(cwi)
+        
+            
     mapper = {"images": Imagesbycat}
     return render(request,"Cats/allcats.html", mapper)
 
@@ -96,20 +100,26 @@ def del_cat(request,cat_id):
     cat.delete()
     return render(request, "Cats/del_Cat.html")
 
-        
+@login_required        
 def PermissionCatsPost(request):
     post = []
     cats= Price.objects.all()
+    
     for postscats in cats:
         cwi = CatWithImage()          
         cwi.cat = Price.objects.all().get(id=postscats.id)
         cwi.image = "/media/"+postscats.image.path
         post.append(cwi)
-            
+        
     mapper = {"postcats": post}
     return render(request,"Cats/postcats.html", mapper)
 
 
-def updatepost(request):
-    return render(request,"Cats/getdate.html" )
+@login_required
+def updatepost(request, cat_id):
+    cat = Price.objects.get(id=cat_id)
+    cat.approved= 1
+    cat.save()
+               
+    return render(request,"Cats/getdate.html")
     

@@ -5,4 +5,4 @@ class CatWithImage():
     image: str
     id_image : Image
     imageForm: Image
-    
+    text: str
