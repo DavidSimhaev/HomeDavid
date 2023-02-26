@@ -1,0 +1,17 @@
+{% extends "Food/base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+<h1 class = "display-3 text-warning">Изменить запись</h1>
+
+
+
+    {% for user in resuser %}
+        <form action="{% url 'Food:updatepost' user.id %}" method='post' class="form" enctype="multipart/form-data">
+    {% endfor%}
+            {% csrf_token %}
+            {% bootstrap_form Form %}
+            <button name="submit">Добавить изменения</button>
+        </form>
+
+{% endblock content %}
+

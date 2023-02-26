@@ -9,9 +9,12 @@
 {% block content %}
     <ul class="list-group">
         {% for cat in cats %}
-        <li class="list-group-item">{{cat}}</li><a href= "{% url 'dict:updatecat' cat.id %}">Редактирование</a>
+        <li class="list-group-item">{{cat}} <div style="text-align: right" </div><a href= "{% url  'dict:updatecat' cat.id  %}">Редактирование</a>
         {% endfor %}
     </ul>
-{% endblock content %}
+    
+    
+    {% endblock content %}
 
-<a href = "{% url "Cats:delCat" c.cat.id %}">Удалить кота</a>
+
+
