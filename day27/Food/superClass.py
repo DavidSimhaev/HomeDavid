@@ -6,4 +6,4 @@ class restjobclass():
     image: str
     res_id: str
     date : Restaurant
-    
+    group : str

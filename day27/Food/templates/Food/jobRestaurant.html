@@ -18,10 +18,12 @@
             <th scope="col">Ресторан</th>
             <th scope="col"></th>
             <div class="float-right">
+                
                 {% buttons%}
                     <a href="{% url "Food:DelRestaurant" job.res_id.id %}" role= "button" class="btn-danger mr-right">Удалить</a>
                     <a href="{% url "Food:updatepost" job.res_id.id %}" role= "button" class="btn-primary mr-right">Редактировать</a>
                 {%endbuttons%}
+                
             </div>
         </tr>
         </thead>

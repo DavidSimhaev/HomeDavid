@@ -19,6 +19,7 @@ def jobRestaurant(request):
         cwi.city=  Restaurant.objects.filter(owner=request.user).values("city").get(id=job.id)['city']
         cwi.image = "/media/"+job.image.path
         cwi.res_id = Restaurant.objects.filter(owner=request.user).get(id=job.id)
+    
         
         if cwi.res_id.approved == 1:
             datejob.append(cwi)
@@ -101,8 +102,13 @@ def menushef(request, res_id):
     jobrestaurant = Restaurant.objects.filter(id=res_id)
     menu=[]
     for res in jobrestaurant: 
-        menushef = Menu.objects.filter(id=res.id).get(owner=request.user)
-        menu.append(menushef)
+        mc = MenuClass()
+        mc.category = Menu.objects.filter(owner=request.user).values("categ")[0]["categ"]
+        mc.dish = Menu.objects.filter(owner=request.user).values("dish")[0]["dish"]
+        mc.image = "/media/"+res.image.path
+        mc.price = Menu.objects.filter(owner=request.user).values("price")[0]["price"]
+        
+        menu.append(mc)
         
     mapper = {"menushef": menu}
     
@@ -110,6 +116,7 @@ def menushef(request, res_id):
     return render(request,'Food/Menu.html', mapper)
 
 def AddMenu(request):
+    
     if request.method != "POST":
         form = MenuShefForm()
     else:
@@ -120,5 +127,5 @@ def AddMenu(request):
             new_menu.save()
             return redirect("Food:JobRestaurant")
     mapper = {"form": form}
-    return render(request, "Food/newRestaurant.html", mapper)
+    return render(request, "Food/newMenu.html", mapper)
 

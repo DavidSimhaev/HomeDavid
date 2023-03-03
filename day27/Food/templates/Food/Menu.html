@@ -16,10 +16,10 @@
         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
         {% for menu in menushef%}    
         <div class="col">
-            <div class="p-3 border bg-light">{{menu.categ}}</div>
+            <div class="p-3 border bg-light"><img src="{{menu.image }}"height="100" style="max-width: 100px "></div>
             <div class="p-3 border bg-light">{{menu.dish}}</div>
-            <div class="p-3 border bg-light">{{menu.image}}</div>
             <div class="p-3 border bg-light">{{menu.price}}</div>
+
         </div>
         {%endfor%}
         <a href="{% url "Food:newMenu" %}" role= "button" class="btn-primary mr-right">Добавить блюдо</a>
