@@ -12,24 +12,26 @@
     <table class="table table-dark">
         <thead> 
         <tr>
-            <th scope="col">Картинка</th>
+            <th scope="col">Лого</th>
             <th scope="col">Описание</th>
             <th scope="col">Город</th>
             <th scope="col">Ресторан</th>
-            <th scope="col">
+            <th scope="col"></th>
+            <div class="float-right">
                 {% buttons%}
-        
-                    <a href="{% url "Food:DelRestaurant" job.res_id.id %}" role= "button" class="btn-danger">Удалить</a>
-                    <a href="{% url "Food:updatepost" job.res_id.id %}" role= "button" class="btn-primary">Редактировать</a>
-                {% endbuttons%}</th>
+                    <a href="{% url "Food:DelRestaurant" job.res_id.id %}" role= "button" class="btn-danger mr-right">Удалить</a>
+                    <a href="{% url "Food:updatepost" job.res_id.id %}" role= "button" class="btn-primary mr-right">Редактировать</a>
+                {%endbuttons%}
+            </div>
         </tr>
         </thead>
         <tbody>
         <tr>
             <th scope="row"><img src="{{job.image }}"height="250" style="max-width: 270px "></th>
-            <td>{{ job.Characteristic|wordwrap:50|linebreaksbr }}</td>
-            <td>{{job.city}}  </td>
-            <td>{{job.Name_Restaurant}}</td>
+            <td><h5>{{ job.Characteristic|wordwrap:50|linebreaksbr }}</h5></td>
+            <td><h5>{{job.city}}<h5></td>
+            <td><h5>{{job.Name_Restaurant}}<span style="vertical-align: -250px;"><a href="{% url "Food:Menu" job.res_id.id %}" role= "button" class="btn-primary mr-right">Перейти</a></span></h5></td>
+            
             
         </tr>
     </table>

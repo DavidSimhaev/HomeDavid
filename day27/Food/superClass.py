@@ -5,6 +5,5 @@ class restjobclass():
     city : str
     image: str
     res_id: str
-    
     date : Restaurant
     

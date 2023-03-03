@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Restaurant
-from .forms import RestaurantForm
+from .models import Restaurant, Menu
+from .forms import RestaurantForm, MenuShefForm
 from .superClass import restjobclass
+from .menuclass import MenuClass
 from django.http import Http404
 # Create your views here.
 
@@ -38,6 +39,7 @@ def AddRestaurant(request):
         if form.is_valid:
             new_restaurant = form.save(commit=False)
             new_restaurant.owner= request.user
+            
             new_restaurant.save()
             return redirect("Food:JobRestaurant")
     mapper = {"form": form}
@@ -72,21 +74,51 @@ def getpost(request, res_id):
 
 def updatepost(request, res_id):
     res = Restaurant.objects.get(id=res_id)
-    resuser = Restaurant.objects.filter(owner=request.user.id)
     if res.owner != request.user:
         raise Http404
     if request.method != 'POST':
         # Current record state
         form = RestaurantForm(instance=res)
     else:
-        form = RestaurantForm(instance=res, data=request.FILES|request.POST) # Застрял :(  
+        form = RestaurantForm(request.POST, request.FILES) # Застрял :(  
         
         if form.is_valid():
-            form.save()
-            return redirect('Food:jobRestaurant')
+            rest= form.save(commit=False)
+            rest.id = res_id
+            rest.date_added = res.date_added
+            rest.owner = request.user
+            rest.approved = 1
+            if rest.image == "":
+                rest.image = res.image()
+            rest.save()
+            return redirect('Food:JobRestaurant')
         
-    mapper = {"Form": form, "resuser":resuser}
+    mapper = {"Form": form, "res":res}
     
     return render(request,'Food/update_res.html', mapper )
 
+def menushef(request, res_id):
+    jobrestaurant = Restaurant.objects.filter(id=res_id)
+    menu=[]
+    for res in jobrestaurant: 
+        menushef = Menu.objects.filter(id=res.id).get(owner=request.user)
+        menu.append(menushef)
+        
+    mapper = {"menushef": menu}
+    
+    
+    return render(request,'Food/Menu.html', mapper)
+
+def AddMenu(request):
+    if request.method != "POST":
+        form = MenuShefForm()
+    else:
+        form = MenuShefForm(request.POST,  request.FILES)
+        if form.is_valid:
+            new_menu = form.save(commit=False)
+            new_menu.owner= request.user
+            new_menu.save()
+            return redirect("Food:JobRestaurant")
+    mapper = {"form": form}
+    return render(request, "Food/newRestaurant.html", mapper)
 

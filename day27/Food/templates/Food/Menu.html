@@ -1,0 +1,30 @@
+{% extends "Food/base.html" %}
+
+{%load bootstrap4%}
+{% block page_header %}
+<h1 class = "display-3 text-warning">Ваше меню</h1>
+{% endblock page_header %}
+{% block content %}
+    
+    
+    <div class="col-6">
+        <div class="p-2"></div>
+    </div>
+    
+    <div class="container text-center">
+        
+        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        {% for menu in menushef%}    
+        <div class="col">
+            <div class="p-3 border bg-light">{{menu.categ}}</div>
+            <div class="p-3 border bg-light">{{menu.dish}}</div>
+            <div class="p-3 border bg-light">{{menu.image}}</div>
+            <div class="p-3 border bg-light">{{menu.price}}</div>
+        </div>
+        {%endfor%}
+        <a href="{% url "Food:newMenu" %}" role= "button" class="btn-primary mr-right">Добавить блюдо</a>
+        
+        </div>
+        
+    </div>
+{% endblock content %}

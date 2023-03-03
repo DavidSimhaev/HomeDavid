@@ -5,13 +5,13 @@
 
 
 
-    {% for user in resuser %}
-        <form action="{% url 'Food:updatepost' user.id %}" method='post' class="form" enctype="multipart/form-data">
-    {% endfor%}
-            {% csrf_token %}
-            {% bootstrap_form Form %}
-            <button name="submit">Добавить изменения</button>
-        </form>
+    
+    <form action="{% url 'Food:updatepost' res.id %}" method='post' class="form" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {% bootstrap_form Form %}
+        <button name="submit">Добавить изменения</button>
+    </form>
 
 {% endblock content %}
 

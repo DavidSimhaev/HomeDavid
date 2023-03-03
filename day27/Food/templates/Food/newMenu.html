@@ -1,0 +1,15 @@
+{% extends "Food/base.html" %}
+{% load bootstrap4 %}
+{% block page_header %}
+<h2>Пожалуйста, добавьте элемент еды в ваше меню</h2>
+
+{% endblock page_header %}
+
+{% block content %}
+<form action="{% url "Food:newMenu" %}" class="form" method="post", enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button name="sumbit"> Добавить элемент</button>
+</form>
+{% endblock content %}
+

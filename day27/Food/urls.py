@@ -14,6 +14,8 @@ urlpatterns = [
     path("GetPost/<str:res_id>", views.getpost, name="getpost"),
     path("Moderatorpost/", views.PermissionPost, name="moderatorposts"),
     path("updatePost/<str:res_id>", views.updatepost, name="updatepost"),
-
+    path("Menu/<str:res_id>", views.menushef, name="Menu"),
+    path("newMenu/", views.AddMenu, name="newMenu")
+    
 ]
 
