@@ -5,5 +5,7 @@ class restjobclass():
     city : str
     image: str
     res_id: str
+    menu_id: str
     date : Restaurant
     group : str
+    form : str

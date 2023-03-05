@@ -19,10 +19,17 @@
                 aria-expanded = "false" aria-label="Toggle navigation">
                 <span class ="navbar-toggler-icon"></span></button>
             <div class ="collapse navbar-collapse" id="navbarCollapse">
-                {% if request.user.is_authenticated%}
+                {% if request.user.is_authenticated and grrr %}
                     <ul class= "navbar-nav mr-left">
                         <a class = "nav-link" href="{% url 'Food:JobRestaurant' %}"> Ваши записи </a>
-                    </ul>    
+                    </ul>
+                {%else%}
+                    <ul class= "navbar-nav mr-left">
+                        <a class = "nav-link" href="{% url 'Food:JobRestaurant' %}"> Рестораны </a>
+                    </ul>
+                    <ul class= "navbar-nav mr-left">
+                        <a class = "nav-link" href="{% url 'Food:Basket' %}">Коризина</a> 
+                    </ul>
                 {% endif%}
                 {% if request.user.is_authenticated and request.user.is_staff %}
                     <ul class= "navbar-nav mr-left">

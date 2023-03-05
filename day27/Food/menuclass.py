@@ -1,9 +1,10 @@
-from .models import Menu, Restaurant
+from .models import Restaurant
 class MenuClass():
-    jobrestaurant: Restaurant
+    menu: str
     category : str
     dish : str
     image : str 
     price : str
-    date : Menu
-    
+    image : str 
+    imageMenu : str 
+    res_id : str

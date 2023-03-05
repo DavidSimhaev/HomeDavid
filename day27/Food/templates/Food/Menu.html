@@ -2,7 +2,11 @@
 
 {%load bootstrap4%}
 {% block page_header %}
+{%if grrr%}
 <h1 class = "display-3 text-warning">Ваше меню</h1>
+{% else %}
+<h1 class = "display-3 text-warning">Меню</h1>
+{%endif%}
 {% endblock page_header %}
 {% block content %}
     
@@ -14,17 +18,22 @@
     <div class="container text-center">
         
         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-        {% for menu in menushef%}    
+        {% for menu in menushef %}
+        
         <div class="col">
-            <div class="p-3 border bg-light"><img src="{{menu.image }}"height="100" style="max-width: 100px "></div>
+            
+            <div class="p-3 border bg-light"><img src="{{menu.image}}"height="100" style="max-width: 100px "></div>
+            
             <div class="p-3 border bg-light">{{menu.dish}}</div>
             <div class="p-3 border bg-light">{{menu.price}}</div>
-
+            {% buttons%}
+            <div><a href="{% url "Food:GetProduct" res_id.id %}" role= "button" class="btn-success mr-right"><h6>В корзину</h6></a></div>
+            {%endbuttons %}
         </div>
         {%endfor%}
-        <a href="{% url "Food:newMenu" %}" role= "button" class="btn-primary mr-right">Добавить блюдо</a>
-        
+        {%if grrr%}
+        <a href="{% url "Food:newMenu" menu_id.id %}" role= "button" class="btn-primary mr-right">Добавить блюдо</a>
         </div>
-        
+        {%endif%}
     </div>
 {% endblock content %}

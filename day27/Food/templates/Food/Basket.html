@@ -1,0 +1,33 @@
+{% extends "Food/base.html" %}
+{% load bootstrap4%}
+{% block page_header %}
+<h1 class="text-light"> Ваша корзина </h1>
+{% endblock page_header %}
+
+
+{% block content %}
+    
+    
+    <div class="col-6">
+        <div class="p-2"></div>
+    </div>
+    
+    <div class="container text-center">
+        
+        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        {% for menu in basket %}
+        
+        <div class="col">
+            
+            <div class="p-3 border bg-light"><img src="{{menu.image}}"height="100" style="max-width: 100px "></div>
+            
+            <div class="p-3 border bg-light">{{menu.dish}}</div>
+            <div class="p-3 border bg-light">{{menu.price}}</div>
+        </div>
+        {%endfor%}
+        {%if grrr%}
+        <a href="{% url "Food:newMenu" res_id.id %}" role= "button" class="btn-primary mr-right">Добавить блюдо</a>
+        </div>
+        {%endif%}
+    </div>
+{% endblock content %}

@@ -15,7 +15,9 @@ urlpatterns = [
     path("Moderatorpost/", views.PermissionPost, name="moderatorposts"),
     path("updatePost/<str:res_id>", views.updatepost, name="updatepost"),
     path("Menu/<str:res_id>", views.menushef, name="Menu"),
-    path("newMenu/", views.AddMenu, name="newMenu")
+    path("newMenu/<str:res_id>", views.AddMenu, name="newMenu"),
+    path("Basket/", views.Basket, name="Basket"),
+    path("GetProduct/<str:menu_id>", views.GetProduct, name="GetProduct"),
     
 ]
 
