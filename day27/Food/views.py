@@ -30,7 +30,7 @@ def jobRestaurant(request):
             cwi.image = "/media/"+job.image.path
             cwi.res_id = Restaurant.objects.filter(owner=request.user).get(id=job.id)
         
-            if cwi.res_id.approved == 1:
+            if cwi.res_id.approved == 0:
                 datejob.append(cwi)
     else:
         jobclient = Restaurant.objects.all()
