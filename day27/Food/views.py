@@ -30,7 +30,7 @@ def jobRestaurant(request):
             cwi.image = "/media/"+job.image.path
             cwi.res_id = Restaurant.objects.filter(owner=request.user).get(id=job.id)
         
-            if cwi.res_id.approved == 0:
+            if cwi.res_id.approved == 1:
                 datejob.append(cwi)
     else:
         jobclient = Restaurant.objects.all()
@@ -154,7 +154,6 @@ def menushef(request, res_id):
         cwi.image = "/media/"+menu.image.path
         menushef.append(cwi)
     res_id = Restaurant.objects.get(id=res_id)
-    menu_id = Menu.objects.get(id=res_id)
     
         
     
@@ -162,7 +161,7 @@ def menushef(request, res_id):
     if request.user.groups.filter(id=1):
         grrr = True
            
-    mapper = {"menushef": menushef, "res_id": res_id,"menu_id":menu_id, "grrr": grrr}
+    mapper = {"menushef": menushef, "res_id": res_id, "grrr": grrr}
     return render(request,'Food/Menu.html', mapper)
 
 def AddMenu(request, res_id):
