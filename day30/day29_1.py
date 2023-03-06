@@ -1,0 +1,6 @@
+#Token 6156140654:AAESB4ELkinSXR4uWQVtkFTRy0zfBCX6S1w
+
+
+import telebot
+
+bot = telebot.TeleBot("6156140654:AAESB4ELkinSXR4uWQVtkFTRy0zfBCX6S1w")

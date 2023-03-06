@@ -190,7 +190,7 @@ def Basket(request):
     if request.user.groups.filter(id=1):
         grrr = True
     menubacket = []
-    menuclient= Menu.objects.filter(approved=0)    
+    menuclient= Menu.objects.filter(approved=1)    
     for menu in menuclient:
         cwi = MenuClass()
         cwi.menu = Menu.objects.all().get(id=menu.id)
@@ -199,7 +199,7 @@ def Basket(request):
         cwi.price = Menu.objects.values("price").get(id=menu.id)['price']
         cwi.image = "/media/"+menu.image.path    
         
-        if cwi.menu.approved == 0:
+        if cwi.menu.approved == 1:
             menubacket.append(cwi)
             
         
