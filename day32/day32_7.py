@@ -1,3 +1,4 @@
+from threading import Thread
 from time import perf_counter
 
 def replace(filename, substr, new_substr):
@@ -14,9 +15,12 @@ def main():
     filenames = []
     for i in range(1,11):
         filenames.append(f"test{i}.json")
-        
-    for filename in filenames:
-        replace(filename, "Отопление", "Жара")
+    threads = [ Thread(target=replace,args=(filename, "Отопление", "Жара")) for filename in filenames]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
+    
         
         
         
