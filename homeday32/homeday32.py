@@ -5,7 +5,7 @@ from threading import Thread
 
 def waiter(n):
     print(f'thread {n} started')
-    sleep(3)
+    sleep(4)
     print(f'thread {n} ended ')
 
 
