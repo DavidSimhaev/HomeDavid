@@ -12,5 +12,5 @@ def fibonacci(n):
 
 
 start = time.perf_counter()
-print(fibonacci(3))
+print(fibonacci(7))
 print(f"executed {time.perf_counter()-start}")
