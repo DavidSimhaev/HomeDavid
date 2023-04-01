@@ -1,26 +1,49 @@
 """
-генератор(n)
+1) генератор(n)
 х х х 
 х х х
 х х х
 где х случайное число но таких массивов будет n
 сделать список загнать в numpy поменять размерность
+2)генератор n случайных колод карт
+3)декоратор замеряющий время выполнения функции"""
 
-генератор n случайных колод карт
 
-декоратор замеряющий время выполнения функции"""
+
 from pprint import pprint
 import random
+import time
 import numpy
-def generator(n):
-    for _ in range(n):
-        a = numpy.array([random.randint(1,1000) for _ in range(1,4)])
-        b = numpy.array([random.randint(1,1000) for _ in range(1,4)])
-        c = numpy.array([random.randint(1,1000) for _ in range(1,4)])
-        
-        pprint([a,b,c])
+def generator(n, l:list):
+    a = numpy.array([
+        [random.randint(1,1000) for _ in range(1,4)],
+        [random.randint(1,1000) for _ in range(1,4)],
+        [random.randint(1,1000) for _ in range(1,4)]])
+    n-=1
+    l.append(a)
+    if n==0:
+        return pprint(l)
+    return generator(n, l)
+generator(3, [])
 
 
-generator(5)
+def coloda():
+    nums = [2,3,4,5,6,7,8,9,10,"Валет", "Дама", "Король", "Туз"]
+    kinds = ["Пики","Буби", "Крести", "Череви"]
+    for x in kinds:
+        for y in nums:
+            yield(x,y)
 
-
+def generatorrandomcoloda(n):
+    l = [ x for x in coloda()]
+    rlist = []
+    for x in range(len(l)-1, -1, -1):
+        k = random.randint(0,x)
+        rlist.append(l.pop(k))
+    n-=1
+    if n == 0:
+        return     
+    return generatorrandomcoloda(n),print(f" ---КОЛОДА--- : {rlist}\n") 
+start = time.perf_counter()
+generatorrandomcoloda(5)
+print(f"Finished Time {time.perf_counter()-start}")
