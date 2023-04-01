@@ -34,6 +34,15 @@ def coloda():
         for y in nums:
             yield(x,y)
 
+
+def dtime():  
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            start = time.perf_counter()
+            return print(f"Finished Time {time.perf_counter()-start}")
+        return wrapper
+    return decorator
+@dtime()
 def generatorrandomcoloda(n):
     l = [ x for x in coloda()]
     rlist = []
@@ -43,7 +52,6 @@ def generatorrandomcoloda(n):
     n-=1
     if n == 0:
         return     
-    return generatorrandomcoloda(n),print(f" ---КОЛОДА--- : {rlist}\n") 
-start = time.perf_counter()
+    return generatorrandomcoloda(n) 
+
 generatorrandomcoloda(5)
-print(f"Finished Time {time.perf_counter()-start}")

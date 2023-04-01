@@ -1,15 +1,15 @@
 def repeater(n):
     def decorator(func):
         def wrapper(*args, **kwargs):
-           
-            for i in range(4):
+            print("Fkjk")
+            for i in range(n-1):
                 func(*args, **kwargs)
             return func(*args, **kwargs)
         return wrapper
     return decorator
     
     
-@repeater(4)
+@repeater(2)
 def some(x,y, p = 2):
     print(x+y+p)
     return(p+x-y)
