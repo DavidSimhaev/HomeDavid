@@ -44,7 +44,7 @@ def dtime():
     return decorator
 @dtime()
 def generatorrandomcoloda(n):
-    l = [ x for x in coloda()]
+    l = list(coloda())
     rlist = []
     for x in range(len(l)-1, -1, -1):
         k = random.randint(0,x)

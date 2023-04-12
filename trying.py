@@ -1,3 +1,5 @@
+import numpy as np
+
 def test_decorator( function_to_decorate ):
     # обертка
     def wrapper ():
@@ -23,4 +25,8 @@ def ordinary_method():
 #ordinary_method()
 #test_decorator(ordinary_method)
 
-ordinary_method()
+#ordinary_method()
+import numpy as np
+
+arr1 = np.array([1,2,0,3,4])
+print (np.log(arr1))
