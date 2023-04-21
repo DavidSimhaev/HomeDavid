@@ -1,0 +1,24 @@
+{% extends "Shope/base.html" %}
+{% load static %}
+
+{% block title %}
+  {{ ProductS.name }}
+{% endblock %}
+{% block content %}
+  <div class="product-detail">
+    <img src="{% if ProductS.image %}{{ ProductS.image.url }}{% else %}
+    {% static "img/no_image.png" %}{% endif %}">
+    <h1>{{ ProductS.name }}</h1>
+    <h2>
+      <a href="{{ ProductS.category.get_absolute_url }}">
+        {{ ProductS.category }}
+      </a>
+    </h2>
+    <p class="price">${{ ProductS.price }}</p>
+    
+    {{ ProductS.description|linebreaks }}
+
+    
+
+  </div>
+{% endblock %}
