@@ -35,6 +35,7 @@ MEDIA_ROOT=os.path.join(BASE_DIR,"media/")
 
 INSTALLED_APPS = [
     "Shope",
+    "cart",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -84,7 +85,7 @@ DATABASES = {
     }
 }
 
-
+CART_SESSION_ID ="cart"
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
