@@ -21,7 +21,7 @@ class Category(models.Model):
     
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name="products", on_delete=models.DO_NOTHING)
-    name = models.CharField(max_length=200, db_index=True) 
+    name = models.CharField(max_length=200, db_index=True
     slug = models.CharField(max_length=200, db_index=True, unique=True) # url ссылка
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
     descreption = models.TextField(blank= True)
