@@ -4,7 +4,7 @@
     <head>
         <meta charset = "utf-8"/>
         <title>{% block title %} TeaHaven {% endblock %}</title>
-        <link href= "{% static "css/base.css" %}" rel ="stylesheet">
+        <link href= "{% static "c_sss/base.css" %}" rel ="stylesheet">
     </head>
     <body>
         <div id ="header">
@@ -12,8 +12,14 @@
         </div>
         
         <div id= "subheader">
-            <div class = "cart">
-                Корзина пуста
+            <div class = "cart"> 
+                <a href="{% url "cart:cart_detail"%}" >
+                    {%if POZITION %} 
+                    {{POZITION}}, NIS {{ cart.get_total_price }}
+                </a>
+                    {% else %}
+                    Ваша корзина пуста!
+                    {% endif %}    
             </div>
         </div>
         <div id="content">

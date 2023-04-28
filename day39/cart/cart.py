@@ -38,18 +38,21 @@ class Cart:
         products = Product.objects.filter(id__in=products_ids)
         cart= self.cart.copy()
         for product in products:
-            cart[int(product.id)]["product"] = product
+            cart[str(product.id)]["product"]= product
             
             
         for item in cart.values():
             item["price"] = Decimal(item["price"]) # Сумма товара  
             item["total_price"] = item["price"]*item["quantity"] # Сумма всех товаров определенного типа
 
-        yield item    
+            yield item    
         
     
     def __len__(self):
         return sum(item["quantity"] for _,item in self.cart.items() ) # Считаем всю корзину!
+    
+    def get_total_price(self):
+        return sum(Decimal(item['price'])*item['quantity'] for item in self.cart.values())
     
     
     def clear(self):

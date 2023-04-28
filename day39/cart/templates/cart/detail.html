@@ -26,7 +26,7 @@
             <tr>
                 <td>
                     <a href="{{product.get_absolute_url}}">
-                        <img src ="{% if product.image%}"{{product.image.url}}{% else %}{%static "img/no_image.png" %} {%endif%}></a>
+                        <img src ="{% if product.image%}{{product.image.url}}"{% else %}{%static "img/no_image.png" %} {%endif%}></a>
                 </td>
                 <td>
                     {{product.name}}
@@ -35,7 +35,7 @@
                     {{item.quantity}}
                 </td>
                 <td>
-                    <form action="{% url "cart:cart:remove" product.id %}" method="post">
+                    <form action="{% url "cart:cart_remove" product.id %}" method="post">
                     <input type="submit" value= "Удалить">
                     {% csrf_token %}
                     </form>
@@ -48,20 +48,22 @@
                     NIS{{item.total_price}}
                 </td>
             </tr>
+            
             {% endwith %}
-        {% endfor %}
+            {% endfor %}
             <tr class="total">
                 <td>
                     Всего: 
                 </td>
                 <td colspan = 4></td>
                 <td class="num">
-                    NIS {{cart.get_total_price}}
+                    <h2>NIS {{cart.get_total_price}}</h2>
                 </td>
             </tr>
     </tbody>
 </table>
 <p class= "text-right">
     <a href= "{% url "Shope:product_list"%}" class= "button-length">Продолжить покупки</a>
+    <a href= "{% url "orders:order_create" %}" class="button">Принять заказ<a>
 </p>
 {%endblock%}
