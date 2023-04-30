@@ -41,18 +41,7 @@ def product_list(request, category_slug= None):
 def product_details(request, id , slug):
     product = get_object_or_404(Product, id=id, slug= slug, available = True)
     cart_product_form = CartAddProductsForm()
-    a = Cart(request)
-    cart_len = len(a.cart.keys())
-    if cart_len > 0:
-        text = f"Ваша корзина: "
-    if cart_len == 1:
-        text += f" {cart_len} Позиция"
-    if cart_len < 5:
-        text += f" {cart_len} Позиции"
-    else:
-        text += f" {cart_len} Позиций"
-    
 
     
     return render(request, 
-                  "Shope/product/detail.html",{"ProductS": product, "cart_product_form":cart_product_form, "text": text})
+                  "Shope/product/detail.html",{"ProductS": product, "cart_product_form":cart_product_form})
