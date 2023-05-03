@@ -9,6 +9,7 @@
     <img src="{% if ProductS.image %}{{ ProductS.image.url }}{% else %}
     {% static "img/no_image.png" %}{% endif %}">
     <h1>{{ ProductS.name }}</h1>
+    <h4>{%if quant > 0%} В вашей корзирне уже есть {{ quant }} штук(а/и){% endif %}</h4>
     <h2>
       <a href="{{ ProductS.category.get_absolute_url }}">
         {{ ProductS.category }}

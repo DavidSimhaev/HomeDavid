@@ -12,14 +12,18 @@
         </div>
         
         <div id= "subheader">
-            <div class = "cart"> 
-                <a href="{% url "cart:cart_detail"%}" >
-                    {%if POZITION %} 
-                    {{POZITION}}, NIS {{ cart.get_total_price }}
-                </a>
-                    {% else %}
+            <div class = "cart">
+                {% with total_items=cart|length%}
+                {% if total_items > 0 %}
+
+                    <a href="{% url "cart:cart_detail"%}" >
+                        {{cart.pozition}} 
+                    </a>
+                {% else %}
                     Ваша корзина пуста!
-                    {% endif %}    
+                {% endif %}
+                
+                {% endwith %}
             </div>
         </div>
         <div id="content">

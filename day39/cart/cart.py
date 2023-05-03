@@ -10,6 +10,21 @@ class Cart:
             cart = self.session[settings.CART_SESSION_ID]= {}
         self.cart = cart
     
+    def pozition(self):
+        cart_len = len(self.cart.keys())
+
+        if cart_len > 0:
+            text = f"Ваша корзина: "
+            if cart_len == 1:
+                text += f" {cart_len} Позиция"
+            elif cart_len < 5:
+                text += f" {cart_len} Позиции"
+            else:
+                text += f" {cart_len} Позиций"
+
+        return text + f" на сумму {self.get_total_price()} NIS"
+    
+    
     def add(self, product, quantity=1, override_quantity= False):
         product_id = int(product.id)
         if product_id not in self.cart:
@@ -19,6 +34,7 @@ class Cart:
             }
         if override_quantity:
             self.cart[product_id]["quantity"] = quantity
+            
         else:
             self.cart[product_id]["quantity"] += quantity
         self.save()
@@ -31,7 +47,12 @@ class Cart:
             
     def save(self):
         self.session.modified= True
-        
+    
+    
+    def productq(self, product_id):
+        if product_id in self.cart.keys():
+            return self.cart[product_id]["quantity"]
+        return 0
         
     def __iter__(self):
         products_ids = self.cart.keys()
