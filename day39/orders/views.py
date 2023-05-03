@@ -11,7 +11,7 @@ def order_create(request, product_id):
     if request.method == "POST":
         form= OrderCreateForm(request.POST)
         if form.is_valid():
-            a=Product.objects.filter(id=product_id, kolichestvo= cart.cart["quantity"])
+            a=Product.objects.update(kolichestvo= cart.cart["quantity"])
             order = form.save()
             for item in cart:
                 OrderItem.objects.create(order=order, product= item["product"], price=item["price"], quantity=item["quantity"] )
