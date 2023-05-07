@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+   'django_session_timeout.middleware.SessionTimeoutMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -73,6 +74,12 @@ TEMPLATES = [
         },
     },
 ]
+STRIPE_SECRET_KEY = "sk_test_51N3kCHJMY6g7I4p1a989MZeRHTaj4TekNsBQcfOlokuhVEwia07It67L1SMAlV8wfcwsfRNLrJsTOBe04YEIO3cR00LJXmpZ2q"
+STRIPE_API_VERSION = "2022-08-01"
+WSGI_APPLICATION = 'NewProject.wsgi.application'
+STRIPE_WEBHOOK = 'whsec_36231f5ecf3bbfb0d6c0d30d0869668f2e3445c8ae4e9020a1647d93d8fea9a5'
+STRIPE_PUBLISHABLE_KEY = "pk_test_51N3kCHJMY6g7I4p1DezfXQ2wbep5p82oMz7qGWhPiYKW6aXXnXyk42O5XVkokO1d0kKjpJYBitJC3P6Kgq2w5JGH00zZvkBvBr"
+
 
 WSGI_APPLICATION = "NewProject.wsgi.application"
 
@@ -106,6 +113,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True 
+SESSION_EXPIRE_SECONDS = 10 # 30 минут сессии
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

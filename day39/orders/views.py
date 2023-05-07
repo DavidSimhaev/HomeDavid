@@ -1,21 +1,24 @@
 from turtle import delay
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Order, OrderItem, Product
 from .forms import OrderCreateForm
 from cart.cart import Cart
 from .tasks import order_created
 # Create your views here.
 
-def order_create(request, product_id):
+def order_create(request):
     cart= Cart(request)
     if request.method == "POST":
         form= OrderCreateForm(request.POST)
         if form.is_valid():
-            a=Product.objects.update(kolichestvo= cart.cart["quantity"])
             order = form.save()
             for item in cart:
                 OrderItem.objects.create(order=order, product= item["product"], price=item["price"], quantity=item["quantity"] )
-
+                p = item["product"]
+                p.stock-= item["quantity"]
+                if p.stock == 0 or p.stock < 0:
+                    return redirect("Shope:ErrorGetData")
+                p.save()
                 
             
             cart.clear()

@@ -16,7 +16,8 @@
       </a>
     </h2>
     {{text}}
-    <p class="price">${{ ProductS.price }}</p>
+    <p class="price">{{ ProductS.price }} NIS</p>
+    <p class="In Stock">Осталось на складе: {{ ProductS.stock }}</p>
     <form action="{% url 'cart:cart_add' ProductS.id %}" method="post">
       {{cart_product_form}}
       {% csrf_token %}

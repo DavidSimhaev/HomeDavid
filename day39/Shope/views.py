@@ -26,8 +26,22 @@ def product_list(request, category_slug= None):
     
 def product_details(request, id , slug):
     product = get_object_or_404(Product, id=id, slug= slug, available = True)
-    cart_product_form = CartAddProductsForm()
+    
+    if product.stock < 21:
+        pquant = product.stock + 1
+        cart_product_form = CartAddProductsForm(pquant=pquant)
+    else:
+        pquant = 21
+        cart_product_form = CartAddProductsForm()
     quant = Cart(request).productq(str(id))
     
     return render(request, 
-                  "Shope/product/detail.html",{"ProductS": product,"quant": quant ,"cart_product_form":cart_product_form})
+                  "Shope/product/detail.html",{
+                      "ProductS": product,
+                      "quant": quant ,
+                      "cart_product_form":cart_product_form})
+    
+    
+    
+def ErrorGetData(request):
+    return render(request, "Shope/product/error.html")    
