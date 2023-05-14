@@ -7,3 +7,14 @@ def infinite (list,tries):
 
 
 infinite([1,2,3],2)
+
+print("------")
+
+li = [0, 1, 2, 3]
+
+running = True
+  
+while running:
+    for elem in li:
+        nextelem = li[li[elem]-len(li)+1]  
+        print(nextelem)
