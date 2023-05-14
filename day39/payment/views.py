@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404 , resolve_url, reverse # Почему у меня reverse беленьким подчеркивается?
+
 from decimal import Decimal
 import stripe
 from django.conf import settings
@@ -23,6 +24,7 @@ def payment_process(request):
             'line_items': []
         }
         for item in order.items.all(): # Не понял items.all()
+            breakpoint()
             session_data['line_items'].append(
                 {
                     'price_data': {
@@ -47,3 +49,4 @@ def payment_completed(request):
 
 def payment_canceled(request):
     return render(request, 'payment/canceled.html')
+

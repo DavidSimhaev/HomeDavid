@@ -9,18 +9,20 @@ class CartAddProductsForm(forms.Form):
         
         super(CartAddProductsForm,self).__init__()
         if "pquant" in kwargs:
+            
             PRODUCT_QUANTITY_CHOISES =  [(i, str(i)) for i in range(1, int(kwargs["pquant"])) ]
             self.fields["quantity"].choices = PRODUCT_QUANTITY_CHOISES
-        
-        
-        #else:
-        #    CartAddProductsForm.PRODUCT_QUANTITY_CHOISES = [(i, str(i)) for i in range(1,21)]            
-        #del kwargs["pquant"]
-        #
-        #CartAddProductsForm.quantity= forms.TypedChoiceField(choices=PRODUCT_QUANTITY_CHOICES, coerce=int)
-        #CartAddProductsForm.override= forms.BooleanField(required=False, initial=False, widget= forms.HiddenInput)
-        #super(CartAddProductsForm,self).__init__()
-
+            pquant = kwargs.pop('pquant')
+            
+        else:
+            pquant = 1
+            
+            
+        super(CartAddProductsForm, self).__init__(*args, **kwargs)
+        if pquant >1 and pquant < 21:
+            self.fields["quantity"].choices = [
+            (i, str(i)) for i in range(1, pquant)]
             
     
 
+#[x for x in range(9)]

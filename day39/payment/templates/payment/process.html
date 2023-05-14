@@ -1,4 +1,4 @@
-{% extends 'shop/base.html' %}
+{% extends 'Shope/base.html' %}
 {% load static %}
 {% block title %} Оплата {% endblock %}
 {% block content %}
@@ -16,7 +16,7 @@
             {% for item in order.items.all %}
             <tr class="row{% cycle "1" "2" %}">
                 <td>
-                    <img src="{% if item.product.image %}" {{ item.product.image.url }}{%else%}{% static "img/no_image.png" %}{% endif %}"">
+                    <img src="{% if item.product.image %}" {{ item.product.image.url }}{%else%}{% static "img/no_image.png" %}{% endif %}>
                 </td>
                 <td>{{item.product.name}}</td>
                 <td class="num">NIS {{item.price}}</td>  
