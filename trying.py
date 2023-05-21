@@ -30,3 +30,7 @@ import numpy as np
 
 arr1 = np.array([1,2,0,3,4])
 print (np.log(arr1))
+
+
+for i in (3):
+    print(i)
