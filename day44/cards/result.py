@@ -13,7 +13,7 @@ def _yes():
 
 figure, axes_list = plt.subplots(nrows=4, ncols=13)
 
-for axes in axes_list.ravel():
+for axes in axes_list.ravel(): # мне кажется что цикл здесь не нужен(могу ошибаться)
     coloda.shuffle()
     axes.get_xaxis().set_visible(False)
     axes.get_yaxis().set_visible(False)
@@ -25,7 +25,7 @@ for axes in axes_list.ravel():
     
 figure.tight_layout()# Не понял
 
-def func(next_card):
+def func(next_card): #  Как написать логику?
     print()
 
 axcut = plt.axes([0.9, 0.0, 0.1, 0.075])
