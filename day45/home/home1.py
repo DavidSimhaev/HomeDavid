@@ -22,36 +22,26 @@ class A(): # Квадрат можно увеличить не больше 10 �
     def __init__(self, quantity):
         self.quantity = quantity
         self.list = []
-    
-    @property
-    def list(self):
-        return self.list
-    
-    
-    @list.setter
-    def list(self, list):
-        return
         
-
-    
-    @property
-    def quantity(self):
-        return self.quantity
-    
-    
-    @quantity.setter
-    def quantity(self, list):
-        return
-   
-        
-
     def kvadrat(self): # Только нечетные!
         zero = "0"
-        
         a = self.quantity * [zero]
         for _ in range(self.quantity):
             self.list.append(a)
             yield a
     
+
 n = A(3)
+print(next(n.kvadrat()))
+print(next(n.kvadrat()))
+print(next(n.kvadrat()))
+
+
+try:
+    if n.quantity % 2 != 0: # Здесь нужно писать после образование квадрата ещё один генератор
+        n.list[len(n.list)//2][len(n.list)//2]= 1
+        print(n.list)
+        
+except StopIteration as ex:
+    print("Введите нечетное число")
 
