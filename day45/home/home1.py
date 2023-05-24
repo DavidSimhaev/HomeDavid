@@ -38,6 +38,10 @@ class A(): # Квадрат можно увеличить не больше 10 �
     def quantity(self):
         return self.quantity
     
+    
+    @quantity.setter
+    def quantity(self, list):
+        return
    
         
 
