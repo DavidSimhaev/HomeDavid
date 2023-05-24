@@ -39,9 +39,23 @@ print(next(n.kvadrat()))
 
 try:
     if n.quantity % 2 != 0: # Здесь нужно писать после образование квадрата ещё один генератор
-        n.list[len(n.list)//2][len(n.list)//2]= 1
-        print(n.list)
         
+       
+        b = 0
+        c = 0
+        for _ in range(n.quantity*n.quantity-1):
+            if b==0:
+                n.list[len(n.list)//2][len(n.list)//2]= "1"
+                b+=1
+            else:
+                
+                n.list[len(n.list)//2-b][len(n.list)//2]= "1"
+                if b>0:
+                    n.list[len(n.list)//2-b][len(n.list)//2-b]= "1"
+                    
+                if c == 0:
+                    n.list[len(n.list)//2][len(n.list)//2-b]= "1"
+                    b+=1
 except StopIteration as ex:
     print("Введите нечетное число")
 
