@@ -43,7 +43,7 @@ try:
        
         b = 0
         c = 0
-        for _ in range(n.quantity*n.quantity-1):
+        for _ in range(n.quantity*n.quantity):
             if b==0:
                 n.list[len(n.list)//2][len(n.list)//2]= "1"
                 b+=1
