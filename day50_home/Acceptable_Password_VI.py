@@ -6,8 +6,6 @@ def is_acceptable_password(password: str) -> bool:
     # your code here
     num = "1234567890"
     
-
-    
     
     if len(password) > 6:
         pas = "password"
@@ -36,7 +34,6 @@ def is_acceptable_password(password: str) -> bool:
                     return True 
                 else:
                     return False
-                
     else:
         return False
                        
