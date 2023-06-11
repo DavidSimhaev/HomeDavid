@@ -54,5 +54,5 @@ def checkio(num: int) -> str:
 print("Example:")
 #print(checkio(4))
 
-print(checkio(200))
+print(checkio(879))
 print("The mission is done! Click 'Check Solution' to earn rewards!")
