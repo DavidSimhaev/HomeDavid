@@ -13,8 +13,28 @@ print("------")
 li = [0, 1, 2, 3]
 
 running = True
-  
-while running:
-    for elem in li:
-        nextelem = li[li[elem]-len(li)+1]  
-        print(nextelem)
+def checkio(words: str) -> int:
+    
+    words = words.split()
+    b = 0
+    for word in words:
+        try:
+            int(word)
+            b = 0
+        except:
+            b +=1
+            if b == 3:
+                return True
+    return False
+    
+
+
+print("Example:")
+print(checkio("Hello World hello"))
+
+# These "asserts" are used for self-checking
+print(checkio("Hello World hello")) == True
+print(checkio("He is 123 man")) == False
+print(checkio("1 2 3 4")) == False
+print(checkio("bla bla bla bla")) == True
+print(checkio("Hi")) == False

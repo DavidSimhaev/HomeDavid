@@ -31,17 +31,16 @@ def click_button(number):
             elif number == "c":
                 res= ""
             elif number == "=":
-                res= solve(res)
+                res= int(solve(res))
                 entry.insert(0, res)
                 return    
         except:
             pass
         entry.insert(0, res)
         return
-    
     res +=str(number)
-    print(res)
     entry.insert(0, res)
+
 buttons = []   
 for x in range(10):
     swich = tk.IntVar()

@@ -2,29 +2,25 @@
 #- после каждой согласной буквы она добавляет случайную гласную букву (l ⇒ la or le);
 #- после каждой гласной буквы она добавляет две таких же буквы (a ⇒ aaa);
 
-def translate(text: str) -> str:
-    l = []
-    for index in range(len(text)):
-        if text[index] not in "aeiouy" :
-            l.extend(text[index])
 
+ 
+ 
+def translate(phrase):
+    VOWELS = "aeiouy"
+    i = 0
+    new_phrase = ''
+    while i < len(phrase):
+        if phrase[i] == ' ':
+            new_phrase += phrase[i]
+            i += 1
+        elif phrase[i] in VOWELS:
+            new_phrase += phrase[i]
+            i += 3
         else:
-            try:
-                if text[index-1] not in "aeiouy" and text[index-1] != " ":
-                    continue
-            
-                elif text[index] == text[index+1] and text[index] == text[index+2] and text[index] != text[index+3]:
-                    l.extend(text[index])
-                
-                elif text[index] == text[index+1] and text[index] == text[index+2] and text[index+3] in "aeiouy":
-                    if text.count(text[index])+1 > 3:
-                        number = text.count(text[index])/3
-                        l.extend(text[index]*int(number))
-                        break
-            except:
-                l.extend(text[index+1])  
-    res = "".join(l)
-    return res
+            new_phrase += phrase[i]
+            i += 2
+    return new_phrase
+ 
 
                                     
 

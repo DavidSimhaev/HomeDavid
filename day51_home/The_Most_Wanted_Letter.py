@@ -27,7 +27,7 @@ def checkio(text: str) -> str:
             
             for index in range(len(text)):
                 if text[index] == text[l.index(max(l))]:
-                    pass
+                    return text[index]
 
 
 

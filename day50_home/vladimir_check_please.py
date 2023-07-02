@@ -49,10 +49,13 @@ def checkio(num: int) -> str:
                 elif int(str(num)[2]) == 0: 
                     return FIRST_TEN[int(str(str_number)[0])-1] + " " + HUNDRED + " " + OTHER_TENS[int(str(str_number)[1])]
                 else:
-                    return FIRST_TEN[int(str(str_number)[0])-1] + " " + HUNDRED + " " + OTHER_TENS[int(str(str_number)[1])] + " " + FIRST_TEN[int(str(str_number)[2])-1]
+                    try:
+                        return FIRST_TEN[int(str(str_number)[0])-1] + " " + HUNDRED + " " + OTHER_TENS[int(str(str_number)[1])] + " " + FIRST_TEN[int(str(str_number)[2])-1]
+                    except:
+                        pass
     return ""
 print("Example:")
 #print(checkio(4))
 
-print(checkio(879))
+print(checkio(999))
 print("The mission is done! Click 'Check Solution' to earn rewards!")

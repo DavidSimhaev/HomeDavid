@@ -1,12 +1,7 @@
-import tkinter as tk
-from tkinter import Button, messagebox
+import sys
+import socket
+ 
+def get_name_and_decades(name, age):
+    print(f"My name is {name} and I'm {age / 10:.5f} decades old.")
 
-mywindows = tk.Tk()
-mywindows.title = "Название окна"
-def ButoonClick():
-    warning = messagebox.askquestion("Уверены?", "Продолжить?")
-    if warning == "yes":
-        mywindows.destroy()
-button = Button(mywindows, text= "Bye!", command= ButoonClick)
-button.place(x = 10, y = 10)
-mywindows.mainloop()
+get_name_and_decades("Leo", 31)
