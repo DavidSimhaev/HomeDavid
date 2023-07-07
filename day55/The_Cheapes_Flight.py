@@ -179,14 +179,6 @@ def cheapest_flight(costs: list, a: str, b: str) -> int:
         return check_arg[0]
     return min(check_arg)
                     
-            
-            
-                
-                    
-                    
-            
-
-
 
 print((
     cheapest_flight(
