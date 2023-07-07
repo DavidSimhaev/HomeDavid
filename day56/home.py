@@ -51,7 +51,7 @@ class time_counter():
             if datetime.datetime.now().hour != self.H or datetime.datetime.now().minute != self.M:
                 print(datetime.datetime.now().hour, datetime.datetime.now().minute, datetime.datetime.now().second)
             else:
-                return print("Программа завершила программа")
+                return print("Программа остановилась")
 
 time1= time_counter(9, 0 )           
 
