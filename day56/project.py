@@ -1,6 +1,6 @@
 import time
 import tkinter as tk
-from tkinter import Button ,Checkbutton , Entry, Frame, W, E, PhotoImage
+from tkinter import Button ,Checkbutton , Entry, Frame, W, E, PhotoImage, Text, IntVar
 from tkinter.ttk import Style
 import tkinter.font as tkFont
 
@@ -17,6 +17,8 @@ class Example(Frame):
         self.master.title("MBook")
         self.photo = PhotoImage(file = r"day56/user.png")
         self.subsise = self.photo.subsample(5, 5)
+        self.seacrh_photo = PhotoImage(file = r"day56/search_2.png")
+        self.subsise_seatch = self.seacrh_photo.subsample(50,50)
         
         Style().configure("TButton", padding=(0, 5, 0, 5), font='serif 10')
         self.columnconfigure(0, pad=3)
@@ -30,15 +32,12 @@ class Example(Frame):
         self.rowconfigure(3, pad=3)
         self.rowconfigure(4, pad=3)
         
+        self.label = tk.Label(self, text = "Message Book",background="yellow" , font = "Haettenschweiler 50" )
+        self.label.grid(row= 0, columnspan= 5, sticky= W+E)
         
-        label = tk.Label(self, text = "Message Book",background="yellow" , font = "Haettenschweiler 50" )
-        label.grid(row= 0, columnspan= 5, sticky= W+E)
-        
-        def main_p():
-             
+        def main_p(): 
             button_image_acc = Button(self, image= self.subsise)
             button_image_acc.grid(row = 2 , columnspan = 3, pady= 20 )
-            
             label_name = tk.Label(self, text = "Name", font="Haettenschweiler 20")
             label_name.grid(row = 2, column= 3)
             biography = tk.Label(self, text = "Biography", font="Haettenschweiler 30")
@@ -92,24 +91,33 @@ class Example(Frame):
             global counter
             counter = 0
             ####
-        Button_page = tk.Button(self, text = "Main Page", bg= "yellow", font="Haettenschweiler 20", command= main_p)
-        Button_page.grid(row=1, column=0)
         
-        Button_message = Button(self, text= "Message", bg= "yellow", font="Haettenschweiler 20")
-        Button_message.grid(row=1, column=1)
+        self.Button_page = tk.Button(self,  text = "Main Page", bg= "yellow"  ,font="Haettenschweiler 20", command= main_p)
+        self.Button_page.grid(row=1, column=0)
         
+        self.Button_message = Button(self, text= "Message", bg= "yellow", font="Haettenschweiler 20")
+        self.Button_message.grid(row=1, column=1)
         
-        Button_music = Button(self, text= "Music", bg= "yellow", font="Haettenschweiler 20")
-        Button_music.grid(row=1, column=2)
+        def func_music():
+            text_search = Entry(self, width="45")
+            text_search.grid(row = 2 , columnspan= 4, ipady=10)
+            
+            button_search = Button(self, image= self.subsise_seatch)
+            button_search.grid(row = 2 , column= 3, pady= 20, sticky = "e" )
+            
+            pass
         
-        Button_support = Button(self, text= "Support", bg= "yellow", font="Haettenschweiler 20")
-        Button_support.grid(row=1, column=3)
+        self.Button_music = Button(self, text= "Music", bg= "yellow", font="Haettenschweiler 20",command= func_music)
+        self.Button_music.grid(row=1, column=2)
+        
+        self.Button_support = Button(self, text= "Support", bg= "yellow", font="Haettenschweiler 20")
+        self.Button_support.grid(row=1, column=3)
         
         def exit():
             self.master.destroy()
         
-        button_exit = Button(self, text= "Exit", bg= "red", font="Haettenschweiler 20", command=exit)
-        button_exit.grid(row=1, column=4)
+        self.button_exit = Button(self, text= "Exit", bg= "red", font="Haettenschweiler 20", command=exit)
+        self.button_exit.grid(row=1, column=4)
         
         
         self.pack()
@@ -120,6 +128,6 @@ def main():
     window.geometry("414x736")
     window.mainloop()
 
-if __name__ == '__main__':
+if __name__ == '__main__': # Не понял
     main()
         
