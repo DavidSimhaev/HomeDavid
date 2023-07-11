@@ -1,0 +1,1 @@
+res =['C:/Users/ASUS/Desktop/FOTO_NIKON/обработанное/NZ5_8106.jpg', 'C:/Users/ASUS/Desktop/FOTO_NIKON/обработанное/NZ5_8095.jpg', 'C:/Users/ASUS/Desktop/FOTO_NIKON/обработанное/NZ5_8086.jpg']
