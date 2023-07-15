@@ -494,6 +494,9 @@ def main():
             
         
     def save_project():
+        if app.FILES_LIST == []:
+            messagebox.showerror(title="Input error", message="Your project is empty, upload files to save.")
+            return
         name = filedialog.asksaveasfile(initialdir= "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/projects")
         
     file_menu2 = Menu(file_menu, tearoff= 0)
@@ -501,7 +504,7 @@ def main():
     file_menu2.add_command(label="Work2")
     
     file_menu.add_command(label="Open File", command= open_file)
-    file_menu.add_command(label="Save File", command= save_project)
+    file_menu.add_command(label="Save Project", command= save_project)
     file_menu.add_cascade(label="Open Recent", menu= file_menu2)
     
     mainmenu.add_cascade(label= "File", menu= file_menu )
