@@ -53,7 +53,7 @@ class Example(Frame):
         self.rowconfigure(3, pad=3)
         self.rowconfigure(4, pad=3)
         
-        self.label = tk.Label(self, text = "Photo-Recognition",background="yellow" , font = "Haettenschweiler 50" )
+        self.label = tk.Label(self, text = "PRT Progamm",background="yellow" , font = "Haettenschweiler 50" )
         self.label.grid(row= 0, columnspan= 5, sticky= W+E)
         
         
@@ -63,12 +63,9 @@ class Example(Frame):
                 if int(label.grid_info()["row"]) > 1:
                     label.destroy()
     
-            button_image_acc = Button(self, image= self.subsise )
-            button_image_acc.grid(row = 2 , columnspan = 3, pady= 20 )
-            label_name = tk.Label(self, text = "Name", font="Haettenschweiler 20")
-            label_name.grid(row = 2, column= 3)
-            biography = tk.Label(self, text = "Biography", font="Haettenschweiler 30")
-            biography.grid(row = 3, columnspan= 5)
+            
+            biography = tk.Label(self, text = "Introduction", font="Haettenschweiler 30")
+            biography.grid(row = 2, columnspan= 5, pady= 30)
                     ####
             def check_text(text):
                         
@@ -99,7 +96,7 @@ class Example(Frame):
                     end = True
                     return text[counter::] 
             row_x = 3    
-            text_ch = "Charles Spencer Chaplin was an English actor, director, and writer who was one of the most famous figures in the history of film. Born in 1889, Chaplin began his career as a performer in British vaudeville and music hall before moving to Hollywood in 1913. Chaplin is best known for his work as a silent film actor, in which he starred in a series of classic comedies featuring his most famous character, the «Tramp.» The Tramp, a lovable and resourceful character with a distinctive appearance (including a small mustache and bowler hat), appeared in many of Chaplin’s films, including «The Kid,» «The Gold Rush,» and «Modern Times.» Chaplin was a pioneer in the film industry and was known for his innovative use of film techniques and storytelling. He wrote, directed, and produced many of his own films and was a key figure in the development of the Hollywood studio system. Chaplin continued to act and make films until the 1950s and received numerous awards and accolades throughout his career. He died in 1977 at the age of 88."
+            text_ch = "PRT Progamm - The mobile application is designed for fast recognition of text into images in PNG, JBG, GIF files format. The application can be used as a digitizer of papers, as it includes a tool for direct interception of photos from the scanner. Developed based on the Keras OCR library. Allows you to save documents and images with high quality to small files. Flexible and built-in functionality allows you to spend minimum energy resources. In order to upload files, click on the right mouse button on the left side of the screen and upload an image. In the transition menu, select recognize text, and wait for the neural network to finish working. If you want to upload several images at once, save the project and go to the 'projects' tab."
                     
             while True:
                 row_x +=1
@@ -181,11 +178,10 @@ class Example(Frame):
                             
                             w.destroy()
                             
-                        
                             
                     w = tk.Tk()              
                     w.geometry("150x40")      
-                    print(file_pr["elem"]["textvariable"])
+                    
                     rename = tk.Entry(w, font= 50)
                     rename.delete(0,END)
                     rename.insert(0,file_pr["elem"]["text"])    
@@ -412,8 +408,7 @@ class Example(Frame):
                         Label_str3.bind("<Leave>", on_leave3)
                         Label_str3.bind("<Button-1>", lambda event, arg=data: on_click_del_file(event, arg))
 
-                    for key in self.dict:
-                        print(self.dict[key])
+                    
             
             f()
 
@@ -488,7 +483,6 @@ def main():
         save_image = Image_ch(name).save()
         
         app.FILES_LIST.append(save_image)
-        print(app.FILES_LIST)
         app.Button_files.invoke() # ИНВОК ЗАПУСКАЕТ ВИДЖЕТ БЕЗ КЛИКА!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
             
@@ -497,7 +491,18 @@ def main():
         if app.FILES_LIST == []:
             messagebox.showerror(title="Input error", message="Your project is empty, upload files to save.")
             return
-        name = filedialog.asksaveasfile(initialdir= "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/projects")
+        files = [('Text Document', '*.txt'),]
+        try:
+            file = filedialog.asksaveasfile(filetypes = files, defaultextension = files ,initialdir= "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/projects")
+        except AttributeError:
+            return
+        write_res_to_file = open(file.name, "w", encoding= "utf-8")
+                                
+        for el in app.FILES_LIST:
+            write_res_to_file.write(f"{str(el)}\n")
+        write_res_to_file.close()
+        messagebox.showinfo(title="The project is saved", message= "Your project has been saved successfully!")
+        
         
     file_menu2 = Menu(file_menu, tearoff= 0)
     file_menu2.add_command(label="Work1")
