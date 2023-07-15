@@ -42,10 +42,10 @@ def click_button(number):
     entry.insert(0, res)
 
 buttons = []   
-for x in range(10):
+for elem in range(10):
     swich = tk.IntVar()
-    swich.set(x)
-    button = tk.Button(window, textvariable= swich , bg= "blue", fg= "white", width= 5, height= 3, text=x, command=lambda x=x: click_button(x))
+    swich.set(elem)
+    button = tk.Button(window, textvariable= swich , bg= "blue", fg= "white", width= 5, height= 3, text=elem, command=lambda x=elem: click_button(x))
     button.focus_set()
     buttons.append( button)
 for index in range(1,len(buttons)+1):
@@ -58,19 +58,19 @@ for index in range(1,len(buttons)+1):
             buttons[index].grid(row=3, column = index+1-6)
         except:
             pass
-        button_minus = tk.Button(window, textvariable= "-" , bg= "yellow", width= 5, height= 3, text="-", command=lambda x=x:click_button("-"))
+        button_minus = tk.Button(window, textvariable= "-" , bg= "yellow", width= 5, height= 3, text="-", command=lambda x=elem:click_button("-"))
         button_minus.grid(row=3, column=5)
-        button_plus = tk.Button(window, textvariable= "+" , bg= "yellow", width= 5, height= 3, text="+", command=lambda x=x: click_button("+"))
+        button_plus = tk.Button(window, textvariable= "+" , bg= "yellow", width= 5, height= 3, text="+", command=lambda x=elem: click_button("+"))
         button_plus.grid(row=4, column=5)
-        button_c = tk.Button(window, textvariable= "*" , bg= "yellow", width= 5, height= 3, text="*", command=lambda x=x: click_button("*"))
+        button_c = tk.Button(window, textvariable= "*" , bg= "yellow", width= 5, height= 3, text="*", command=lambda x=elem: click_button("*"))
         button_c.grid(row=1, column=5)
-        button_des = tk.Button(window, textvariable= "/" , bg= "yellow", width= 5, height= 3, text="/", command=lambda x=x: click_button("/"))
+        button_des = tk.Button(window, textvariable= "/" , bg= "yellow", width= 5, height= 3, text="/", command=lambda x=elem: click_button("/"))
         button_des.grid(row=2, column=5)
-        button_rovno = tk.Button(window, textvariable= "=" , bg= "yellow", width= 5, height= 3, text="=", command=lambda x=x: click_button("="))
+        button_rovno = tk.Button(window, textvariable= "=" , bg= "yellow", width= 5, height= 3, text="=", command=lambda x=elem: click_button("="))
         button_rovno.grid(row=4,column=4)
-        button_clear = tk.Button(window, textvariable= "c" , bg= "yellow", width= 5, height= 3, text="c", command=lambda x=x: click_button("c"))
+        button_clear = tk.Button(window, textvariable= "c" , bg= "yellow", width= 5, height= 3, text="c", command=lambda x=elem: click_button("c"))
         button_clear.grid(row=4,column=3)
-        button_space = tk.Button(window, textvariable= " " , bg= "yellow", width= 5, height= 3, text=" ", command=lambda x=x: click_button(" "))
+        button_space = tk.Button(window, textvariable= " " , bg= "yellow", width= 5, height= 3, text=" ", command=lambda x=elem: click_button(" "))
         button_space.grid(row=4,column=2)
 res.split("+")
 print(res)
