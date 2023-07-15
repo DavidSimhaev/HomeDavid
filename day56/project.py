@@ -454,7 +454,7 @@ def main():
         files = [('PNG', '*.png'),('JPG', '*.jpg')]
         
         try:
-            name = filedialog.askopenfilename(filetypes = files, defaultextension = files )
+            name = filedialog.askopenfilename(filetypes = files, defaultextension = files, initialdir= "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/image" )
         except AttributeError:
             return
         if name == "":
