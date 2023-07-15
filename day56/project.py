@@ -413,8 +413,10 @@ class Example(Frame):
                 
                     files = [
                                 ('Text Document', '*.txt'),]
-                            
-                    file = filedialog.asksaveasfile(filetypes = files, defaultextension = files)
+                    try:
+                        file = filedialog.asksaveasfile(filetypes = files, defaultextension = files,initialdir= "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/projects")
+                    except AttributeError:
+                        return
                     write_res_to_file = open(file.name, "w", encoding= "utf-8")
                     
                     
@@ -451,7 +453,10 @@ def main():
     def open_file():
         files = [('PNG', '*.png'),('JPG', '*.jpg')]
         
-        name = filedialog.askopenfilename(filetypes = files, defaultextension = files)
+        try:
+            name = filedialog.askopenfilename(filetypes = files, defaultextension = files )
+        except AttributeError:
+            return
         if name == "":
             return
         
@@ -464,7 +469,7 @@ def main():
             
         
     def save_project():
-        name = filedialog.asksaveasfile()
+        name = filedialog.asksaveasfile(initialdir= "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/projects")
         
     file_menu2 = Menu(file_menu, tearoff= 0)
     file_menu2.add_command(label="Work1")
