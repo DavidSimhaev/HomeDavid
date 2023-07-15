@@ -164,12 +164,37 @@ class Example(Frame):
                     e.widget['background'] = 'SystemButtonFace'
                     
                 def rename_pr(event, file_pr):
+                    
+                    def change_name(event):
+                        answer = messagebox.askyesno(message="Are you sure you want to change the name of the project?")
+                        if answer:
+                            b = 0
+                            for el in str(file_pr["elem"]["textvariable"])[::-1]:
+                                b+=1
+                                if el == "/": 
+                                    os.rename(file_pr["elem"]["textvariable"],file_pr["elem"]["textvariable"][:-b]+"/"+rename.get()+".txt")
+                                    self.Button_projects.invoke()
+                                    w.destroy()
+                                    break
+                                    
+                        else:
+                            
+                            w.destroy()
+                            
+                        
+                            
                     w = tk.Tk()              
                     w.geometry("150x40")      
+                    print(file_pr["elem"]["textvariable"])
                     rename = tk.Entry(w, font= 50)
                     rename.delete(0,END)
                     rename.insert(0,file_pr["elem"]["text"])    
                     rename.place(width=150, height=40)
+                    
+                    
+                    rename.bind("<Return>",change_name)
+                    
+                    #os.rename(file_pr["elem"]["textvariable"], rename["text"])
                 
                 
                 
