@@ -8,34 +8,41 @@ from PIL import ImageTk, Image
 from tkinter import ttk ,Button ,Checkbutton , Entry, Frame, W, E, PhotoImage, Text, IntVar, Menu, filedialog, messagebox, END
 from tkinter.ttk import Style
 import tkinter.font as tkFont
+
+
+
 res = 0
 First= True
 end = False
 counter = 0
 b = 3
 q = 0
+
+
+
+
 class Example(Frame):
     def __init__(self):
         super().__init__()
         
-
+        self.local_url = os.getcwd().replace("\\", "/")
         self.FILES_LIST = []
         self.image = None       
         self.sub = None         
         self.load = None
-        self.support_1 = PhotoImage(file = "day56/support_img/1.png" )
-        self.support_2 = PhotoImage(file = "day56/support_img/2.png")
-        self.support_3 = PhotoImage(file = "day56/support_img/3.png").subsample(2,2)
-        self.support_4 = PhotoImage(file = "day56/support_img/4.png")
-        self.support_6 = PhotoImage(file = "day56/support_img/6.png")
+        self.support_1 = PhotoImage(file = f"{self.local_url}/support_img/1.png" )
+        self.support_2 = PhotoImage(file = f"{self.local_url}/support_img/2.png")
+        self.support_3 = PhotoImage(file = f"{self.local_url}/support_img/3.png").subsample(2,2)
+        self.support_4 = PhotoImage(file = f"{self.local_url}/support_img/4.png")
+        self.support_6 = PhotoImage(file = f"{self.local_url}/support_img/6.png")
         
-        self.photo = PhotoImage(file = "day56/image/user.png")
+        self.photo = PhotoImage(file = f"{self.local_url}/image/user.png")
         self.subsise = self.photo.subsample(5, 5)                      
-        self.icon_del = PhotoImage(file = "day56/image/975968.png")
+        self.icon_del = PhotoImage(file = f"{self.local_url}/image/975968.png")
         self.sub_icon_del = self.icon_del.subsample(25, 25)
-        self.editing_icon = PhotoImage(file = "day56/image/950768.png")
+        self.editing_icon = PhotoImage(file = f"{self.local_url}/image/950768.png")
         self.sub_editing = self.editing_icon.subsample(25,25)
-        self.icon_sell = PhotoImage(file= "day56/image/1778661.png")
+        self.icon_sell = PhotoImage(file= f"{self.local_url}/image/1778661.png")
         self.sub_sell = self.icon_sell.subsample(25,25)
         
         self.dict = {}
@@ -274,7 +281,7 @@ class Example(Frame):
                 
                 
                     
-                for file_project in glob.glob("day56/projects*/*.txt"):
+                for file_project in glob.glob(f"{self.local_url}/projects*/*.txt"):
                     global q
                     if q % 2: # Четное
                         q+=2
@@ -341,10 +348,6 @@ class Example(Frame):
                     widget_frame.update_idletasks()
                     bbox = canvas.bbox(tk.ALL)
                     
-                    #############
-                    
-                    
-                    #############
                     canvas.configure(scrollregion=bbox, width=359, height=500)
                     
         self.Button_projects = Button(self, text= "Projects", bg= "yellow", font="Haettenschweiler 20", command= all_projects, cursor="hand2")
@@ -542,7 +545,7 @@ class Example(Frame):
                     files = [
                                 ('Text Document', '*.txt'),]
                     try:
-                        file = filedialog.asksaveasfile(filetypes = files, defaultextension = files,initialdir= "day56/projects")
+                        file = filedialog.asksaveasfile(filetypes = files, defaultextension = files,initialdir= f"{self.local_url}/projects")
                     except AttributeError:
                         return
                     write_res_to_file = open(file.name, "w", encoding= "utf-8")
@@ -569,7 +572,7 @@ def main():
     app = Example()
     app.Button_page.invoke()
     window.geometry("414x736")
-    window.iconbitmap("day56/image/photo_photography_picture_camera_summer_icon_251688.ico")
+    window.iconbitmap(f"{app.local_url}/image/photo_photography_picture_camera_summer_icon_251688.ico")
     mainmenu = Menu(window)
     
     window.config(menu= mainmenu)
@@ -596,7 +599,7 @@ def main():
         files = [('PNG', '*.png'),('JPG', '*.jpg')]
         
         try:
-            name = filedialog.askopenfilename(filetypes = files, defaultextension = files, initialdir= "day56/image" )
+            name = filedialog.askopenfilename(filetypes = files, defaultextension = files, initialdir= f"{app.local_url}/image" )
         except AttributeError:
             return
         if name == "":
@@ -615,7 +618,7 @@ def main():
             return
         files = [('Text Document', '*.txt'),]
         try:
-            file = filedialog.asksaveasfile(filetypes = files, defaultextension = files ,initialdir= "day56/projects")
+            file = filedialog.asksaveasfile(filetypes = files, defaultextension = files ,initialdir= f"{app.local_url}/projects")
         except AttributeError:
             return
         write_res_to_file = open(file.name, "w", encoding= "utf-8")
@@ -641,6 +644,6 @@ def main():
     
     window.mainloop()
 
-if __name__ == '__main__': # Не понял
+if __name__ == '__main__': 
     main()
         
