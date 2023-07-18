@@ -584,6 +584,7 @@ def main():
                 save_project()
                 app.master.destroy()
             else:
+                app.master.destroy()
                 return
         
     
