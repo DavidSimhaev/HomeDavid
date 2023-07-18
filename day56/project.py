@@ -23,19 +23,19 @@ class Example(Frame):
         self.image = None       
         self.sub = None         
         self.load = None
-        self.support_1 = PhotoImage(file = "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/support_img/1.png" )
-        self.support_2 = PhotoImage(file = "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/support_img/2.png")
-        self.support_3 = PhotoImage(file = "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/support_img/3.png").subsample(2,2)
-        self.support_4 = PhotoImage(file = "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/support_img/4.png")
-        self.support_6 = PhotoImage(file = "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/support_img/6.png")
+        self.support_1 = PhotoImage(file = "day56/support_img/1.png" )
+        self.support_2 = PhotoImage(file = "day56/support_img/2.png")
+        self.support_3 = PhotoImage(file = "day56/support_img/3.png").subsample(2,2)
+        self.support_4 = PhotoImage(file = "day56/support_img/4.png")
+        self.support_6 = PhotoImage(file = "day56/support_img/6.png")
         
         self.photo = PhotoImage(file = "day56/image/user.png")
         self.subsise = self.photo.subsample(5, 5)                      
-        self.icon_del = PhotoImage(file = "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/image/975968.png")
+        self.icon_del = PhotoImage(file = "day56/image/975968.png")
         self.sub_icon_del = self.icon_del.subsample(25, 25)
-        self.editing_icon = PhotoImage(file = "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/image/950768.png")
+        self.editing_icon = PhotoImage(file = "day56/image/950768.png")
         self.sub_editing = self.editing_icon.subsample(25,25)
-        self.icon_sell = PhotoImage(file= "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/image/1778661.png")
+        self.icon_sell = PhotoImage(file= "day56/image/1778661.png")
         self.sub_sell = self.icon_sell.subsample(25,25)
         
         self.dict = {}
@@ -135,7 +135,7 @@ class Example(Frame):
             Label_pr.grid(row= 2 , columnspan= 5, pady= 8)
             
             
-            if glob.glob("C:/Users/ASUS/Desktop/HomeWorkDavid/day56/projects*/*.txt") == []:
+            if glob.glob("day56/projects*/*.txt") == []:
                 label_str = tk.Label(self, text = "You don't have any active projects at the moment.", font="@yugothic 11 ")
                 label_str.grid(row= 3 , columnspan= 5)
                 label_str2 = tk.Label(self , text = "Log in to the 'files' tab and upload the recordings,", font="@yugothic 11 ")
@@ -274,7 +274,7 @@ class Example(Frame):
                 
                 
                     
-                for file_project in glob.glob("C:/Users/ASUS/Desktop/HomeWorkDavid/day56/projects*/*.txt"):
+                for file_project in glob.glob("day56/projects*/*.txt"):
                     global q
                     if q % 2: # Четное
                         q+=2
@@ -542,7 +542,7 @@ class Example(Frame):
                     files = [
                                 ('Text Document', '*.txt'),]
                     try:
-                        file = filedialog.asksaveasfile(filetypes = files, defaultextension = files,initialdir= "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/projects")
+                        file = filedialog.asksaveasfile(filetypes = files, defaultextension = files,initialdir= "day56/projects")
                     except AttributeError:
                         return
                     write_res_to_file = open(file.name, "w", encoding= "utf-8")
@@ -569,7 +569,7 @@ def main():
     app = Example()
     app.Button_page.invoke()
     window.geometry("414x736")
-    window.iconbitmap("C:/Users/ASUS/Desktop/HomeWorkDavid/day56/image/photo_photography_picture_camera_summer_icon_251688.ico")
+    window.iconbitmap("day56/image/photo_photography_picture_camera_summer_icon_251688.ico")
     mainmenu = Menu(window)
     
     window.config(menu= mainmenu)
@@ -577,9 +577,10 @@ def main():
     
     def on_closing():
         if app.FILES_LIST == []:
+            app.master.destroy()
             return
         else:
-            answer = messagebox.askokcancel(title="The saving process", message="do you want to save the result of the current project?")
+            answer = messagebox.askyesno(title="The saving process", message="Do you want to save the result of the current project?")
             if answer:
                 save_project()
                 app.master.destroy()
@@ -595,7 +596,7 @@ def main():
         files = [('PNG', '*.png'),('JPG', '*.jpg')]
         
         try:
-            name = filedialog.askopenfilename(filetypes = files, defaultextension = files, initialdir= "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/image" )
+            name = filedialog.askopenfilename(filetypes = files, defaultextension = files, initialdir= "day56/image" )
         except AttributeError:
             return
         if name == "":
@@ -614,7 +615,7 @@ def main():
             return
         files = [('Text Document', '*.txt'),]
         try:
-            file = filedialog.asksaveasfile(filetypes = files, defaultextension = files ,initialdir= "C:/Users/ASUS/Desktop/HomeWorkDavid/day56/projects")
+            file = filedialog.asksaveasfile(filetypes = files, defaultextension = files ,initialdir= "day56/projects")
         except AttributeError:
             return
         write_res_to_file = open(file.name, "w", encoding= "utf-8")
