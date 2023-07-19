@@ -24,8 +24,7 @@ q = 0
 class Example(Frame):
     def __init__(self):
         super().__init__()
-        
-        self.local_url = os.getcwd().replace("\\", "/")
+        self.local_url = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
         self.FILES_LIST = []
         self.image = None       
         self.sub = None         
