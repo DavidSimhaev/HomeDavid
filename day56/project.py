@@ -2,14 +2,9 @@ from frame_easyocr import Recording_text
 from check_width_and_height import Image_ch
 import os
 import glob
-import time
 import tkinter as tk
-from PIL import ImageTk, Image
 from tkinter import ttk ,Button ,Checkbutton , Entry, Frame, W, E, PhotoImage, Text, IntVar, Menu, filedialog, messagebox, END
 from tkinter.ttk import Style
-import tkinter.font as tkFont
-
-
 
 res = 0
 First= True
@@ -141,7 +136,7 @@ class Example(Frame):
             Label_pr.grid(row= 2 , columnspan= 5, pady= 8)
             
             
-            if glob.glob("day56/projects*/*.txt") == []:
+            if glob.glob(f"{self.local_url}/projects*/*.txt") == []:
                 label_str = tk.Label(self, text = "You don't have any active projects at the moment.", font="@yugothic 11 ")
                 label_str.grid(row= 3 , columnspan= 5)
                 label_str2 = tk.Label(self , text = "Log in to the 'files' tab and upload the recordings,", font="@yugothic 11 ")
