@@ -3,7 +3,7 @@ from check_width_and_height import Image_ch
 import os
 import glob
 import tkinter as tk
-from tkinter import ttk ,Button ,Checkbutton , Entry, Frame, W, E, PhotoImage, Text, IntVar, Menu, filedialog, messagebox, END
+from tkinter import Button, Frame, W, E, PhotoImage, Menu, filedialog, messagebox, END
 from tkinter.ttk import Style
 
 res = 0
@@ -48,7 +48,7 @@ class Example(Frame):
         self.app()          
         
     def app(self):
-        self.master.title("MBook")
+        self.master.title("PRT")
         
         Style().configure("TButton", padding=(0, 5, 0, 5), font='serif 10')
         self.columnconfigure(0, pad=3)

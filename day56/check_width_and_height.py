@@ -10,8 +10,7 @@ class Image_ch:
         self.new_width  = 500
         self.new_height = 500
         self.url_l = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
-    
-    
+
     def save(self):
         img = self.image.resize((self.new_width, self.new_height), Image.LANCZOS)
         x = []
