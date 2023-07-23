@@ -1,5 +1,5 @@
 # Program in Python to create a Snake Game
-
+from frame_easyocr import Recording_text
 from tkinter import *
 import random
 

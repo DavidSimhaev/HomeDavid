@@ -12,7 +12,7 @@ class Image_ch:
         self.url_l = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
 
     def save(self):
-        img = self.image.resize((self.new_width, self.new_height), Image.LANCZOS)
+        img = self.image.resize((self.new_width, self.new_height), Image.Resampling.LANCZOS)
         x = []
         for elem in self.url[::-1]:
             if elem != "/":
@@ -21,5 +21,5 @@ class Image_ch:
             else:
                 break 
         res = "".join(x[::-1])
-        img.save(f"{self.url_l}/image/image_pr/"+res)
-        return f"{self.url_l}/image/image_pr/"+res
+        img.save(rf"{self.url_l}/image/image_pr/"+res)
+        return rf"{self.url_l}/image/image_pr/"+res

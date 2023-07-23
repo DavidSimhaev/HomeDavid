@@ -1,3 +1,5 @@
+import shutil
+import threading
 from frame_easyocr import Recording_text
 from check_width_and_height import Image_ch
 import os
@@ -5,46 +7,44 @@ import glob
 import tkinter as tk
 from tkinter import Button, Frame, W, E, PhotoImage, Menu, filedialog, messagebox, END
 from tkinter.ttk import Style
-
+import time
 res = 0
 First= True
 end = False
 counter = 0
 b = 3
 q = 0
-
-
-
+count_threads=0
 
 class Example(Frame):
     def __init__(self):
         super().__init__()
+        
         self.local_url = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
         self.FILES_LIST = []
+        self.running = True
         self.image = None       
         self.sub = None         
         self.load = None
-        self.support_1 = PhotoImage(file = f"{self.local_url}/support_img/1.png" )
-        self.support_2 = PhotoImage(file = f"{self.local_url}/support_img/2.png")
-        self.support_3 = PhotoImage(file = f"{self.local_url}/support_img/3.png").subsample(2,2)
-        self.support_4 = PhotoImage(file = f"{self.local_url}/support_img/4.png")
-        self.support_6 = PhotoImage(file = f"{self.local_url}/support_img/6.png")
+        self.support_1 = PhotoImage(file = rf"{self.local_url}/support_img/1.png" )
+        self.support_2 = PhotoImage(file = rf"{self.local_url}/support_img/2.png")
+        self.support_3 = PhotoImage(file = rf"{self.local_url}/support_img/3.png").subsample(2,2)
+        self.support_4 = PhotoImage(file = rf"{self.local_url}/support_img/4.png")
+        self.support_6 = PhotoImage(file = rf"{self.local_url}/support_img/6.png")
         
-        self.photo = PhotoImage(file = f"{self.local_url}/image/user.png")
+        self.photo = PhotoImage(file = rf"{self.local_url}/image/user.png")
         self.subsise = self.photo.subsample(5, 5)                      
-        self.icon_del = PhotoImage(file = f"{self.local_url}/image/975968.png")
+        self.icon_del = PhotoImage(file = rf"{self.local_url}/image/975968.png")
         self.sub_icon_del = self.icon_del.subsample(25, 25)
-        self.editing_icon = PhotoImage(file = f"{self.local_url}/image/950768.png")
+        self.editing_icon = PhotoImage(file = rf"{self.local_url}/image/950768.png")
         self.sub_editing = self.editing_icon.subsample(25,25)
-        self.icon_sell = PhotoImage(file= f"{self.local_url}/image/1778661.png")
+        self.icon_sell = PhotoImage(file= rf"{self.local_url}/image/1778661.png")
         self.sub_sell = self.icon_sell.subsample(25,25)
-        
+        self.change_height =1
         self.dict = {}
         
         
-        
-        
-        
+
         self.app()          
         
     def app(self):
@@ -63,7 +63,7 @@ class Example(Frame):
         self.rowconfigure(4, pad=3)
         
         
-        self.label = tk.Label(self, text = "PRT Progamm",background="yellow" , font = "Haettenschweiler 50" )
+        self.label = tk.Label(self, text = "PRT Progamm",background="#78DBE2" , font = "Haettenschweiler 50" ,fg = "black")
         self.label.grid(row= 0, columnspan= 5, sticky= W+E)
         
         
@@ -72,10 +72,11 @@ class Example(Frame):
             for label in self.grid_slaves():
                 if int(label.grid_info()["row"]) > 1:
                     label.destroy()
-    
             
-            biography = tk.Label(self, text = "Introduction", font="Haettenschweiler 30")
+            
+            biography = tk.Label(self, text = "Introduction", font="Haettenschweiler 30", fg = "black")
             biography.grid(row = 2, columnspan= 5, pady= 30)
+            
                     ####
             def check_text(text):
                         
@@ -113,7 +114,7 @@ class Example(Frame):
                     
             while True:
                 row_x +=1
-                characteristic_text = tk.Label(self, text = check_text(text_ch), font="GothicLight 10")
+                characteristic_text = tk.Label(self, text = check_text(text_ch), font="GothicLight 10", fg = "black")
                 characteristic_text.grid(row = row_x, columnspan= 5)
                 global end
                 if end == True:
@@ -124,7 +125,7 @@ class Example(Frame):
                     ####
             
         
-        self.Button_page = tk.Button(self,  text = "Main Page", bg= "yellow"  ,font="Haettenschweiler 20", command= main_p, cursor="hand2")
+        self.Button_page = tk.Button(self,  text = "Main Page", bg= "#78DBE2"  ,font="Haettenschweiler 20", command= main_p, cursor="hand2", fg = "black")
         self.Button_page.grid(row=1, column=0)
         
         def all_projects():
@@ -132,17 +133,22 @@ class Example(Frame):
             for label in self.grid_slaves():
                 if int(label.grid_info()["row"]) > 1:
                     label.destroy()
-            Label_pr = tk.Label(self, text = "Your projects" , font= "@yugothic 20 bold ") # При нажатие выдасть диологовое окно и загрузить проект
-            Label_pr.grid(row= 2 , columnspan= 5, pady= 8)
+            counter_pr = len(glob.glob(rf"{self.local_url}/projects*/*.txt"))
+            Label_pr = tk.Label(self, text = f"Your projects: {counter_pr}" , font= "@yugothic 13 bold", fg = "black")
+            Label_pr.grid(row= 2 , column= 0, columnspan= 3, pady= 8)
             
             
-            if glob.glob(f"{self.local_url}/projects*/*.txt") == []:
-                label_str = tk.Label(self, text = "You don't have any active projects at the moment.", font="@yugothic 11 ")
-                label_str.grid(row= 3 , columnspan= 5)
-                label_str2 = tk.Label(self , text = "Log in to the 'files' tab and upload the recordings,", font="@yugothic 11 ")
-                label_str2.grid(row= 4 , columnspan= 5)
-                label_str2 = tk.Label(self, text = "and save the result.", font="@yugothic 11  ")
+            if glob.glob(rf"{self.local_url}/projects*/*.txt") == []:
+                canv = tk.Canvas(self, bg= "gray", height= 2, width=350)
+                canv.grid(row = 3, columnspan= 5, pady= 4)
+                label_str = tk.Label(self, text = "You don't have any active projects at the moment.", font="@yugothic 11 ", fg = "black")
+                label_str.grid(row= 4 , columnspan= 5)
+                label_str2 = tk.Label(self , text = "Log in to the 'files' tab and upload the recordings,", font="@yugothic 11 ", fg = "black")
                 label_str2.grid(row= 5 , columnspan= 5)
+                label_str2 = tk.Label(self, text = "and save the result.", font="@yugothic 11  ", fg = "black")
+                label_str2.grid(row= 6 , column=0, columnspan= 3)
+            
+            
             else:
                     
                 ###########################################################################
@@ -204,37 +210,61 @@ class Example(Frame):
                                     os.rename(file_pr["elem"]["textvariable"],file_pr["elem"]["textvariable"][:-b]+"/"+rename.get()+".txt")
                                     self.Button_projects.invoke()
                                     w.destroy()
-                                    break
-                                    
-                        else:
-                            
+                                    break       
+                        else:                            
                             w.destroy()
-                            
-                            
                     w = tk.Tk()              
                     w.geometry("150x40")      
-                    
                     rename = tk.Entry(w, font= 50)
                     rename.delete(0,END)
                     rename.insert(0,file_pr["elem"]["text"])    
                     rename.place(width=150, height=40)
-                    
-                    
                     rename.bind("<Return>",change_name)
                 
-
-                def recognize_pr(event, arg):
+                
+                
+                
+                
+                        
+                
+                
+                
+                
+                def start_action(event, arg_e):
+                    def close():
+                        self.change_height +=0.1
+                        canvas.destroy()
+                    global count_threads
+                    if count_threads >= 3:
+                        messagebox.showinfo(title="Exceeded the limit", message="At least 3 threads are supported, please wait for the end of the work and try again.")
+                        return
+                    count_threads+=1
+                    thread = threading.Thread(target=recognize_pr, kwargs={"arg_elem": arg_e["elem"]["textvariable"]})
+                    thread.start()
+                    width= 150 
+                    height=40
+                    text_png = str(arg_e["elem"]["textvariable"])[-10::]
+                    canvas =  tk.Canvas(self, bg = "#78DBE2", highlightbackground = "#7FFFD4" , height= height, width= width)
+                    canvas.create_text(width/2, height/2, fill="black", text = f"add: {text_png}", font= "@yugothic 10")
+                    self.change_height -=0.1
+                    canvas.place(relx=0.60, rely=self.change_height)
+                    canvas.after(3000, close)
+                        
+                def recognize_pr(arg_elem):
+                    global count_threads
                     window = tk.Tk()
-                    file = open(str(arg["elem"]["textvariable"]), "r", encoding= "utf-8")
+                    file = open(str(arg_elem), "r", encoding= "utf-8")
                     s = file.read()
                     s = s.split("\n")
                     s = s[:-1:]
                     res = ""
                     for el in s:
                         res+= Recording_text.text_recognition_res(el)        
+                    count_threads-=1
                     label = tk.Label(window)
                     label["text"] = res
                     label.pack()
+                    window.mainloop()
                     
                     
                 
@@ -275,7 +305,7 @@ class Example(Frame):
                 
                 
                     
-                for file_project in glob.glob(f"{self.local_url}/projects*/*.txt"):
+                for file_project in glob.glob(rf"{self.local_url}/projects*/*.txt"):
                     global q
                     if q % 2: # Четное
                         q+=2
@@ -290,11 +320,11 @@ class Example(Frame):
                         index +=1 
                         if i == "/":
                             if len(file_project[-index::]) > 15:
-                                label_file = tk.Label(widget_frame, textvariable= file_project, text = f"{file_project[-(index-1):-abs(index-14):]}.." ,font = "@yugothic 15", cursor="hand2")
+                                label_file = tk.Label(widget_frame, textvariable= file_project, text = rf"{file_project[-(index-1):-abs(index-14):]}.." ,font = "@yugothic 15", cursor="hand2", fg = "black")
                                 
                                 break
                             else:
-                                label_file = tk.Label(widget_frame,  textvariable= file_project ,text = f"{file_project[-(index-1):-4:]}" ,font = "@yugothic 15", cursor="hand2")
+                                label_file = tk.Label(widget_frame,  textvariable= file_project ,text = rf"{file_project[-(index-1):-4:]}" ,font = "@yugothic 15", cursor="hand2", fg = "black")
                                 
                                 break
                         
@@ -325,10 +355,12 @@ class Example(Frame):
                     
                     Label_sell1.bind("<Enter>", on_enter)
                     Label_sell1.bind("<Leave>", on_leave)
-                    Label_sell1.bind("<Button-1>",lambda event, arg=data: recognize_pr(event, arg))
+                    
+                    Label_sell1.bind("<Button-1>",lambda event, arg=data: start_action(event, arg))
 
                     label_editing2.bind("<Enter>", on_enter2)
                     label_editing2.bind("<Leave>", on_leave2)
+                    
                     label_editing2.bind("<Button-1>", lambda event, arg=data: on_click_ed(event, arg))
                     
                         
@@ -344,7 +376,7 @@ class Example(Frame):
                     
                     canvas.configure(scrollregion=bbox, width=359, height=500)
                     
-        self.Button_projects = Button(self, text= "Projects", bg= "yellow", font="Haettenschweiler 20", command= all_projects, cursor="hand2")
+        self.Button_projects = Button(self, text= "Projects", bg= "#78DBE2", font="Haettenschweiler 20", command= all_projects, cursor="hand2", fg = "black")
         self.Button_projects.grid(row=1, column=1)
         
         
@@ -355,22 +387,20 @@ class Example(Frame):
                     label.destroy()
             
             
-            label_w = tk.Label(self, text = "Files in your project", font= "@yugothic 13 bold")
-            label_w.grid(row = 2, column= 2 , columnspan= 3, pady=5)
-            
+            label_w = tk.Label(self, text = f"Files: {len(self.FILES_LIST)}", font= "@yugothic 13 bold", fg = "black")
+            label_w.grid(row = 2, column= 0 , columnspan= 2, pady=5)
             
             
             def f():
                 
                 if self.FILES_LIST == []:
-                    Label_nothing = tk.Label(self, text = "Your project is empty!", font= "@yugothic 17 ")   
-                    Label_nothing.grid(row = 3, columnspan = 5)
-                         
+                    canv = tk.Canvas(self, bg= "gray", height= 2, width=350)
+                    canv.grid(row = 3, columnspan= 5, pady= 4)
+                    Label_nothing = tk.Label(self, text = "There are no existing images in your project.", font= "@yugothic 13", fg = "black")   
+                    Label_nothing.grid(row = 4, columnspan = 5)     
                 else:
                         
-                    ###########################################################################
-                    #ОПИСАНИЕ ПРОКРУТКИ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    
+                   
                     master_frame = tk.Frame(self, bd=3, relief=tk.RIDGE)
                     master_frame.grid(columnspan=5)
                     master_frame.columnconfigure(0, weight=1)
@@ -384,8 +414,8 @@ class Example(Frame):
                     canvas.configure(yscrollcommand=vsbar.set)
                     widget_frame = tk.Frame(canvas)
 
-                    #ЗАПОМНИТЬ!!!!!!!!!!
-                    ##################################################################################
+                    #ЗАПОМНИТЬ!!!!!!!!!!##########################################################################
+                    
                     
                     
                     
@@ -426,16 +456,41 @@ class Example(Frame):
                         arg["self"].image = PhotoImage(file = arg["elem"])
                         label_img = tk.Label(w, image=arg["self"].image).pack()
                     
-                    
-                    def recognize(event, arg):
                         
-                        res = Recording_text.text_recognition_res(arg["elem"])        
+                    def start_action(event, arg_e):
+                        def close():
+                            self.change_height +=0.1
+                            canvas.destroy()
+                        global count_threads
+                        if count_threads >= 3:
+                            info = messagebox.showinfo(title="Exceeded the limit", message="At least 3 threads are supported, please wait for the end of the work and try again.")
+                            return
+                        count_threads+=1
+                        thread = threading.Thread(target=recognize, kwargs={"arg_elem": arg_e["elem"]})
+                        print(threading.main_thread().name)
+                        print(thread.name)
+                        thread.start()
+                        width= 150 
+                        height=40
+                        text_png = arg_e["elem"][-10::]
+                        canvas =  tk.Canvas(self, bg = "#78DBE2", highlightbackground = "#7FFFD4" , height= height, width= width)
+                        canvas.create_text(width/2, height/2, fill="black", text = f"add: {text_png}", font= "@yugothic 10")
+                        self.change_height -=0.1
+                        canvas.place(relx=0.60, rely=self.change_height)
+                        canvas.after(3000, close)
+                        
+                    
+                    
+                    
+                    def recognize(arg_elem):
+                        global count_threads
+                        res = Recording_text.text_recognition_res(arg_elem)        
                         window = tk.Tk()
                         label = tk.Label(window)
                         label["text"] = res
                         label.pack()
                         window.mainloop()
-                    
+                        count_threads-=1
                     
                     for elem in self.FILES_LIST:
                         global b
@@ -450,32 +505,33 @@ class Example(Frame):
                                 break
                         
                         if len(elem[-index_start::]) > 12:
-                            Label_str = tk.Label(widget_frame, cursor="hand2" ,textvariable= elem, text = f"{elem[-(index_start-1):-(index_start-11):]}..{elem[-4::]}", font= "@yugothic 15", fg = "black")
+                            Label_str = tk.Label(widget_frame, cursor="hand2" ,textvariable= elem, text = rf"{elem[-(index_start-1):-(index_start-11):]}..{elem[-4::]}", font= "@yugothic 15", fg = "black")
                             
                         else:
-                            Label_str = tk.Label(widget_frame, cursor="hand2", textvariable= elem, text = f"{elem[-(index_start-1)::]}", font= "@yugothic 15", fg = "black")
+                            Label_str = tk.Label(widget_frame, cursor="hand2", textvariable= elem, text = rf"{elem[-(index_start-1)::]}", font= "@yugothic 15", fg = "black")
                                 
                                     
                         
                         Label_str.grid(row = b, column=0, columnspan= 2 , pady= 3)
-                        Label_str2 = tk.Label(widget_frame, text= "recognize text" , font= "@yugothic 15", cursor="hand2")
+                        Label_str2 = tk.Label(widget_frame, text= "recognize text" , font= "@yugothic 15", cursor="hand2", fg = "black")#####################
                         Label_str2.grid(row = b, column= 2, columnspan= 3 , pady= 3,sticky= "w")
                         
-                        Label_str3 = tk.Label(widget_frame, image= self.sub_icon_del, cursor="hand2")
+                        Label_str3 = tk.Label(widget_frame, image= self.sub_icon_del, cursor="hand2", fg = "black")
                         Label_str3.grid(row = b, column= 4, pady= 10 ,sticky= "s")
                         
                         canv = tk.Canvas(widget_frame, bg= "gray", height= 2, width=350)
                         canv.grid(row = b+1, columnspan= 5, pady= 4)
                             
-                        data={"self": self, "elem": elem, }
+                        data={"self": self, "elem": elem }
                         
                         Label_str.bind("<Button-1>", lambda event, arg=data: func_c(event, arg))
                         Label_str.bind("<Enter>", on_enter)
                         Label_str.bind("<Leave>", on_leave)
                         
-                        Label_str2.bind("<Button>", lambda event, arg=data: recognize(event, arg))
+                        Label_str2.bind("<Button>", lambda event, arg=data: start_action(event, arg))
                         Label_str2.bind("<Enter>", on_enter2)
                         Label_str2.bind("<Leave>", on_leave2)
+                        
                         
                         
                         Label_str3.bind("<Button-1>", lambda event, arg=data: on_click_del_file(event, arg))
@@ -487,46 +543,40 @@ class Example(Frame):
                         widget_frame.update_idletasks()
                         bbox = canvas.bbox(tk.ALL)
                         canvas.configure(scrollregion=bbox, width=359, height=500)
-                    
-            
+             
             f()
-                
-                
-        self.Button_files = Button(self, text= "Files", bg= "yellow", font="Haettenschweiler 20",command= func_files, cursor="hand2")
+                   
+        self.Button_files = Button(self, text= "Files", bg= "#78DBE2", font="Haettenschweiler 20",command= func_files, cursor="hand2", fg = "black")
         self.Button_files.grid(row=1, column=2)
         
 
-        
         def Support():
             for label in self.grid_slaves():
                 if int(label.grid_info()["row"]) > 1:
                     label.destroy()
             label = tk.Label(self, text = "1) In the upper left click on 'Open File'", font='Helvetica 12 bold')
-            label.grid(row = 3 , column = 0, columnspan=5, pady= 5 )
-            label_img = tk.Label(self, image = self.support_1, relief="groove")
+            label.grid(row = 3 , column = 0, columnspan=5, pady= 25 )
+            label_img = tk.Label(self, image = self.support_1, relief="groove", fg = "black")
             label_img.grid(row = 4 , column = 0 , columnspan= 2)
-            label_img1 = tk.Label(self, image = self.support_2 , relief="groove" )
+            label_img1 = tk.Label(self, image = self.support_2 , relief="groove", fg = "black" )
             label_img1.grid(row = 4, column= 2, columnspan=3)
-            label_1 = tk.Label(self, text = "2) Uploading the file", font='Helvetica 12 bold')
+            label_1 = tk.Label(self, text = "2) Uploading the file", font='Helvetica 12 bold', fg = "black")
             label_1.grid(row = 5 , column= 0, columnspan= 5, pady= 8)
             label_img_2 = tk.Label(self, image = self.support_3 )
             label_img_2.grid(row = 6, columnspan= 5)
-            label_3 = tk.Label(self, text = "3) Click on the green button to recognize the text",  font='Helvetica 12 bold')
+            label_3 = tk.Label(self, text = "3) Click on the green button to recognize the text",  font='Helvetica 12 bold', fg = "black")
             label_3.grid(row = 7, column= 0, columnspan= 5, pady= 8)
             label_img_3 = tk.Label(self, image = self.support_4)
             label_img_3.grid(row = 8, columnspan= 5)
             
-            label_4 = tk.Label(self, text = "4) Or save the project and upload recognize",font='Helvetica 12 bold')
+            label_4 = tk.Label(self, text = "4) Or save the project and upload recognize",font='Helvetica 12 bold', fg = "black")
             label_4.grid(row = 9, columnspan= 5, pady= 8)
             label_img_4 = tk.Label(self, image = self.support_6)
             label_img_4.grid(row = 10, columnspan= 5)
-            
-            
-            
             pass
         
         
-        self.Button_support = Button(self, text= "Support", bg= "yellow", font="Haettenschweiler 20", cursor="hand2" , command= Support)
+        self.Button_support = Button(self, text= "Support", bg= "#78DBE2", font="Haettenschweiler 20", cursor="hand2" , command= Support, fg = "black")
         self.Button_support.grid(row=1, column=3)
         
         def exit():
@@ -546,7 +596,7 @@ class Example(Frame):
                     
                     
                     for el in self.FILES_LIST:
-                        write_res_to_file.write(f"{str(el)}\n")
+                        write_res_to_file.write(rf"{str(el)}\n")
                     
                     write_res_to_file.close()
                     self.master.destroy()
@@ -554,9 +604,8 @@ class Example(Frame):
                     self.master.destroy()
                     
 
-        self.button_exit = Button(self, text= "Exit", bg= "red", font="Haettenschweiler 20", command=exit, cursor="hand2")
+        self.button_exit = Button(self, text= "Exit", bg= "red", font="Haettenschweiler 20", command=exit, cursor="hand2" ,fg = "black")
         self.button_exit.grid(row=1, column=4)
-        
         self.pack() #<<<<<<<<<<< Запомнить
 
  
@@ -566,12 +615,12 @@ def main():
     app = Example()
     app.Button_page.invoke()
     window.geometry("414x736")
-    window.iconbitmap(f"{app.local_url}/image/photo_photography_picture_camera_summer_icon_251688.ico")
+    window.iconbitmap(rf"{app.local_url}/image/photo_photography_picture_camera_summer_icon_251688.ico")
     mainmenu = Menu(window)
-    
     window.config(menu= mainmenu)
-    file_menu = Menu(mainmenu, tearoff= 0)
     
+    file_menu = Menu(mainmenu, tearoff= 0)
+    file_settings = Menu(mainmenu, tearoff= 0)
     def on_closing():
         if app.FILES_LIST == []:
             app.master.destroy()
@@ -585,7 +634,6 @@ def main():
                 app.master.destroy()
                 return
         
-    
     window.protocol("WM_DELETE_WINDOW", on_closing)
     
     
@@ -593,26 +641,22 @@ def main():
         files = [('PNG', '*.png'),('JPG', '*.jpg')]
         
         try:
-            name = filedialog.askopenfilename(filetypes = files, defaultextension = files, initialdir= f"{app.local_url}/image" )
+            name = filedialog.askopenfilename(filetypes = files, defaultextension = files, initialdir= rf"{app.local_url}/image" )
         except AttributeError:
             return
         if name == "":
             return
-        
-        save_image = Image_ch(name).save()
-        
+        save_image = Image_ch(name).save()    
         app.FILES_LIST.append(save_image)
         app.Button_files.invoke() # ИНВОК ЗАПУСКАЕТ ВИДЖЕТ БЕЗ КЛИКА!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
-            
-        
+    
     def save_project():
         if app.FILES_LIST == []:
             messagebox.showerror(title="Input error", message="Your project is empty, upload files to save.")
             return
         files = [('Text Document', '*.txt'),]
         try:
-            file = filedialog.asksaveasfile(filetypes = files, defaultextension = files ,initialdir= f"{app.local_url}/projects")
+            file = filedialog.asksaveasfile(filetypes = files, defaultextension = files ,initialdir= rf"{app.local_url}/projects")
         except AttributeError:
             return
         write_res_to_file = open(file.name, "w", encoding= "utf-8")
@@ -620,22 +664,34 @@ def main():
         for el in app.FILES_LIST:
             write_res_to_file.write(f"{str(el)}\n")
         write_res_to_file.close()
-        messagebox.showinfo(title="The project is saved", message= "Your project has been saved successfully!")
+        app.FILES_LIST.clear()
+        local_path_url = str(app.local_url)+"/projects/"
+        counter = 0
+        for x in file.name[::-1]:
+            if x == "/":
+                break
+            counter +=1
+        if local_path_url != file.name[:-counter]:
+            app.Button_projects.invoke()        
+            shutil.copy(str(file.name), local_path_url)
+            messagebox.showinfo(title="The project is saved", message= "Your project has been saved successfully!")
+        
         app.Button_projects.invoke()
         
+    def info():
+        window= tk.Tk()
+        label = tk.Label(window, text = "Version 0.1.1", fg = "black")
+        label.pack()
+        window.mainloop()
         
     file_menu2 = Menu(file_menu, tearoff= 0)
     file_menu2.add_command(label="Work1")
     file_menu2.add_command(label="Work2")
-    
     file_menu.add_command(label="Open File", command= open_file)
     file_menu.add_command(label="Save Project", command= save_project)
-    file_menu.add_cascade(label="Open Recent", menu= file_menu2)
-    
+    file_settings.add_command(label="Info", command= info)
     mainmenu.add_cascade(label= "File", menu= file_menu )
-    
-    mainmenu.add_cascade(label= "Settings")
-    
+    mainmenu.add_cascade(label= "Settings", menu =  file_settings)
     window.mainloop()
 
 if __name__ == '__main__': 
