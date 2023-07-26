@@ -23,7 +23,7 @@ class Example(tk.Frame):
         Frame_app = tk.Frame()
         Frame_app.pack(side = tk.TOP)
         
-        Frame_Instruction = tk.Frame(Frame_app, width=250, height=460, bg='#E0B0FF')
+        Frame_Instruction = tk.Frame(Frame_app, width=250, height=460, bg='#CCCCFF')
         Frame_Instruction.pack(side = tk.LEFT)
         
         
@@ -34,9 +34,9 @@ class Example(tk.Frame):
         
         #Canvas_fr = tk.Canvas(Frame_Instruction)
         
-        label_img_panda = tk.Label(Frame_Instruction ,image= self.img_panda , bg= "#E0B0FF")
+        label_img_panda = tk.Label(Frame_Instruction ,image= self.img_panda , bg= "#CCCCFF")
         label_img_panda.place(x=40, y =18)
-        label_logo = tk.Label(Frame_Instruction ,image= self.img_logo, bg= "#E0B0FF")
+        label_logo = tk.Label(Frame_Instruction ,image= self.img_logo, bg= "#CCCCFF")
         label_logo.place(x=1, y =192)
         
         
@@ -45,7 +45,7 @@ class Example(tk.Frame):
 
         
         
-        Frame_Recording = tk.Frame(Frame_app, width=342, height=460, bg="#E0B0FF")##E0B0FF
+        Frame_Recording = tk.Frame(Frame_app, width=342, height=460, bg="#CCCCFF")##E0B0FF
         Frame_Recording.pack(side = tk.LEFT)
         
         
@@ -53,12 +53,12 @@ class Example(tk.Frame):
         
         
         ##################################  РЕДАКТИРОВАНИЕ    ###################################################
+
         
-        
-        Frame_recording = tk.LabelFrame(Frame_Recording ,text = "Editing projects", fg="#990066",font = "Arial 12 bold ", width= 340, height= 210, bg= "#E0B0FF")
+        Frame_recording = tk.LabelFrame(Frame_Recording ,text = "Editing projects", fg="#6666ff",font = "Arial 12 bold ", width= 340, height= 210, bg= "#CCCCFF")
         Frame_recording.place(x= 1, y= 1)
         
-        Frame_Files = tk.LabelFrame(Frame_Recording ,text = "Files", fg="#990066",font = "Arial 12 bold ", width= 340, height= 235, bg= "#E0B0FF")
+        Frame_Files = tk.LabelFrame(Frame_Recording ,text = "Files", fg="#6666ff",font = "Arial 12 bold ", width= 340, height= 235, bg= "#CCCCFF")
         Frame_Files.place(x= 1, y= 210)
         
         
@@ -69,7 +69,7 @@ class Example(tk.Frame):
         self.master.after(1000, update)
 
 
-        Frame_Handler = tk.Frame(Frame_app, width=250, height=460, bg='red')##E0B0FF
+        Frame_Handler = tk.Frame(Frame_app, width=250, height=460, bg='#CCCCFF')##E0B0FF
         Frame_Handler.pack(side = tk.LEFT)
         
         
@@ -80,7 +80,7 @@ class Example(tk.Frame):
         ##################################  ОБРАБОТЧИК    ###################################################
         
 
-        Load_frame_app = tk.Frame(bg = "#E0B0FF")
+        Load_frame_app = tk.Frame(bg = "#CCCCFF")
         Load_frame_app.pack(side= tk.TOP)
         label_Load = tk.Label(Load_frame_app, width=120, height=1,  text="ЗАГРУЗКА")
         label_Load.pack()
@@ -116,7 +116,7 @@ def main():
     
     window.protocol("WM_DELETE_WINDOW", on_closing)
     #window.wm_attributes('-transparentcolor','red')
-    window["bg"] = "#E0B0FF"
+    window["bg"] = "#CCCCFF"
     window.mainloop()
     
 if __name__ == "__main__":

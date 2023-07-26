@@ -28,10 +28,10 @@ class Recording(Frame):
         def on_leave(e):
             e.widget['background'] = 'SystemButtonFace'
         
-        label = tk.Label(self.frame, bg= "#E0B0FF", fg="#660066", text = "Orientation:", font= "Arial 12")
+        label = tk.Label(self.frame,bg= "#CCCCFF", fg="#6666ff", text = "Orientation:", font= "Arial 12")
         label.place(x = 10, y = 10)
         
-        label = tk.Label(self.frame, bg= "#E0B0FF",fg="#660066",text = "Select a project", font= "Arial 12")
+        label = tk.Label(self.frame, bg= "#CCCCFF", fg="#6666ff",text = "Select a project", font= "Arial 12")
         label.place(x = 10, y = 60)
         
         
@@ -67,7 +67,7 @@ class Recording(Frame):
                 self.count_new +=1
                 add_new_pr = self.local_url + f"/projects/New_Project"
                 Path(add_new_pr).mkdir(parents=True, exist_ok=True)
-                label_pr_act = tk.Label(self.frame, text = f"New_Project", bg= "#E0B0FF", fg="#660066",  font= "Arial 14")
+                label_pr_act = tk.Label(self.frame, text = f"New_Project", bg= "#CCCCFF", fg="#6666ff",  font= "Arial 14")
                 label_pr_act.place(x = 100, y = 6)
                 Files(" ").add_file(self.frame2)  ##############
             else:
