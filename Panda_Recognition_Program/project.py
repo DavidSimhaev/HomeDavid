@@ -62,11 +62,8 @@ class Example(tk.Frame):
         Frame_Files.place(x= 1, y= 210)
         
         
-        def update():
-            Recording(Frame_recording, Frame_Files ).list_box_pr()
-            self.master.after(1000, update)
-
-        self.master.after(1000, update)
+        Recording(Frame_recording, Frame_Files ).list_box_pr()
+        
 
 
         Frame_Handler = tk.Frame(Frame_app, width=250, height=460, bg='#CCCCFF')##E0B0FF
