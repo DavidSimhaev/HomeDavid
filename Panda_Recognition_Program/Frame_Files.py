@@ -75,6 +75,7 @@ class Files(tk.Frame):
             widget_frame.update_idletasks()
             bbox = canvas.bbox(tk.ALL)
             canvas.configure(scrollregion=bbox, width=310, height=190)
+            print
                         
                     
                 
