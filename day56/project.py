@@ -224,12 +224,6 @@ class Example(Frame):
                 
                 
                 
-                
-                        
-                
-                
-                
-                
                 def start_action(event, arg_e):
                     def close():
                         self.change_height +=0.1
