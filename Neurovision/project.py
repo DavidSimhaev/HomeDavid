@@ -111,8 +111,8 @@ class FRAME_RECORDING(Example):
                         self.Frame_Files.destroy()
                         self.Frame_Files = tk.LabelFrame(self.Frame_Recording ,text = "Files", fg="#6666ff",font = "Arial 12 bold ", width= 340, height= 235, bg= "#CCCCFF")                #
                         self.Frame_Files.place(x= 1, y= 210)      
-                        self.FilesFRAME = Files(self.Frame_Files)
-                        self.FilesFRAME.load_frame(res_files)
+                        self.FilesFRAME = Files(self.Frame_Files, self.Frame_Recording).load_frame(res_files)
+                        
                         
                         break
             if self.pr_activion:
