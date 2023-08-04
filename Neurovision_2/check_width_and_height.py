@@ -4,7 +4,8 @@ class Image_ch:
     
     new_width  = 500
     new_height = 500
-    def __init__(self, image) -> None:
+    def __init__(self, image, name_pr) -> None:
+        self.name_pr = name_pr
         self.url = image
         self.image = Image.open(image)
         self.new_width  = 500
@@ -21,5 +22,12 @@ class Image_ch:
             else:
                 break 
         res = "".join(x[::-1])
-        img.save(rf"{self.url_l}/projects/New_Project/"+res)
-        return rf"{self.url_l}/projects/New_Project/"+res
+        
+        file = f"{self.url_l}/projects/{self.name_pr}/"+res
+        
+        result = file[:-3] + "png" 
+          
+        img.save(result)
+        
+        
+        return result

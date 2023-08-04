@@ -367,7 +367,6 @@ class Example(Frame):
                     canvas.create_window((0,0), window=widget_frame, anchor=tk.NW)
                     widget_frame.update_idletasks()
                     bbox = canvas.bbox(tk.ALL)
-                    
                     canvas.configure(scrollregion=bbox, width=359, height=500)
                     
         self.Button_projects = Button(self, text= "Projects", bg= "#78DBE2", font="Haettenschweiler 20", command= all_projects, cursor="hand2", fg = "black")
