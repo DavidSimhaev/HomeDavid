@@ -5,8 +5,8 @@ import easyocr
 class Recording_text():
     def __init__(self) -> None:
         pass
-    def text_recognition_res(file_path):
-        reader = easyocr.Reader(["en"])
+    def text_recognition_res(file_path, lng):
+        reader = easyocr.Reader([lng])
         result = reader.readtext(file_path)
         l = []
         

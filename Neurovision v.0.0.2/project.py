@@ -15,7 +15,7 @@ class Example(tk.Frame):
         super().__init__()
         
         self.img_panda = tk.PhotoImage(file = rf"{self.local_url}/image/panda.png" ).subsample(3,3)
-  
+        self.lng = None
         self.master.title("Neurovision v.0.0.2")
         self.Frame_app = tk.Frame()
         self.Frame_app.pack(side = tk.TOP)
@@ -58,17 +58,47 @@ class Example(tk.Frame):
         
         def recognize_pr():
             self.grab_set() 
+            
+            def on_enter(e):
+                e.widget['background'] = 'gray'                
+            def on_leave(e):
+                e.widget['background'] = 'SystemButtonFace'
+            def on_click_lng(event, arg):
+                self.lng = arg
+                window_language.destroy()
+            window_language = tk.Tk()
+            window_language.geometry("50x30+900+500")
+            label_rus =  tk.Label(window_language , text = "RU", font= 50, cursor="hand2")
+            label_rus.pack(side = tk.LEFT)
+            label_eng =  tk.Label(window_language ,  text = "EN", font= 50, cursor="hand2")
+            label_eng.pack(side = tk.LEFT)
+            label_heb =  tk.Label(window_language , text = "HE", font= 50, cursor="hand2")
+            label_heb.pack(side = tk.LEFT)
+            label_rus.bind("<Enter>", on_enter)
+            label_rus.bind("<Leave>", on_leave)        
+            label_eng.bind("<Enter>", on_enter)
+            label_eng.bind("<Leave>", on_leave)        
+            label_heb.bind("<Enter>", on_enter)
+            label_heb.bind("<Leave>", on_leave)        
+            label_rus.bind("<Button-1>",lambda event, arg="ru": on_click_lng(event, arg))
+            label_eng.bind("<Button-1>", lambda event, arg="en": on_click_lng(event, arg))
+            label_heb.bind("<Button-1>", lambda event, arg="he": on_click_lng(event, arg))
+            window_language.mainloop()
+            if self.lng == None:
+                self.grab_release()
+                return
             res =""
             self.progress["value"] = 0
             self.progress["maximum"] = len(OBJ.FILES_LIST) 
             count = 0
+            
             for file in OBJ.FILES_LIST:
                 count += 1
                 self.progress["value"] = count
                 if file == " ":
                     continue
                 
-                result= Recording_text.text_recognition_res(file)  
+                result= Recording_text.text_recognition_res(file, self.lng)  
                 res+= result
                 if result == "":
                     messagebox.showerror(title= "Something gone wrong" , message=  "Some files do not contain a text value or are not of good quality.")
@@ -94,8 +124,40 @@ class Example(tk.Frame):
         
         
         def recognize_file(arg_elem):
-            self.grab_set() 
-            res = Recording_text.text_recognition_res(arg_elem)
+            self.grab_set()
+            window_language.geometry("50x30+900+500")
+            def on_enter(e):
+                e.widget['background'] = 'gray'                
+            def on_leave(e):
+                e.widget['background'] = 'SystemButtonFace'
+            def on_click_lng(event, arg):
+                self.lng = arg
+                window_language.quit()
+            window_language = tk.Tk()
+            label_rus =  tk.Label(window_language , text = "RU", font= 50, cursor="hand2")
+            label_rus.pack()
+            label_eng =  tk.Label(window_language ,  text = "EN", font= 50, cursor="hand2")
+            label_eng.pack()
+            label_heb =  tk.Label(window_language , text = "HE", font= 50, cursor="hand2")
+            label_heb.pack()
+            label_rus.bind("<Enter>", on_enter)
+            label_rus.bind("<Leave>", on_leave)        
+            label_eng.bind("<Enter>", on_enter)
+            label_eng.bind("<Leave>", on_leave)        
+            label_heb.bind("<Enter>", on_enter)
+            label_heb.bind("<Leave>", on_leave)        
+            label_rus.bind("<Button-1>",lambda event, arg="ru": on_click_lng(event, arg))
+            label_eng.bind("<Button-1>", lambda event, arg="en": on_click_lng(event, arg))
+            label_heb.bind("<Button-1>", lambda event, arg="he": on_click_lng(event, arg))
+            window_language.mainloop()
+            
+            
+            
+            if self.lng == None:
+                self.grab_release()
+                return
+             
+            res = Recording_text.text_recognition_res(arg_elem, self.lng)
             if res == "":
                 messagebox.showerror(title= "Something gone wrong" , message=  "Some files do not contain a text value or are not of good quality.")
                 self.grab_release()
@@ -126,12 +188,42 @@ class Example(tk.Frame):
         
         def recognize_pr_2():
             self.grab_set() 
+            window_language.geometry("50x30+900+500")
+            def on_enter(e):
+                e.widget['background'] = 'gray'                
+            def on_leave(e):
+                e.widget['background'] = 'SystemButtonFace'
+            def on_click_lng(event, arg):
+                self.lng = arg
+                window_language.quit()
+            window_language = tk.Tk()
+            label_rus =  tk.Label(window_language , text = "RU", font= 50,cursor="hand2")
+            label_rus.pack()
+            label_eng =  tk.Label(window_language ,  text = "EN", font= 50, cursor="hand2")
+            label_eng.pack()
+            label_heb =  tk.Label(window_language , text = "HE", font= 50, cursor="hand2")
+            label_heb.pack()
+            label_rus.bind("<Enter>", on_enter)
+            label_rus.bind("<Leave>", on_leave)        
+            label_eng.bind("<Enter>", on_enter)
+            label_eng.bind("<Leave>", on_leave)        
+            label_heb.bind("<Enter>", on_enter)
+            label_heb.bind("<Leave>", on_leave)        
+            label_rus.bind("<Button-1>",lambda event, arg="ru": on_click_lng(event, arg))
+            label_eng.bind("<Button-1>", lambda event, arg="en": on_click_lng(event, arg))
+            label_heb.bind("<Button-1>", lambda event, arg="he": on_click_lng(event, arg))
+            window_language.mainloop()
+            
+            if self.lng == None:
+                self.grab_release()
+                return
+            
             res =""
             self.progress["value"] = 0
             self.progress["maximum"] = len(OBJ.FILES_LIST) 
             count = 0
             def thrd(file_txt):
-                res = Recording_text.text_recognition_res(file_txt)    
+                res = Recording_text.text_recognition_res(file_txt, self.lng)    
                 window = tk.Tk()
                 label = tk.Label(window)
                 label["text"] = res  
@@ -191,30 +283,67 @@ class FRAME_RECORDING(Example):
         
     def save_pr_and_file(self):
         if self.pr_activion:
-            save_window = tk.Toplevel()
-            save_window.resizable(False, False)
-            save_window.title("Save")
-            save_window.geometry("220x90+860+450")
-            label_name_write = tk.Label(save_window, text = "Project name",font = "Arial 12 bold ")
-            label_name_write.pack(anchor= tk.N, padx= 5)
-            def on_enter(e):
-                e.widget['background'] = 'gray'
-            def on_leave(e):
-                e.widget['background'] = "SystemButtonFace"
-            def res_enter(event):
-                path = filedialog.askdirectory()
+            if self.label_pr_act["text"] == "New Project":
+                save_window = tk.Toplevel()
+                save_window.resizable(False, False)
+                save_window.title("Save")
+                save_window.geometry("220x90+860+450")
+                label_name_write = tk.Label(save_window, text = "Project name",font = "Arial 12 bold ")
+                label_name_write.pack(anchor= tk.N, padx= 5)
+                def on_enter(e):
+                    e.widget['background'] = 'gray'
+                def on_leave(e):
+                    e.widget['background'] = "SystemButtonFace"
+                def res_enter(event):
+                    path = filedialog.askdirectory()
+                    files_pr = OBJ.FILES_LIST
+                    text = Entry.get()
+                    add_new_project = self.local_url + f"/projects/{text}"
+                    add_cur_project = path + f"/{text}"
+                    Path(add_new_project).mkdir(parents=True, exist_ok=True)
+                    Path(add_cur_project).mkdir(parents=True, exist_ok=True)
+                    
+                    for copy_file in files_pr:
+                        if copy_file == " ":
+                                continue
+                        try:
+                            shutil.copy(str(copy_file), f"{path}/{text}")
+                            shutil.copy(str(copy_file), f"{self.local_url}/projects/{text}")
+                        except:
+                           pass
+                       
+                    save_window.destroy()
+                    save_window.quit()
+                    
+                Entry = tk.Entry(save_window,width=33)
+                Entry.pack(anchor= tk.CENTER, padx= 5)
+                icon_image = tk.Label(save_window, image=self.bg)
+                icon_image.pack(anchor= tk.CENTER)
+                Entry.bind("<Return>", res_enter)
+                icon_image.bind("<Enter>", on_enter)
+                icon_image.bind("<Leave>",  on_leave)
+                icon_image.bind("<Button-1>", res_enter)
+                save_window.mainloop()
+                shutil.rmtree(f"{self.local_url}/projects/New Project")
+                OBJ.upload_bool_ = False
+                self.pr_activion = False
+                self.new_pr_bool = False
+                OBJ.FILES_LIST.clear()
+                self.Recording_Frame()
+                return
+                
+                
+            else:
                 files_pr = OBJ.FILES_LIST
-                text = Entry.get()
-                add_new_project = self.local_url + f"/projects/{text}"
-                add_cur_project = path + f"/{text}"
-                Path(add_new_project).mkdir(parents=True, exist_ok=True)
-                Path(add_cur_project).mkdir(parents=True, exist_ok=True)
+                name_pr = self.label_pr_act["text"]
+                
                 for copy_file in files_pr:
                     if copy_file == " ":
-                            continue
-                    shutil.copy(str(copy_file), f"{path}/{text}")
-                    shutil.copy(str(copy_file), f"{self.local_url}/projects/{text}")
-        
+                        continue  
+                    try:      
+                        shutil.copy(str(copy_file), f"{self.local_url}/projects/{name_pr}")
+                    except shutil.SameFileError:
+                        pass
                 self.Frame_recording.destroy()
                 self.Frame_Files.destroy()
                 
@@ -222,26 +351,15 @@ class FRAME_RECORDING(Example):
                 self.Frame_Files.place(x= 1, y= 235)      
                 self.Frame_recording = tk.LabelFrame(self.Frame_Recording ,text = "Editing projects",font = "Arial 12 bold ", width= 320, height= 235) #
                 self.Frame_recording.place(x= 1, y= 1)
+                OBJ.upload_bool_ = False
                 OBJ.FILES_LIST.clear()
                 self.pr_activion = False
+                
                 self.Recording_Frame()
-                save_window.destroy()
-                save_window.quit()
+                return
                     
                     
-                    
-            Entry = tk.Entry(save_window,width=33)
-            Entry.pack(anchor= tk.CENTER, padx= 5)
-            icon_image = tk.Label(save_window, image=self.bg)
-            icon_image.pack(anchor= tk.CENTER)
-            Entry.bind("<Return>", res_enter)
-            icon_image.bind("<Enter>", on_enter)
-            icon_image.bind("<Leave>",  on_leave)
-            icon_image.bind("<Button-1>", res_enter)
-            save_window.mainloop()
-            self.pr_activion = False
-            return
-    
+                 
 
     def urls_project_files(self):
         projects_url_res  =glob.glob(rf"{self.local_url}/projects*/*")
@@ -289,10 +407,10 @@ class FRAME_RECORDING(Example):
                         if answer:
                             self.save_pr_and_file()
                             OBJ.upload_bool_ = False
-                            self.pr_activion = False                            
+                            self.pr_activion = False     
+                            pr_load()                        
                             messagebox.showinfo(title="The project is saved", message= "Your project has been saved successfully!")
                             
-                            pr_load() 
                         else:
                             if self.label_pr_act["text"] == "New Project":
                                 index= list(self.listbox["values"]).index("New Project")
@@ -301,9 +419,9 @@ class FRAME_RECORDING(Example):
                                 del list_res[index]
                                 index_cur = list_res.index(self.selected_before)
                                 self.listbox.destroy()                        
-                                self.listbox = ttk.Combobox(self.Frame_Recording, width= 45,values= list_res)
+                                self.listbox = ttk.Combobox(self.Frame_Recording,values= list_res)
                                 self.listbox.current(index_cur)
-                                self.listbox.place(x = 10, y = 130)
+                                self.listbox.place(x = 10, y = 130, width=300)
                                 self.listbox.bind("<<ComboboxSelected>>", selected)
                             OBJ.upload_bool_ = False
                             self.pr_activion = False
@@ -337,7 +455,7 @@ class FRAME_RECORDING(Example):
         
         
         
-        self.listbox = ttk.Combobox(self.Frame_Recording, width= 45,values= urls_project_files() )
+        self.listbox = ttk.Combobox(self.Frame_Recording,values= urls_project_files() )
         if self.new_pr_bool == True:
             
             self.label_pr_act["text"] = "New Project"
@@ -347,7 +465,7 @@ class FRAME_RECORDING(Example):
             self.pr_activion = False
             
         self.listbox.bind("<<ComboboxSelected>>", selected)
-        self.listbox.place(x = 10, y = 130)  
+        self.listbox.place(x = 10, y = 130, width=300)  
         self.listbox['state'] = 'readonly'  
 
             
@@ -529,7 +647,10 @@ class FRAME_RECORDING(Example):
             if self.label_pr_act["text"] == "New Project":
                 self.pr_activion = True        
                 self.save_pr_and_file()
-                shutil.rmtree(f"{Example.local_url}/projects/New project")
+                try:
+                    shutil.rmtree(f"{Example.local_url}/projects/New project")
+                except:
+                    pass
                 self.Frame_recording.destroy()
                 self.Frame_recording = tk.LabelFrame(self.Frame_Recording ,text = "Editing projects",font = "Arial 12 bold ", width= 320, height= 235) #
                 self.Frame_recording.place(x= 1, y= 1)
