@@ -1,5 +1,6 @@
 import glob
 import threading
+import time
 import tkinter as tk
 from tkinter import messagebox, ttk, filedialog, Listbox
 import os
@@ -16,7 +17,7 @@ class Example(tk.Frame):
         
         self.img_panda = tk.PhotoImage(file = rf"{self.local_url}/image/panda.png" ).subsample(3,3)
         self.lng = None
-        self.master.title("Neurovision v.0.0.2")
+        self.master.title("Neurovision v.0.0.4")
         self.Frame_app = tk.Frame()
         self.Frame_app.pack(side = tk.TOP)
         
@@ -52,12 +53,11 @@ class Example(tk.Frame):
         
         
         def thred_process():
-            thread = threading.Thread(target=recognize_pr).start()
-        
-        
+            thread = threading.Thread(target=recognize_pr)
+            thread.start()
         
         def recognize_pr():
-            self.grab_set() 
+            self.grab_set()
             
             def on_enter(e):
                 e.widget['background'] = 'gray'                
@@ -66,6 +66,7 @@ class Example(tk.Frame):
             def on_click_lng(event, arg):
                 self.lng = arg
                 window_language.destroy()
+                window_language.quit()
             window_language = tk.Tk()
             window_language.geometry("50x30+900+500")
             label_rus =  tk.Label(window_language , text = "RU", font= 50, cursor="hand2")
@@ -85,7 +86,7 @@ class Example(tk.Frame):
             label_heb.bind("<Button-1>", lambda event, arg="he": on_click_lng(event, arg))
             window_language.mainloop()
             if self.lng == None:
-                self.grab_release()
+                
                 return
             res =""
             self.progress["value"] = 0
@@ -97,8 +98,10 @@ class Example(tk.Frame):
                 self.progress["value"] = count
                 if file == " ":
                     continue
-                
-                result= Recording_text.text_recognition_res(file, self.lng)  
+                try:
+                    result= Recording_text.text_recognition_res(file, self.lng)  
+                except:
+                    messagebox.showerror(title="The object cannot be recognized", message= "Please make sure that there are lowercase characters in the image")
                 res+= result
                 if result == "":
                     messagebox.showerror(title= "Something gone wrong" , message=  "Some files do not contain a text value or are not of good quality.")
@@ -119,9 +122,7 @@ class Example(tk.Frame):
         
         
         def thred_process_2():
-            file = filedialog.askopenfile().name
-            thread = threading.Thread(target=recognize_file, kwargs= {"arg_elem":file} ).start()
-        
+            self.Frame_app.after(1000, recognize_file)
         
         def recognize_file(arg_elem):
             self.grab_set()
@@ -185,7 +186,7 @@ class Example(tk.Frame):
         
         
         def thred_process_3():
-            thread = threading.Thread(target=recognize_pr_2).start()
+            self.Frame_app.after(1000, recognize_pr_2)
         
         def recognize_pr_2():
             self.grab_set() 
@@ -265,6 +266,75 @@ class Example(tk.Frame):
         self.progress = ttk.Progressbar(self.Load_frame_app, orient="horizontal", 
                                         length=844,mode="determinate")         
         self.progress.pack()                                                                             
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
         
 class FRAME_RECORDING(Example):
     def __init__(self):
@@ -316,6 +386,7 @@ class FRAME_RECORDING(Example):
                        
                     save_window.destroy()
                     save_window.quit()
+                    
                     
                 Entry = tk.Entry(save_window,width=33)
                 Entry.pack(anchor= tk.CENTER, padx= 5)
@@ -381,14 +452,61 @@ class FRAME_RECORDING(Example):
         return list_files_pr
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     def Recording_Frame(self):
+        
         def selected(event):
             def pr_load(): 
         
                 global OBJ
                 if OBJ.upload_bool_:
                     self.pr_activion = True
-                    selected(event)
+
+                    selected(event)            
+                    pr_load()
+                    index= list(self.listbox["values"]).index(self.selected_before)
+                    self.listbox.current(index)
+                    self.label_pr_act = tk.Label(self.Frame_Recording, text = self.selected_before,  font= "Arial 14") #
+                    self.label_pr_act.place(x=126, y =37)
+                    
                     return
                 
                 for elem in urls_project_files():
@@ -407,10 +525,11 @@ class FRAME_RECORDING(Example):
             if self.pr_activion:
                         answer = messagebox.askyesno(title="Save Changes", message= "Changes have been detected do you want to save them?")              
                         if answer:
+                            self.selected_before = self.listbox.get()
                             self.save_pr_and_file()
                             OBJ.upload_bool_ = False
                             self.pr_activion = False     
-                            pr_load()                        
+                                                    
                             messagebox.showinfo(title="The project is saved", message= "Your project has been saved successfully!")
                             
                         else:
@@ -448,7 +567,7 @@ class FRAME_RECORDING(Example):
                         break   
             return list_files_pr
         
-
+        
         
         label = tk.Label(self.Frame_Recording, text = "Current Project:", font= "Arial 12")
         label.place(x = 10, y = 40)
@@ -458,18 +577,78 @@ class FRAME_RECORDING(Example):
         
         
         self.listbox = ttk.Combobox(self.Frame_Recording,values= urls_project_files() )
-        if self.new_pr_bool == True:
-            
-            self.label_pr_act["text"] = "New Project"
-            self.listbox.insert(0, "New Project")
-            index= list(self.listbox["values"]).index("New Project")
-            self.listbox.current(index)
-            self.pr_activion = False
-            
+        
+    
+
         self.listbox.bind("<<ComboboxSelected>>", selected)
         self.listbox.place(x = 10, y = 130, width=300)  
         self.listbox['state'] = 'readonly'  
-
+        return
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
         
     def Handler_Frame(self):
@@ -488,7 +667,9 @@ class FRAME_RECORDING(Example):
                     self.Frame_Files.place(x= 1, y= 235)  
                     self.Frame_recording = tk.LabelFrame(self.Frame_Recording ,text = "Editing projects",font = "Arial 12 bold ", width= 320, height= 235) #
                     self.Frame_recording.place(x= 1, y= 1)
-                    self.Recording_Frame()
+                    self.label_info_fr_file = tk.Label(self.Frame_Files, text = "Please upload or select a project", font = "Arial 10 bold")
+                    self.label_info_fr_file.place(relx=.5, rely=.5, anchor="c")
+                    
                     self.label_pr_act["text"] = ""
                     messagebox.showinfo(title="Successfully!", message= "The project has been deleted.")
                     
@@ -556,13 +737,22 @@ class FRAME_RECORDING(Example):
         
         def upload_project():
             falder = filedialog.askdirectory()
+            if falder == None or falder == "" :
+                return
+            
             index = 0
-            files_no_ready = glob.glob(f"{falder}/*")
+
+
+            files_j = glob.glob(f"{falder}/*.jpg")
+            files_p = glob.glob(f"{falder}/*.png")
+            files_no_ready = files_j + files_p
             files = []
             for file in files_no_ready:
                 files.append(file.replace("\\", "/"))
             if files == []:
-                return "no data"
+                
+                messagebox.showerror(title="Nothing found", message= "No photos found in this folder")
+                return 
             
             self.Frame_Files.destroy()
             self.Frame_Files = tk.LabelFrame(self.Frame_Recording ,text = "Files",font = "Arial 12 bold ", width= 320, height= 250)                #
@@ -580,18 +770,54 @@ class FRAME_RECORDING(Example):
                     self.Recording_Frame()
                     
                     break
-
-            OBJ(self.Frame_Files, self.Frame_Recording).load_frame(files)         
+            name_pr = self.label_pr_act["text"]
+            Path(self.local_url +f"/projects/{name_pr}").mkdir(parents=True, exist_ok=True)
+            list_res =  list(self.listbox["values"])
+            list_res.append(name_pr)
+            self.listbox["values"] = list_res
+            index_frame_selected= list(self.listbox["values"]).index(name_pr)
+            self.listbox.current(index_frame_selected)
+            OBJ(self.Frame_Files, self.Frame_Recording).upload_frame(files, name_pr)         
             
 
         
         self.Upload_a_project = ttk.Button(self.Additional_settings, text = "Upload a project", cursor="hand2", command= upload_project)
         self.Upload_a_project.grid(row=3, column=0, columnspan=2, ipadx=67, ipady=4, padx=5, pady=5)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         def add_new_pr():
             
             if self.pr_activion == False:
                 
+                
+                """def on_click_lng(event, arg):
+                    self.lng = arg
+                    window_language.quit()
+                """
                 self.pr_activion= True    
                 add_new_project = self.local_url + f"/projects/New Project"
                 Path(add_new_project).mkdir(parents=True, exist_ok=True)
@@ -606,12 +832,20 @@ class FRAME_RECORDING(Example):
                 self.label_info_fr_file.place(relx=.5, rely=.5, anchor="c")
                 OBJ(self.Frame_Files, self.Frame_Recording).add_frame()
                 
-                self.new_pr_bool = True
-                self.label_pr_act.destroy()
+                
+                
+                    
                 self.label_pr_act = tk.Label(self.Frame_Recording, text = "New Project", font= "Arial 14") #
                 self.label_pr_act.place(x=126, y =37)
+                self.label_pr_act["text"] = "New Project"
                 
                 self.Recording_Frame()
+                
+                self.listbox['state'] = 'readonly'  
+
+                
+                
+                self.pr_activion = False
                 
                 messagebox.showinfo(title= "Create process",message="The project has been created!")
                 
@@ -628,6 +862,29 @@ class FRAME_RECORDING(Example):
         
         self.Add_a_project = ttk.Button(self.Additional_settings, text = "Add a project", cursor="hand2", command= add_new_pr)
         self.Add_a_project.grid(row=4, column=0, columnspan=2, ipadx=74, ipady=4, padx=5, pady=5)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         def add_file():

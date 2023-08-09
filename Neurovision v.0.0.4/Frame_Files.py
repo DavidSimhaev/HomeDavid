@@ -23,6 +23,16 @@ class Files:
     def upload_bool(self):
         change = Files.upload_bool_ = True
         return change
+
+
+
+    def upload_frame(self, files, name_pr):
+        Files.FILES_LIST = []
+        for file in files:
+            save_image = Image_ch(file, name_pr).save()
+            Files.FILES_LIST.append(save_image) 
+        self.c = True
+        self.list_files_from_pr(self.new_frame, self.FRAME_RECORDING)
     
     
         
@@ -50,10 +60,7 @@ class Files:
         
         if self.FILES_LIST != []:
             #По умолчанию по созданию проекта первое значение всегда ровно пробелу 
-            def on_enter(e):
-                e.widget['background'] = 'gray'                
-            def on_leave(e):
-                e.widget['background'] = 'SystemButtonFace'
+
 
             
             def on_enter_1(e):
@@ -163,6 +170,7 @@ class Files:
                 new_file()
                 return
             if self.c == True:
+                    
                 f()
                 return
                 
