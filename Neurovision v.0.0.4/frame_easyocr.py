@@ -7,7 +7,6 @@ class Recording_text():
         pass
     def text_recognition_res(file_path, lng):
         reader = easyocr.Reader([lng])
-        
         result = reader.readtext(file_path)
         l = []
         

@@ -25,7 +25,6 @@ class Files:
         return change
 
 
-
     def upload_frame(self, files, name_pr):
         Files.FILES_LIST = []
         for file in files:
@@ -33,7 +32,7 @@ class Files:
             Files.FILES_LIST.append(save_image) 
         self.c = True
         self.list_files_from_pr(self.new_frame, self.FRAME_RECORDING)
-    
+
     
         
     def load_frame(self, files):
@@ -61,6 +60,10 @@ class Files:
         if self.FILES_LIST != []:
             #По умолчанию по созданию проекта первое значение всегда ровно пробелу 
 
+            def on_enter(e):
+                e.widget['background'] = 'gray'                
+            def on_leave(e):
+                e.widget['background'] = 'SystemButtonFace'
 
             
             def on_enter_1(e):
@@ -170,7 +173,6 @@ class Files:
                 new_file()
                 return
             if self.c == True:
-                    
                 f()
                 return
                 

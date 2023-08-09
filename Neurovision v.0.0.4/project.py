@@ -26,8 +26,6 @@ class Example(tk.Frame):
         self.label_img_panda = tk.Label(self.Frame_Instruction ,image= self.img_panda)      
         self.label_img_panda.place(x=40, y =18)                     
 
-        
-        
         self.Frame_Recording = tk.Frame(self.Frame_app, width=332, height=490)                                                                                
         self.Frame_Recording.pack(side = tk.LEFT)                                                                                                                           
         self.Frame_recording = tk.LabelFrame(self.Frame_Recording ,text = "Editing projects",font = "Arial 12 bold ", width= 320, height= 235) 
@@ -36,10 +34,6 @@ class Example(tk.Frame):
         self.Frame_Files.place(x= 1, y= 235)                                                                                                                                
         self.label_info_fr_file = tk.Label(self.Frame_Files, text = "Please upload or select a project", font = "Arial 10 bold")
         self.label_info_fr_file.place(relx=.5, rely=.5, anchor="c")
-        
-            
-        
-            
 
         self.Frame_Handler = tk.Frame(self.Frame_app, width=250, height=490)
         self.Frame_Handler.pack(side = tk.LEFT)
@@ -117,8 +111,6 @@ class Example(tk.Frame):
             self.progress.pack()    
             self.grab_release()
             window.mainloop()  
-        
-        
         
         
         def thred_process_2():
@@ -294,47 +286,6 @@ class Example(tk.Frame):
       
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
         
 class FRAME_RECORDING(Example):
     def __init__(self):
@@ -467,29 +418,7 @@ class FRAME_RECORDING(Example):
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     def Recording_Frame(self):
         
@@ -794,21 +723,6 @@ class FRAME_RECORDING(Example):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         def add_new_pr():
             
             if self.pr_activion == False:
@@ -868,23 +782,7 @@ class FRAME_RECORDING(Example):
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         
         
         def add_file():
