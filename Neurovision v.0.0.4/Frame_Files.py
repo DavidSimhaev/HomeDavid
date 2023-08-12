@@ -79,9 +79,22 @@ class Files:
                 except AttributeError:
                     return
                 if name == "":
+                    try:
+                        self.FILES_LIST[1]
+                    except:  
+                          
+                        label= tk.Label(New_Frame_Files, text = "Please upload files or select a project", font = "Arial 10")
+                        label.pack()
+                    f()
                     return  
                 
                 save_image = Image_ch(name, self.name_pr).save()
+                
+                if save_image in self.FILES_LIST:
+                    os.remove(save_image)
+                    messagebox.showerror(title= "Repeated operation" , message= "The file has already been uploaded or named as well")
+                    f()    
+                    return
                 self.upload_bool()
                 
                 self.FILES_LIST.append(save_image) 
@@ -180,9 +193,7 @@ class Files:
             if self.f == True:
                 self.FILES_LIST.append(" ")
                 self.list_files_from_pr( New_Frame_Files, FRAME_RECORDING )
-            else:
-                label = tk.Label(New_Frame_Files, text= "В этом проекте не имеются файлы") 
-                label.pack()
+            
                 
                         
                     
