@@ -16,7 +16,20 @@ class Example(tk.Frame):
     def __init__(self):
         super().__init__()
         
+        """self.img_logo_rus = Image.open(f"{self.local_url}/image/logo_rus.png")
+        self.img_logo_eng = Image.open(f"{self.local_url}/image/logo_england.png")
+        self.img_logo_he = Image.open(f"{self.local_url}/image/logo_he.png" )
+        
+        self.img_rus = ImageTk.PhotoImage(self.img_logo_rus)
+        self.img_eng = ImageTk.PhotoImage(self.img_logo_eng)
+        self.img_he = ImageTk.PhotoImage(self.img_logo_he)"""
+        
         self.img_panda = tk.PhotoImage(file = rf"{self.local_url}/image/panda.png" ).subsample(3,3)
+        
+        self.img_rus = tk.PhotoImage(file = rf"{self.local_url}/image/logo_rus.png" ).subsample(2,2)
+        self.img_eng = tk.PhotoImage(file = rf"{self.local_url}/image/logo_england.png").subsample(2,2)
+        self.img_he = tk.PhotoImage(file = rf"{self.local_url}/image/logo_he.png" ).subsample(2,2)
+        
         self.lng = None
         self.master.title("Neurovision v.0.0.4")
         self.Frame_app = tk.Frame()
@@ -64,14 +77,17 @@ class Example(tk.Frame):
                 self.lng = arg
                 window_language.destroy()
                 window_language.quit()
-            window_language = tk.Tk()
-            window_language.geometry("50x30+900+500")
-            label_rus =  tk.Label(window_language , text = "RU", font= 50, cursor="hand2")
-            label_rus.pack(side = tk.LEFT)
-            label_eng =  tk.Label(window_language ,  text = "EN", font= 50, cursor="hand2")
-            label_eng.pack(side = tk.LEFT)
-            label_heb =  tk.Label(window_language , text = "HE", font= 50, cursor="hand2")
-            label_heb.pack(side = tk.LEFT)
+            window_language = tk.Toplevel()
+            window_language.geometry("180x90+900+500")
+            window_language.resizable(False, False)
+            label_ =  tk.Label(window_language , text= "Select a language:", font = 50)
+            label_.pack()
+            label_rus =  tk.Label(window_language , image= self.img_rus,  cursor="hand2")
+            label_rus.pack(side = tk.LEFT, padx=2)
+            label_eng =  tk.Label(window_language ,  image= self.img_eng, cursor="hand2")
+            label_eng.pack(side = tk.LEFT, padx=2)
+            label_heb =  tk.Label(window_language , image= self.img_he, cursor="hand2")
+            label_heb.pack(side = tk.LEFT, padx=2)
             label_rus.bind("<Enter>", on_enter)
             label_rus.bind("<Leave>", on_leave)        
             label_eng.bind("<Enter>", on_enter)
@@ -126,7 +142,7 @@ class Example(tk.Frame):
                         label_error_2.pack()
                         time.sleep(3)
                         return
-                windwo_load.destroy()
+                    label_["text"] = "Processing of the final result"
                 windwo_load.quit()
 
             
@@ -135,22 +151,28 @@ class Example(tk.Frame):
             windwo_load.mainloop()
             
             self.master.deiconify()
+            
             window = tk.Tk()
             label = tk.Label(window)
             label["text"] = txt_res
             if label["text"] == "":
                 window.destroy()
                 windwo_load.destroy()
+                
                 return
             label.pack()
+            windwo_load.destroy()
             window.mainloop()
             
         def recognize_file():
             
             file = filedialog.askopenfile()
+            if file == "" or file == None:
+                return
+            window_language = tk.Toplevel()
+            window_language.geometry("180x90+900+500")
+            window_language.resizable(False, False)
             
-            window_language = tk.Tk()
-            window_language.geometry("50x30+900+500")
             def on_enter(e):
                 e.widget['background'] = '#006B9E'                
             def on_leave(e):
@@ -159,12 +181,16 @@ class Example(tk.Frame):
                 self.lng = arg
                 window_language.destroy()
                 window_language.quit()
-            label_rus =  tk.Label(window_language , text = "RU", font= 50, cursor="hand2")
-            label_rus.pack(side = tk.LEFT)
-            label_eng =  tk.Label(window_language ,  text = "EN", font= 50, cursor="hand2")
-            label_eng.pack(side = tk.LEFT)
-            label_heb =  tk.Label(window_language , text = "HE", font= 50, cursor="hand2")
-            label_heb.pack(side = tk.LEFT)
+                
+            label_ =  tk.Label(window_language , text= "Select a language:", font = 50)
+            label_.pack()
+            label_rus =  tk.Label(window_language , image= self.img_rus,  cursor="hand2")
+            label_rus.pack(side = tk.LEFT, padx=2)
+            label_eng =  tk.Label(window_language ,  image= self.img_eng, cursor="hand2")
+            label_eng.pack(side = tk.LEFT, padx=2)
+            label_heb =  tk.Label(window_language , image= self.img_he, cursor="hand2")
+            label_heb.pack(side = tk.LEFT, padx=2)
+            
             label_rus.bind("<Enter>", on_enter)
             label_rus.bind("<Leave>", on_leave)        
             label_eng.bind("<Enter>", on_enter)
@@ -221,7 +247,7 @@ class Example(tk.Frame):
                     label_error_2.pack()
                     time.sleep(3)
                     return
-                windwo_load.destroy()
+                label_["text"] = "Processing of the final result"
                 windwo_load.quit()
             ##
             windwo_load.title("Recognition process...")
@@ -229,6 +255,7 @@ class Example(tk.Frame):
             windwo_load.mainloop()
             
             self.master.deiconify()
+            
             window = tk.Tk()
             label = tk.Label(window)
             label["text"] = txt_res
@@ -237,6 +264,7 @@ class Example(tk.Frame):
                 windwo_load.destroy()
                 return
             label.pack()
+            windwo_load.destroy()
             window.mainloop()
             
         
@@ -269,14 +297,20 @@ class Example(tk.Frame):
                 self.lng = arg
                 window_language.destroy()
                 window_language.quit()
-            window_language = tk.Tk()
-            window_language.geometry("50x30+900+500")
-            label_rus =  tk.Label(window_language , text = "RU", font= 50, cursor="hand2")
-            label_rus.pack(side = tk.LEFT)
-            label_eng =  tk.Label(window_language ,  text = "EN", font= 50, cursor="hand2")
-            label_eng.pack(side = tk.LEFT)
-            label_heb =  tk.Label(window_language , text = "HE", font= 50, cursor="hand2")
-            label_heb.pack(side = tk.LEFT)
+                
+            window_language = tk.Toplevel()
+            window_language.geometry("180x90+900+500")
+            window_language.resizable(False, False)
+            
+            label_ =  tk.Label(window_language , text= "Select a language:", font = 50)
+            label_.pack()
+            label_rus =  tk.Label(window_language , image= self.img_rus,  cursor="hand2")
+            label_rus.pack(side = tk.LEFT, padx=2)
+            label_eng =  tk.Label(window_language ,  image= self.img_eng, cursor="hand2")
+            label_eng.pack(side = tk.LEFT, padx=2)
+            label_heb =  tk.Label(window_language , image= self.img_he, cursor="hand2")
+            label_heb.pack(side = tk.LEFT, padx=2)
+            
             label_rus.bind("<Enter>", on_enter)
             label_rus.bind("<Leave>", on_leave)        
             label_eng.bind("<Enter>", on_enter)
@@ -332,7 +366,7 @@ class Example(tk.Frame):
                         label_error_2.pack()
                         time.sleep(3)
                         return
-                windwo_load.destroy()
+                label_["text"] = "Processing of the final result"
                 windwo_load.quit()
 
             
@@ -351,6 +385,7 @@ class Example(tk.Frame):
                     windwo_load.destroy()
                     return
                 label.pack()
+                windwo_load.destroy()
         
         self.Label_get2 = ttk.Button(self.Handler, text = "Recognize separately",  cursor="hand2", command=thread_process_2)
         self.Label_get2.grid(row=2, column=0, columnspan=2, ipadx=56, ipady=4, padx=5, pady=5)
@@ -395,13 +430,12 @@ class FRAME_RECORDING(Example):
                         
                         messagebox.showerror(title="Creation error", message= "Enter the correct project name to create")
                         return
-                    path = filedialog.askdirectory()
+                    
                     
                     self.save_text_new_pr = Entry.get()
                     add_new_project = self.local_url + f"/projects/{self.save_text_new_pr}"
-                    add_cur_project = path + f"/{self.save_text_new_pr}"
+                    
                     Path(add_new_project).mkdir(parents=True, exist_ok=True)
-                    Path(add_cur_project).mkdir(parents=True, exist_ok=True)
                     Processed_list = []
                     for copy_file in OBJ.FILES_LIST:
 
@@ -409,11 +443,10 @@ class FRAME_RECORDING(Example):
                                 continue
                         
                         
-                        shutil.copy(str(copy_file), f"{path}/{self.save_text_new_pr}")
                         shutil.copy(str(copy_file), f"{self.local_url}/projects/{self.save_text_new_pr}")
                         res_copy = copy_file.replace("New Project", self.save_text_new_pr)
                         Processed_list.append(res_copy)
-                        
+                    
                     OBJ.FILES_LIST = Processed_list
                     save_window.destroy()
                     save_window.quit()
@@ -660,6 +693,9 @@ class FRAME_RECORDING(Example):
             else:
                 answer = messagebox.askyesno(title="Remove process", message= "Are you sure you want to remove all the files of this project?")
                 if answer:
+                    if self.label_pr_act["text"] == "New Project":
+                        messagebox.showwarning(title="Session error", message= "Please delete or save the current project to continue the operation.")
+                        return
                     name = self.label_pr_act["text"]
                     files = glob.glob(self.local_url+f"/projects/{name}/*")
                     print(files)
@@ -686,10 +722,12 @@ class FRAME_RECORDING(Example):
         
         
         def Remove_all_pr():
-
+            
             answer = messagebox.askyesno(title="Remove process", message= "Are you sure you want to remove all projects?")
             if answer: 
-                print(self.urls_project_files())
+                if self.label_pr_act["text"] == "New Project":
+                    messagebox.showwarning(title="Session error", message= "Please delete or save the current project to continue the operation.")
+                    return
                 for file_pr in self.urls_project_files():
                     shutil.rmtree(self.local_url +f"/projects/{file_pr}")
                 self.Frame_Files.destroy()
@@ -849,7 +887,7 @@ class FRAME_RECORDING(Example):
         self.Add_a_file = ttk.Button(self.Additional_settings, text = "Add a file", cursor="hand2", command= add_file)
         self.Add_a_file.grid(row=5, column=0, columnspan=2, ipadx=77, ipady=4, padx=5, pady=5)
         def save(): 
-            if OBJ.upload_bool_ == False or OBJ.FILES_LIST == [] :
+            if OBJ.FILES_LIST == [] :
                 messagebox.showerror(title="Your project is empty!", message= "Add files to save the project")
                 return
             if self.label_pr_act["text"] == "New Project":
@@ -877,15 +915,7 @@ class FRAME_RECORDING(Example):
                 self.selected_before = self.save_text_new_pr
                 messagebox.showinfo(title="Successfully!", message= "The project has been saved successfully")
             else:
-                self.pr_activion = True        
-                self.save_pr_and_file()
-                self.pr_activion = False
-                OBJ.upload_bool_ = False
-                self.blocker_new_pr = None
-                self.Frame_recording.destroy()
-                self.Frame_recording = tk.LabelFrame(self.Frame_Recording ,text = "Editing projects",font = "Arial 12 bold ", width= 320, height= 235) #
-                self.Frame_recording.place(x= 1, y= 1)
-                self.Recording_Frame()
+                messagebox.showinfo(title= "Repeated operation", message= "Saved projects are automatically saved.")
         self.exit = ttk.Button(self.Additional_settings, text = "Save",  cursor="hand2", command= save)
         self.exit.grid(row=7, column=0, columnspan=2, ipadx=77, ipady=4, padx=5, pady=5)
 def main():

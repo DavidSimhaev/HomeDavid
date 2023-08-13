@@ -14,8 +14,7 @@ class Files:
         self.image = None   
         self.FRAME_RECORDING = FRAME_RECORDING
         self.img_shove = tk.PhotoImage(file = rf"{self.local_url}/image/shove_.png" )
-        self.img = Image.open(f"{self.local_url}/image/shove_.png")
-        self.img_shove2 = ImageTk.PhotoImage(self.img)
+
         self.f = False
         
         super().__init__()
@@ -139,8 +138,17 @@ class Files:
             
                 def func_c(event, arg):
                         w = tk.Toplevel()
-                        
-                        arg["self"].image = PhotoImage(file = arg["elem"]["textvariable"])
+                        l = []
+                        our_file = str(arg["elem"]["textvariable"])
+                        for file in arg["self"].FILES_LIST:
+                            if file == " ":
+                                continue
+                            if "/New Project/" in file:
+                                break
+                            else: 
+                                res = [x for x in range(len(file[::-1])) if file[-x] == "/"  ]
+                                our_file.replace("New Project", file[-res[1]:-res[0]] )
+                        arg["self"].image = PhotoImage(file = our_file)
                         label_img = tk.Label(w, image=arg["self"].image).pack()
                         
                         w.mainloop()
