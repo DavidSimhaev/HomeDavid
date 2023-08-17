@@ -12,6 +12,9 @@ from frame_easyocr import Recording_text
 import subprocess
 import ctypes
 from pandas.io import clipboard
+import subprocess
+
+
 
 OBJ = Files
 user32 = ctypes.windll.user32

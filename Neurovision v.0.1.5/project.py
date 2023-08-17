@@ -14,8 +14,7 @@ import ctypes
 from pandas.io import clipboard
 
 OBJ = Files
-user32 = ctypes.windll.user32
-screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+
 
 switch_value = True
 txt_res = None
@@ -60,7 +59,7 @@ class Example(tk.Frame):
         
         self.list_funcs_settings = []
         self.lng = None
-        self.master.title("Neurovision v.0.1.2")
+        self.master.title("Neurovision v.0.1.7")
         self.Frame_app = tk.Frame()
         self.Frame_app.pack(side = tk.TOP)
         
@@ -1581,14 +1580,26 @@ class FRAME_RECORDING(Example):
         self.list_funcs_settings2 = Remove_pr, Remove_all_files ,Remove_all_pr, upload_project, add_new_pr, add_file, save
         
         
-        
-        def check_appearance():
-            """Checks DARK/LIGHT mode of macos."""
-            cmd = 'defaults read -g AppleInterfaceStyle'
-            p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE, shell=True)
-            return bool(p.communicate()[0])
-        res_OC_BG= check_appearance()
+        import subprocess
+
+
+        def detectDarkModeGnome():
+            try:
+                '''Detects dark mode in GNOME'''
+                getArgs = ['gsettings', 'get', 'org.gnome.desktop.interface', 'gtk-theme']
+
+                currentTheme = subprocess.run(
+                    getArgs, capture_output=True
+                ).stdout.decode("utf-8").strip().strip("'")
+
+                darkIndicator = '-dark'
+                if currentTheme.endswith(darkIndicator):
+                    return True
+                return False
+            except:
+                return False
+            
+        res_OC_BG= detectDarkModeGnome()
         if res_OC_BG:
             self.switch.invoke()    
         
