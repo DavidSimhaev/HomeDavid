@@ -1,0 +1,57 @@
+{% extends "Main/base.html" %}
+{% block content %}
+
+{%load static%}
+
+
+{% if some_flag %}
+    <script>
+        alert("Invalid password or login, try again.")
+    </script>     
+{%endif%}
+
+
+
+{% for c in Camers %}
+    <div class = "block-product">
+        <div class = "description-product-block">
+
+            <img src={{c.image.url}} height="170" style="max-width: 150px">
+            <div class = "description-text-product" >
+                <div>
+                    
+                <div class= "buttons-buy-info-pr">
+                    <div>Brand: {{c.firm}}</div>
+                    
+                    <div>Name: {%if c.name|length > 16 %} {{c.name|slice:"0:16"}}...{%else %}{{c.name}}{%endif%}</div>
+                    <div>Type: {{c.type}}</div>
+                    <div>Matrix: {{c.Matrix_format}}</div>
+                    <div>Bayonet: {{c.Bayonet}}</div>
+                    <div>Stabilizer: {{c.Image_Stabilizer}}</div>
+                    <div>Color: {{c.color}}</div>
+                    <div class= "pr-price" >Price: {{c.price}}$</div>
+
+
+                    <form action="{% url 'Cart:cart_add' c.id %}" method='post' >
+                        
+                            {% csrf_token %}
+                            {{ FORM_TO_BACKET }}
+                            <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
+                        </form>
+                    
+
+                    <div class="info-logo-pr"><button type="submit"><h3><a href="{% url "Main:Camera_product" c.id %}"> Info</a></h3></button></div>
+                
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endfor %}
+<div class="m" style="--m: {{ line }}" >
+</div>
+
+
+{% endblock content %}
+

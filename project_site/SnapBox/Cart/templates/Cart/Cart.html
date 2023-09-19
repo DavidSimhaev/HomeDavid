@@ -1,0 +1,65 @@
+{% extends 'Main/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<link rel ="stylesheet" type="text/css" href= "{% static "Main/css/Cart.css" %}?ver=13"> 
+<h1 class = "mlabel"> Your orders: </h1>
+
+<table class="cart">
+    <thead>
+        <tr class= "tr-class">
+            <th><p>Фото</p></th>
+            <th><p class = "obj-th" >Продукт</p> </th>
+            <th><p class = "obj-th">Количество</p></th>
+            <th><p class = "obj-th">Удалить из корзины</p></th>
+            <th><p class = "obj-th">Цена за единицу</p></th>
+            <th><p class = "obj-th">Цена</p></th>
+        </tr>
+    </thead>
+    <tbody class= "tbody-bas">
+        {% for item in Cart %}
+            {% with product=item.product %}
+            <tr class = "format-table">
+                <td class = "table-basket">
+                    <a href="{{product.get_absolute_url}}">
+                        <img height="170" style="max-width: 150px" src ="{{product.image.url}}" ></a>
+                </td>
+                <td class = "table-basket-name">
+                    {{product.name}}
+                </td>
+                <td class = "table-basket-qun">
+                    {{item.quantity}}
+                </td>
+                <td class = "table-basket-del">
+                    Удалить
+                    
+                </td class = >
+                <td class ="table-basket-pr">
+                    {{item.price}}$    
+                </td>
+
+                <td class ="table-basket-total-pr">
+                    {{item.total_price}}$
+                </td>
+            </tr>
+            
+            {% endwith %}
+            {% endfor %}
+            <tr class="total">
+                <td><p class ="total-label">
+                    Всего: 
+                </p></td>
+                <td colspan = 4></td>
+                <td class="num">
+                    <h2>{{Cart.get_total_price}}$</h2>
+                </td>
+            </tr>
+    </tbody>
+</table>
+<p class= "text-right">
+
+</p>
+{%endblock%}

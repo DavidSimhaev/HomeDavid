@@ -37,8 +37,8 @@ class Example(tk.Frame):
         self.img_panda = tk.PhotoImage(file = rf"{self.local_url}/image/panda.png" ).subsample(3,3)
         self.img_panda_update = tk.PhotoImage(file = rf"{self.local_url}/image/panda_light.png" ).subsample(3,3)
         self.info_logo = tk.PhotoImage(file = rf"{self.local_url}/image/info_logo.png" ).subsample(1,1)
-        
-        
+        self.count_window = 0
+        self.count_process_window = 0
         
         
         
@@ -218,7 +218,9 @@ class Example(tk.Frame):
              
         
         def info():
+            self.count_window +=1
             global switch_value
+            
             self.switch.place_forget()
             def on_enter(e):
                 e.widget['background'] = 'gray'                
@@ -287,7 +289,9 @@ class Example(tk.Frame):
 
             def on_closing():
                 self.count= 0
-                self.switch.place(x = 174, y = 20 )
+                self.count_window -=1
+                if self.count_window == 0:
+                    self.switch.place(x = 174, y = 20 )
                 window.destroy()
             window.protocol("WM_DELETE_WINDOW", on_closing)
         
@@ -317,9 +321,10 @@ class Example(tk.Frame):
         
         for c in range(2): self.Handler.columnconfigure(index=c, weight=1)
         for r in range(2): self.Handler.rowconfigure(index=r, weight=1)
+        
         def thred_process():
             
-                
+            
             global txt_res
             try:
                 OBJ.FILES_LIST.remove(" ")
@@ -467,8 +472,11 @@ class Example(tk.Frame):
             windwo_load.mainloop()
             
             self.master.deiconify()
- 
+            
+            
             window = tk.Toplevel(bg = bg_val)
+            self.switch.place_forget()
+            self.count_process_window+=1
             frame = tk.Frame(window, bg = bg_val)
             label_copy = tk.Label(frame, image = self.copy, cursor="hand2", bg = bg_val, fg = fg_val)
             label_copy2 = tk.Label(frame, image = self.copy2,  cursor="hand2", bg = bg_val, fg = fg_val)
@@ -521,7 +529,18 @@ class Example(tk.Frame):
             label.pack()
             frame2.pack(side="top")
             windwo_load.destroy()
+            
+            def on_closing():
+                self.count_process_window-=1
+                if self.count_process_window == 0:
+                    self.switch.place(x = 174, y = 20 )
+                window.destroy()
+            window.protocol("WM_DELETE_WINDOW", on_closing)
+            
             window.mainloop()
+            
+            
+            
             
         def recognize_file():
             if switch_value == False:
@@ -654,19 +673,11 @@ class Example(tk.Frame):
             windwo_load.mainloop()
             
             self.master.deiconify()
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
             
             window = tk.Toplevel(bg = bg_val)
+            self.count_process_window+=1
+            self.switch.place_forget()
             frame = tk.Frame(window, bg = bg_val)
             def copy_text_click(event):
                 clipboard.copy(txt_res)   
@@ -688,9 +699,7 @@ class Example(tk.Frame):
             label_copy2.bind("<Enter>", on_enter)
             label_copy2.bind("<Leave>", on_leave)   
             
-            
-            
-            
+
             def TXT_file(event):
                 Files = [('Text Document', '*.txt')]
                 file = filedialog.asksaveasfile(filetypes = Files, defaultextension = Files)
@@ -719,6 +728,13 @@ class Example(tk.Frame):
             label.pack()
             frame2.pack(side="top")
             windwo_load.destroy()
+            
+            def on_closing():
+                self.count_process_window-=1
+                if self.count_process_window == 0:
+                    self.switch.place(x = 174, y = 20 )
+                window.destroy()
+            window.protocol("WM_DELETE_WINDOW", on_closing)
             window.mainloop()
             
         
@@ -882,6 +898,8 @@ class Example(tk.Frame):
             
             for ready_text in txt_res:
                 window = tk.Toplevel(bg = bg_val)
+                self.count_process_window +=1
+                self.switch.place_forget()
                 frame = tk.Frame(window, bg = bg_val)
                 data= {"elem":ready_text , "self": self }
                 def copy_text_click(event, arg):
@@ -938,6 +956,14 @@ class Example(tk.Frame):
                     return
                 label.pack()
                 frame2.pack(side="top")
+                
+                def on_closing():
+                    self.count_process_window-=1
+                    if self.count_process_window == 0:
+                        self.switch.place(x = 174, y = 20 )
+                    window.destroy()
+                window.protocol("WM_DELETE_WINDOW", on_closing)
+                
             windwo_load.destroy()
         
         self.Label_get2 = ttk.Button(self.Handler, text = "Recognize separately",  cursor="hand2", command=thread_process_2)
@@ -1552,17 +1578,27 @@ class FRAME_RECORDING(Example):
                 self.Frame_recording.destroy()
                 self.Frame_recording = tk.LabelFrame(self.Frame_Recording ,text = "Editing projects",font = "Arial 12 bold ", width= 320, height= 235, bg= bg_val, fg=fg_val) #
                 self.Frame_recording.place(x= 1, y= 1)
+                self.Frame_Files.destroy()
+                self.Frame_Files = tk.LabelFrame(self.Frame_Recording ,text = "Files", font = "Arial 12 bold", width= 320, height= 250)                
+                self.Frame_Files.place(x= 1, y= 235) 
+                
+                OBJ(self.Frame_Files, self.Frame_Recording, switch_value).load_frame(OBJ.FILES_LIST)
+                
                 self.new_pr_bool = False
                 self.pr_activion = False
                 self.blocker_new_pr = None
                 OBJ.upload_bool_ = False
+                
                 self.Recording_Frame()
+                
                 self.label_pr_act = tk.Label(self.Frame_Recording,  font= "Arial 14", bg= bg_val, fg=fg_val) #
                 self.label_pr_act.place(x=126, y =37)
                 self.label_pr_act["text"] = self.save_text_new_pr
                 self.listbox.current(index)
                 self.save_text_new_pr = None
                 self.selected_before = self.save_text_new_pr
+                
+                print(OBJ.FILES_LIST)
                 def label_animation_add():
                     canvas.destroy()
                     

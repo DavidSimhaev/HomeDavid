@@ -1,0 +1,121 @@
+
+
+.all_wrap_slider{
+    padding-top: 15px;
+}
+
+.Heading-main{
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.Heading-main h1{
+    color: #b3b3e0;
+    font-size: 20px;
+    font-family: Calisto MT;
+
+}
+
+
+.slperekhodnik{
+max-width: 38em;
+margin-left: 5px;
+width: 100%;
+border: 3px solid #242424;
+float: left;
+}
+.logo-company{
+    border: 3px solid #242424;
+    width: 285px;
+    background: #cacaca;
+    height: 342px;
+    float: left;
+}
+.gablok_sedakoda{
+width: 100%;
+margin: 0 auto;
+overflow: hidden;
+}
+
+.slayder_karusel{
+position: relative;
+width: 500%;
+font-size: 0;
+animation: 8s gablok_sedakoda-ani infinite;
+}
+
+.slayder_karusel figure{
+width: 20%;
+height: auto;
+display: inline-block;
+position: inherit;
+}
+
+.slayder_karusel img{
+max-width: 100%;
+vertical-align: bottom;
+}
+
+.slayder_karusel img:hover{
+filter: grayscale(90%);
+}
+
+.slayder_karusel figure figcaption{
+position: absolute;
+font-family: 'Roboto';
+font-size: 1.4rem;
+font-weight: 100;
+text-transform: uppercase;
+bottom: 0;
+background: rgba(0,0,0,0.6);
+color: #fff;
+width: 100%;
+padding: .5em;
+}
+
+@keyframes gablok_sedakoda-ani{
+0%{
+left: 0%;
+}
+
+20%{
+left: 0%;
+}
+
+25%{
+left: -100%;
+}
+
+45%{
+left: -100%;
+}
+
+50%{
+left: -200%;
+}
+
+70%{
+left: -200%;
+}
+
+75%{
+left: -300%;
+}
+
+95%{
+left: -300%;
+}
+
+100%{
+left: -400%;
+}
+
+}
+
+
+.object-margin{
+    color: #b3b3e0;
+    
+    margin-top: 380px;
+    margin-left: 5px;
+}

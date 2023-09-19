@@ -1,0 +1,48 @@
+{% extends "Main/base.html" %}
+
+
+
+
+
+{% block content %}
+
+{% if some_flag %}
+    <script>
+        alert("Invalid password or login, try again.")
+    </script>     
+{%endif%}
+
+{%load static%}
+
+{% for l in Lightings %}
+    <div class = "block-product">
+        <div class = "description-product-block">
+
+            <img src={{l.image.url}} height="170" style="max-width: 150px">
+            <div class = "description-text-product" >
+                <div class= "buttons-buy-info-pr">
+                <div>lens for {{l.lens}}</div>
+                
+                
+                <div>Name: {%if l.name|length > 16 %} {{l.name|slice:"0:16"}}...{%else %}{{l.name}}{%endif%} 
+                </div>
+                <div>Supports {{l.power}} charging</div>
+                <div>Charging time: {{l.time_power}}</div>
+                <div>Date of publication: {{l.created}}</div>
+                <div class = "buttons-buy-info-pr-4">
+                    <div class= "pr-price" >Price: {{l.price}}$</div>
+                    <div class="buy-logo"><button><h3> Into a basket </h3></button></div>
+
+                    
+                    <div class="info-logo-pr"><button><h3><a href="{% url "Main:Lighting_product" l.id %}">Info</a></h3></button></div>
+                </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+{% endfor %}
+<div class="m" style="--m: {{ line }}" >
+</div>
+{% endblock content %}

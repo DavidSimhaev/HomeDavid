@@ -1,0 +1,48 @@
+{% extends "Main/base.html" %}
+
+
+
+
+
+{% block content %}
+
+{% if some_flag %}
+    <script>
+        alert("Invalid password or login, try again.")
+    </script>     
+{%endif%}
+
+{%load static%}
+
+{% for l in Lens %}
+    <div class = "block-product">
+        <div class = "description-product-block">
+
+            <img src={{l.image.url}} height="170" style="max-width: 150px">
+            <div class = "description-text-product" >
+                
+            
+            </div>
+            <div class= "buttons-buy-info-pr">
+                
+                <div>Name: {%if l.name|length > 16 %} {{l.name|slice:"0:16"}}...{%else %}{{l.name}}{%endif%} 
+                </div>
+                <div>Date of publication: {{l.created}}</div>
+                
+                <div class= "buttons-buy-info-pr-2">
+                    <div class= "pr-price" >Price: {{l.price}}$</div>
+                    <div class="buy-logo"><button><h3> Into a basket </h3></button></div>
+                    
+                    <div class="info-logo-pr"><button><h3>
+                        <a href="{% url "Main:Lens_product" l.id %}">Info</a></h3></button></div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endfor %}
+<div class="m" style="--m: {{ line }}" >
+</div>
+{% endblock content %}

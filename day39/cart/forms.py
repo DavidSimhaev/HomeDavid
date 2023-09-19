@@ -17,7 +17,7 @@ class CartAddProductsForm(forms.Form):
         else:
             pquant = 1
             
-            
+        
         super(CartAddProductsForm, self).__init__(*args, **kwargs)
         if pquant >1 and pquant < 21:
             self.fields["quantity"].choices = [

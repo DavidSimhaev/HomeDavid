@@ -1,0 +1,77 @@
+
+.mlabel{
+    margin-left: 7%;
+    padding-top:5px ;
+    color: #e8e8f7;
+    letter-spacing: 1px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    
+}
+
+.cart{
+    margin-top: 4px;
+    width: 916px;
+    color: #e8e8f7;
+}
+
+.tr-class{
+    height: 33px;
+    background: #ff000038;
+}
+
+.obj-th{
+    margin-left: -22px;
+}
+
+.tbody-bas{
+    background: #18181f;;
+}
+
+.cart thead th{
+    
+    padding-left: 30px;
+}
+
+.total td{
+    padding-top: 50px;
+    padding-left: 30px;
+}
+
+.table-basket{
+    padding-left: 40px;
+    
+    letter-spacing: 3px;
+}
+
+
+.table-basket-name{
+    padding-left: 34px;
+}
+
+.table-basket-qun{
+    padding-left: 50px;
+}
+
+.table-basket-del{
+    padding-left: 64px;
+}
+
+.table-basket-pr{
+    
+    padding-left: 53px;
+}
+
+
+.table-basket-total-pr{
+    
+    padding-left: 44px;
+}
+
+.format-table{
+    height: 201px;
+}
+
+.total-label{
+    padding-left: 51px;
+    font-size: 22px;
+}

@@ -1,0 +1,45 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+
+
+{% if some_flag %}
+    <script>
+        alert("Invalid password or login, try again.")
+    </script>     
+{%endif%}
+
+{%load static%}
+
+{% for T in Tripods %}
+    <div class = "block-product">
+        <div class = "description-product-block">
+
+            <img src={{T.image.url}} height="170" style="max-width: 150px">
+            <div class = "description-text-product" >
+                <div class= "buttons-buy-info-pr">
+                
+
+
+                
+                <div>Name: {%if T.name|length > 16 %} {{T.name|slice:"0:16"}}...{%else %}{{T.name}}{%endif%} 
+                </div>
+                
+                <div>Date of publication: {{T.created}}</div>
+                <div class = "buttons-buy-info-pr-3">
+                    <div class= "pr-price" >Price: {{T.price}}$</div>
+                    <div class="buy-logo"><button><h3> Into a basket </h3></button></div>
+                    <div class="info-logo-pr"><button><h3>
+                        <a href="{% url "Main:Tripods_product" T.id %}">Info</a></h3></button></div>
+                
+                </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+{% endfor %}
+<div class="m" style="--m: {{ line }}" >
+</div>
+{% endblock content %}
