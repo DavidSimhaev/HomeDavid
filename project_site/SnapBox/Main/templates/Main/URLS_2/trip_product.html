@@ -1,32 +1,53 @@
 {% extends "Main/base.html" %}
 
 {%load static%}
+{%load tegs_page%}
+
+
 
 {% block content %}
-
-<link rel ="stylesheet" type="text/css" href= "{% static "Main/css/style.css" %}?ver=19"> 
+{% if some_flag %}
+<meta http-equiv="refresh" content="0; #popup" />
+{%endif%}
+<link rel ="stylesheet" type="text/css" href= "{% static "Main/css/style.css" %}?ver=22"> 
 
 <div class= "fitst-content">        
     <div class = "block-left-pr" >
       <div class= "slider middle">
         <div class = "slides">
-          <input type = "radio" name = "r" id="r1" checked>
-          <input type = "radio" name = "r" id="r2">
-          <input type = "radio" name = "r" id="r3">
-          <input type = "radio" name = "r" id="r4">
-
-          <div class="slide s1"><img src="{% static "Main/images/085dbf-1559e2-canon-eos-5d-mark-iv.jpg" %}" alt=""></div>
-          <div class="slide"><img src="{% static "Main/images/217613875_20488.jpg" %}" alt=""></div>
-          <div class="slide"><img src="{% static "Main/images/085dbf-1559e2-canon-eos-5d-mark-iv.jpg" %}" alt=""></div>
-          <div class="slide"><img src="{% static "Main/images/83878829_2048.jpg" %}" alt=""></div>
-
-        </div>
+          
+          {%if images_pr.len == 1%}
+            <div class="slide s1"><img src="{{Trip.image.url}}" alt=""></div>
+              
+          {%else%}
+            {% with True as flag %}
+              {% for quintity_len in images_pr.quintity %}
+                {% if flag %}
+                    <input id="r{{quintity_len}}" type = "radio"  name = "r" checked>
+                    {% update_variable False as flag %}
+                {% else %}  
+                  <input id="r{{quintity_len}}" type = "radio"  name = "r">
+                {% endif %}
+              {% endfor %}
+            {% endwith %}
+            
+            {% with True as flag %}
+            {% for product_image in images_pr.cls %}
+              {% if flag %}
+                <div class="slide s1"><img src={{product_image.image.url}} alt=""></div>
+                {% update_variable False as flag %}
+              {%else%}
+              <div class="slide"><img src={{product_image.image.url}} alt=""></div>
+              {% endif %}
+            {%endfor%}
+            {% endwith %}
+          {%endif%}
+          </div>
+          
         <div class = "navigation-1">
-
-          <label for="r1" class = "bar"></label>
-          <label for="r2" class = "bar"></label>
-          <label for="r3" class = "bar"></label>
-          <label for="r4" class = "bar"></label>
+          {% for quintity_pr in images_pr.quintity %}
+            <label for="r{{quintity_pr}}" class = "bar"></label>
+          {%endfor%}
         </div>
 
       </div>
@@ -41,7 +62,18 @@
       
       <div class = "buy-block-product">
         <div class= "pr-price-2" >Price: {{Trip.price}}$</div>
-        <div class="buy-logo"><button><h3> Into a basket </h3></button></div>
+        {% if request.user.is_authenticated %}
+          <form action="{% url 'Cart:cart_add' Trip.id %}" method='post' >            
+            
+            {{ FORM_TO_BACKET }}
+            {% csrf_token %}
+            <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
+          </form>
+        {% else %}
+          <div class="buy-logo-2"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
+        {% endif %}
+
+
       </div>
     </div>
 

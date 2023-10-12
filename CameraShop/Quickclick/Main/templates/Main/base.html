@@ -1,0 +1,278 @@
+{% load static %}
+
+
+<html>
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+       
+        <title> Quickclick </title>
+        <link rel ="stylesheet" type="text/css" href= "{% static "Main/css/base.css" %}?ver=121"> 
+    </head>
+    <body>
+        <div id = "wrapper">
+            <!-- Начало шабки сайта -->
+            <div  id "header">
+                <div id = "head-line">
+                    <div class = "wrapp-head-line">
+                        <div class = "logo">
+                        </div>
+                        <div class = "site-label">
+                        </div>
+                        <div class = "info-contact">
+                            <h5> Address 1: London Wall Street 23 </h5>
+                            <h5> Address 2: London Boughton Rd 95 Street </h5>
+                        </div>
+                        <div class = "info-contact-2" >
+                            <h5> From Mon to Fri from 10:00 to 22:00 </h5>
+                            <h5> Contact details: +000-00-000-0000 </h5>
+                        </div>
+
+                        <div class = "logo-phone" >
+                        </div>
+                        <div class = "logo-telegram" >
+                        </div>
+                        <div class = "logo-facebook" >
+                        </div>
+                    </div>
+                </div>
+                <div id = "head-menu">
+                    <div class = "wrapp-head-menu" >
+                        <div class = "navigation">
+                            <ul class = "top-menu">
+
+                                <li><a href="{% url "Main:Main"%}">
+                                    
+                                    <span class = "button__line button__line--top"></span>
+                                    <span class = "button__line button__line--right"></span>
+                                    <span class = "button__line button__line--bottom"></span>
+                                    <span class = "button__line button__line--left"></span>
+                                
+                                    Home</a></li>
+
+
+                                <li><a href="{% url "Main:Camers"%}">
+                                
+                                    <span class = "button__line button__line--top"></span>
+                                    <span class = "button__line button__line--right"></span>
+                                    <span class = "button__line button__line--bottom"></span>
+                                    <span class = "button__line button__line--left"></span>
+                                
+
+                                    Cameras</a></li>
+
+                                <li><a href="{% url "Main:Lens"%}">
+                                    
+                                    <span class = "button__line button__line--top"></span>
+                                    <span class = "button__line button__line--right"></span>
+                                    <span class = "button__line button__line--bottom"></span>
+                                    <span class = "button__line button__line--left"></span>
+                                
+                                    Lenses</a></li>
+
+                                <li><a href="{% url "Main:Tripods"%}">
+                                    
+                                    <span class = "button__line button__line--top"></span>
+                                    <span class = "button__line button__line--right"></span>
+                                    <span class = "button__line button__line--bottom"></span>
+                                    <span class = "button__line button__line--left"></span>
+                                
+                                    Tripods</a></li>
+                                <li><a href="{% url "Main:Lightings"%}">
+                                    <span class = "button__line button__line--top"></span>
+                                    <span class = "button__line button__line--right"></span>
+                                    <span class = "button__line button__line--bottom"></span>
+                                    <span class = "button__line button__line--left"></span>
+                                
+                                    
+                                    Lighting</a></li>
+                                
+                                <li><a href="{% url "Main:binoculars"%}">
+                                    
+                                    <span class = "button__line button__line--top"></span>
+                                    <span class = "button__line button__line--right"></span>
+                                    <span class = "button__line button__line--bottom"></span>
+                                    <span class = "button__line button__line--left"></span>
+                                
+                                    Binoculars</a></li>
+
+                                <li class = "last"><a href="#">
+                                    <span class = "button__line button__line--top"></span>
+                                    <span class = "button__line button__line--right"></span>
+                                    <span class = "button__line button__line--bottom"></span>
+                                    <span class = "button__line button__line--left"></span>
+                                    
+                                    About us</a></li>
+                            </ul>
+                            <div class = "search">  
+                                <input type = "text" value ="Search" name= "form-search" class = "search-form"/>
+
+                            </div> 
+                        
+                        </div>
+                    </div>
+                </div>
+            
+            <!-- Конец шабки сайта -->
+
+            <div class = "all_wrap">
+                <div id = "right-sidebar"> <!-- Начало контента-->
+                    <div class = "main-block">
+                        
+                        <div class ="block-content-top">
+                            
+                        </div>
+                        <div class ="block-content-center">
+                            {% block content %}
+                            {% endblock content%}
+                            
+                        </div>
+                        <div class ="block-content-botton">
+                            
+                        </div>
+                    </div>
+                </div>  <!-- Конец контента-->
+                
+                <div id = "left-sidebar"> <!-- Начало окна меню -->
+                    <div class = "main-menu"   >
+                        
+                        <div class = "user-login" >
+                            {% block login_logout %}
+                            {%if user.is_authenticated%}
+                                <div class = "block-menu-user" >
+                                    <h1 >Welcome, {{user.username}} </h1>
+                                    <ul class = "menu-user">
+                                        <button class = "log-button-acc-2"><a href="{% url "Cart:cart_detail" %}">Basket</a></button>
+                                        <button class = "log-button-acc-2"><a href="#">Settings </a></button>
+                                        <button class = "log-button-acc-2"><a href="#">Support </a></button>
+                                        <button class = "log-button-acc-2"><a href="#">Coupons</a></button> 
+                                        <button class = "log-button-acc-2"><a href="#">Coupons</a></button> 
+
+                                        <button class = "log-button-acc-2"><a href = "{% url "Main:logout" %}"> Logout</a></button>
+                                    </ul>
+                                </div>
+                                
+                                
+                            {% else %}
+                                
+                                <h1>User Login</h1>
+                                <h2>Username:</h2>
+                                <input type = "text" placeholder="Username" id = "u-form" onkeypress= "handleKeyPress(event)" class = "user-form"/>
+                                <h2>Password:</h2>
+                                <input type = "password" placeholder="Password" id = "p-form" onkeypress= "handleKeyPress(event)" class = "password-form"/>                                
+                                <h2>Forgot password?</h2>
+
+
+
+                                <button class = "log-button-acc" onClick="submit()">Login</button>
+                                
+                                <script>
+                                    function submit(){
+                                        var a = document.getElementById("u-form").value;
+                                        var b = document.getElementById("p-form").value;
+                                        
+                                        window.location.href = "{% url 'Main:authentication' %}" + "?login="+ a +"&password=" + b; 
+                                    }
+                                </script>
+                                
+                                <script>
+                                    function handleKeyPress(e){
+                                        var key=e.keyCode || e.which;
+                                         if (key === 13){ // Клавиша Enter
+                                            
+                                            var a = document.getElementById("u-form").value;
+                                            var b = document.getElementById("p-form").value;
+                                            
+                                            window.location.href = "{% url 'Main:authentication' %}" + "?login="+ a +"&password=" + b; 
+                                        
+                                            
+                                         }
+                                       }
+                                </script>
+
+                                <button class = "reg-button-acc"><a href="{% url "users:register"%}">Registration</a></button>
+                                
+                                
+                                
+                                
+                                
+
+
+
+                            {%endif%}
+                            {% endblock login_logout %}
+                        </div>
+                            
+                        <div class ="block-menu">
+                            
+                            {% block left-content-ctg %}
+                            <div class= "label-categ-head">
+                                <h1>Category</h1>
+                            </div>
+                            {% endblock left-content-ctg %}
+                            
+                        </div>
+                            
+                        
+                        <div class = "useful-link" ></div>
+                    </div>
+                </div>  <!-- Конец окна меню -->
+            </div>
+            </div>  
+        
+        
+        </div>
+
+
+    </body>
+    <div id = "popup" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite"> Invalid login or password! </div>
+                <div class= "popup__text">
+                    Please check the correctness of the entered data. You may have made mistakes such as: 
+                </div>
+                <div class= "popup__text">
+                    <ul class = "list-invalid-password">
+                        <li>
+                            CAPS button is pressed
+                        </li>
+                        
+                        <li>
+                            Another language is set
+                        </li>
+                        <li>
+                            Your device is not connected to the network
+                        </li>
+                    </ul>
+                </div>
+                
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id = "popup-2" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite"> You are not registered! </div>
+                <div class= "popup__text">
+                    Please register and then add the product to the cart
+                </div>
+                
+                
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    
+</html>

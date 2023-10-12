@@ -40,6 +40,9 @@ body{
 	
 }
 
+.menu-user{
+	margin-top: 10px;
+}
 
 .navigation{
 	width: 1200px;
@@ -217,6 +220,8 @@ body{
 .logo-phone:hover{
 	cursor: pointer;
 	background: url(../images/logo_phone-2.png) no-repeat;
+	transition: 0.5s;
+	transition-delay: 0,25;
 }
 
 .logo-telegram{
@@ -231,6 +236,8 @@ body{
 .logo-telegram:hover{
 	cursor: pointer;
 	background: url(../images/telegram-logo-2.png) no-repeat;
+	transition: 0.5s;
+	transition-delay: 0,25;
 }
 
 .logo-facebook{
@@ -245,6 +252,8 @@ body{
 .logo-facebook:hover{
 	cursor: pointer;
 	background: url(../images/logo-facebook-2.png) no-repeat;
+	transition: 0.5s;
+	transition-delay: 0,25;
 }
 
 
@@ -309,7 +318,7 @@ input[type="password"]{
 
 button {
     color:#fff;
-    background:#5993bb;
+    background:#5993bb24;
     border-radius:10px;
     padding:10px 20px;
     font-size:14px;
@@ -389,18 +398,15 @@ button {
 
 
 .log-button-acc{
+	height: 35px;
 	margin-left: 10px;
 	margin-top: 10px;
 	width: 193px;
 }
 .log-button-acc-2{
-	margin-left: 10px;
-    margin-top: 10px;
-    width: 89px;
-}
-.log-button-acc:hover{
-	box-shadow: 0 5px 15px rgba(71, 105, 255, 0.4);
-	color: #0e0e0e;
+	margin-left: 7px;
+    margin-top: -4px;
+    width: 199px;
 }
 
 
@@ -410,13 +416,9 @@ button {
 	
 	margin-top: 7px;
 	width: 193px;
-	background: rgb(219, 216, 29);
+
 	
 }
-.reg-button-acc:hover{
-	box-shadow: 0 5px 15px rgb(116, 114, 23);
-}
-
 
 
 
@@ -482,13 +484,40 @@ button {
 
 .buy-logo{
 	margin-left: -10px;
-	
+
 }
+
+
 
 .buy-logo button{
 	width: 150px;
 	background: rgb(155, 16, 16);
 	float: left;
+	
+}
+
+.buy-logo button h3 a{
+	text-decoration: none;  
+	color: white;
+	
+}
+
+
+.buy-logo-2 button{
+	margin-top: 23px;
+	width: 150px;
+	background: rgb(155, 16, 16);
+	float: left;
+}
+
+.buy-logo-2 button:hover{
+	background: #9b10109e;
+	
+}
+
+.buy-logo-2 button h3 a{
+	text-decoration: none;  
+	color: white;
 }
 
 .info-logo-pr button{
@@ -507,20 +536,21 @@ button {
 
 .buttons-buy-info-pr{
 	margin-left: -20px;
+
 }
 
 .buttons-buy-info-pr-2{
-	padding-top: 76px;
+	padding-top: 70px;
 }
 .buttons-buy-info-pr-3{
-	padding-top: 76px;
+	padding-top: 70px;
 }
 .buttons-buy-info-pr-4{
-	padding-top: 19px;
+	padding-top: 15px;
 }
 
 .buttons-buy-info-pr-5{
-	padding-top: 38px;
+	padding-top: 32px;
 }
 
 
@@ -628,19 +658,197 @@ button {
   }
   
   button:hover {
-	transform: translateY(5px);
-	  box-shadow: 0px 0px transparent, 0px 5px 10px rgba(0,0,0,0.25);
+	transform: translateY(2px);
+	background: #46567d85;
+	box-shadow: 0px 0px transparent, 0px 5px 10px rgba(0,0,0,0.25);
   }
-  
+  .buy-logo button:hover{
+	background: #9b10109e;
+
+  }
   button:focus {
 	outline: none;
   }
 
+  .unckick-link a {
+	display: inline-block;
+	pointer-events: none;
+  }
+
+  .popup{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.664);
+	top: 0;
+	left: 0;
+	font-size: 36px;
+	opacity: 0;
+	visibility: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
+	transition: all 0.8s ease 0s ;
+  }
+
+.popup__area{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.popup__body{
+	min-height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 30px 10px;
+}
+
+.popup__content{
+	background-color: white;
+	color: #000;
+	
+	max-width: 800px;
+	padding: 30px;
+	position: relative;
+}
+
+.popup__close{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	font-size: 20px;
+	color: #000;
+	text-decoration: none;
+}
+
+.popup__tite{
+	color: #ff0000d4;
+	font-size: 36px;
+	margin: 0px 0px 1em 0px;
+}
+
+.popup__text{
+	margin-top: 3px;
+	font-size: 25px;
+}
+
+.list-invalid-password{
+	margin-left: 20px;
+}
 
 
 
+.popup:target{
+	opacity: 1;
+	visibility: visible;
+  }
 
 
 
+.price-category{
+	margin-left: 10px;
+	padding-top: 9px;
+    
+	
+}
 
+.having-some{
 
+	padding-top: 17px;
+}
+.miksher{
+	width: 93%;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      width: 192px;
+      -webkit-appearance: none;
+      background-color: #2b374e;
+	  border-radius: 5px;
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 15px;
+      -webkit-appearance: none;
+      color: rgb(255, 0, 0);
+      margin-top: -1px;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+		width: 10px;
+		-webkit-appearance: none;
+		height: 15px;
+		cursor: ew-resize;
+		background: #7f919e;
+		box-shadow: -100px 0 0 100px #394769;
+		border-radius: 150px;
+    }	
+}
+
+.label-ctg{
+	    /* padding-left: 50%; */
+		font-family: 'Krona One', sans-serif;
+		font-size: 16px;
+		width: 95%;
+		text-align: center;
+		color: white;
+}
+.label-ctg-2{
+	padding-left: 2%;
+	font-family: 'Krona One', sans-serif;
+	font-size: 16px;
+	width: 84%;
+	text-align: center;
+	color: white;
+	float: left;
+}
+
+.select-ctg{
+	padding-top: 11px;
+	width: 100%;
+	text-align: center;
+}
+.select-windows{
+	
+	background-color: #253045a8;
+    box-shadow: 0 0 10px #15151e, 0 0 40px #101419;
+	border-radius: 7px;
+    width: 89%;
+	margin-top: 4px;
+    color: #ffffffbf;
+}
+.label-categ-head h1{
+	width: 100%;
+	text-align: center;
+	color: #b3b3e0;
+	font: 24px Verdana;
+	padding-top: 17px;
+}
+.Change-button{
+	width: 100%;
+}
+
+.label-center-content-nothing{
+	width: 100%;
+    padding-bottom: 33%;
+    text-align: center;
+
+	color: #b3b3e0a8;
+	font: 40px century gothic ;
+}
+.block-label-select-category{
+	width: 100%;
+	height: 100%;
+	
+}
+
+.Select-category{
+	padding-top: 63%;
+    text-align: center;
+    font: 30px century gothic;
+    COLOR: #b3b3d0bd;
+}

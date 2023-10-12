@@ -1,12 +1,13 @@
 {% load static %}
 
+
 <html>
+
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
        
         <title> Quickclick </title>
-        <link rel ="stylesheet" type="text/css" href= "{% static "Main/css/base.css" %}?ver=102"> 
-        
+        <link rel ="stylesheet" type="text/css" href= "{% static "Main/css/base.css" %}?ver=117"> 
     </head>
     <body>
         <div id = "wrapper">
@@ -146,8 +147,7 @@
                                         <button class = "log-button-acc-2"><a href="#">Support </a></button>
                                         <button class = "log-button-acc-2"><a href="#">Coupons</a></button> 
                                         <button class = "log-button-acc-2"><a href="#">Coupons</a></button> 
-                                        <button class = "log-button-acc-2"><a href="#">Coupons</a></button> 
-                                        <button class = "log-button-acc-2"><a href="#">Coupons</a></button> 
+
                                         <button class = "log-button-acc-2"><a href = "{% url "Main:logout" %}"> Logout</a></button>
                                     </ul>
                                 </div>
@@ -203,7 +203,15 @@
                             {% endblock login_logout %}
                         </div>
                             
-                        <div class ="block-menu"></div>
+                        <div class ="block-menu">
+                            
+                            {% block left-content-ctg %}
+                            <div class= "label-categ-head">
+                                <h1>Category</h1>
+                            </div>
+                            {% endblock left-content-ctg %}
+                            
+                        </div>
                             
                         
                         <div class = "useful-link" ></div>
@@ -215,5 +223,56 @@
         
         </div>
 
+
     </body>
+    <div id = "popup" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite"> Invalid login or password! </div>
+                <div class= "popup__text">
+                    Please check the correctness of the entered data. You may have made mistakes such as: 
+                </div>
+                <div class= "popup__text">
+                    <ul class = "list-invalid-password">
+                        <li>
+                            CAPS button is pressed
+                        </li>
+                        
+                        <li>
+                            Another language is set
+                        </li>
+                        <li>
+                            Your device is not connected to the network
+                        </li>
+                    </ul>
+                </div>
+                
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id = "popup-2" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite"> You are not registered! </div>
+                <div class= "popup__text">
+                    Please register and then add the product to the cart
+                </div>
+                
+                
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    
 </html>

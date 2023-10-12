@@ -1,0 +1,359 @@
+{% extends "Main/base.html" %}
+{% block content %}
+
+{%load static%}
+{%load tegs_page%}
+
+
+{% if some_flag %}
+<meta http-equiv="refresh" content="0; #popup" />
+{%endif%}
+
+{% for c, form in Camers %}
+    <div class = "block-product">
+        <div class = "description-product-block">
+            <a href="{{c.get_absolute_url}}">
+            <img src={{c.image.url}} height="170" style="max-width: 150px"></a>
+            <div class = "description-text-product" >
+                <div>
+                <div class= "buttons-buy-info-pr">
+                    <div>Brand: {{c.firm}}</div>
+                    <div>Name: {%if c.name|length > 16 %} {{c.name|slice:"0:16"}}...{%else %}{{c.name}}{%endif%}</div>
+                    <div>Type: {{c.type}}</div>
+                    <div>Matrix: {{c.Matrix_format}}</div>
+                    <div>Bayonet: {{c.Bayonet}}</div>
+                    <div>Stabilizer: {{c.Image_Stabilizer}}</div>
+                    <div>Color: {{c.color}}</div>
+                    <div class= "pr-price" >Price: {{c.price}}$</div>
+
+                    {% if request.user.is_authenticated %}
+                        <form class = "text-form-in" action="{% url 'Cart:cart_add' c.id %}" method='post' >
+                            {% csrf_token %}
+                            {{ form }}
+                            <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
+                        </form>
+                    {% else %}
+                        <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
+                    {% endif %}
+                    <div class="info-logo-pr"><button type="submit"><h3><a href="{% url "Main:Camers_product" c.id c.klass %}"> Info</a></h3></button></div>
+                
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endfor %}
+<div class="m" style="--m: {{ line }}" > <!-- ТАКИМ ОБРАЗОМ МОЖНО ПЕРЕДАТЬ АРГУМЕНТ В CSS ПОЖАЛУЙСТА ЗАПОМНИТЬ!-->
+</div>
+
+
+{% endblock content %}
+
+{% block left-content-ctg %}
+<div class = "content-ctg">
+    <div class= "label-categ-head">
+        <h1>Category</h1>
+    </div>
+    
+    <div class = "form-category">
+        <div class = "price-category">
+            <p class = "label-ctg" >Budget: <output id="value"></output>$</p>
+            <input id="pi_input" type="range" value= "7500" class = "miksher" min="0" max="15000" step="100" />
+
+        <script>
+            const value = document.querySelector("#value");
+            const input = document.querySelector("#pi_input");
+            value.textContent = input.value;
+            input.addEventListener("input", (event) => {
+            value.textContent = event.target.value;
+            });</script>
+        </div>
+
+        <div class = "select-box">
+            <div class = "having-some">
+                <p class = "label-ctg-2" >The presence of a lens:</p>
+                <input id = "ID-LENS" type="checkbox">
+            </div>
+            <div class = "having-some">
+                <p class = "label-ctg-2" >Second-hand:</p>
+                <input id= "ID-HAND" type="checkbox">
+            </div>
+        </div>
+        <div class = "list-ctg">
+            
+            <div class = "select-ctg">
+                <p class = "label-ctg" >Company:</p>
+               
+                <form name="myForm">
+                    
+                    <select id = "ID-CAMERA" name="language" class = "select-windows">
+                        {% with True as flag %}
+                            {% for c in category_camera %}
+                                {% if flag %}
+                                    <option style="display:none;" value="{{ c }}">Select</option>
+                                    {% update_variable False as flag %}
+                                {%else%}
+                                    <option value="{{ c }}">{{ c }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                    </select>
+                </form>
+                
+                
+                
+                
+                <!-- Достать аргумент по клику затем создать событие связывающие этот аргумент с другими элементами следующего списка -->
+            </div>
+            <div class = "select-ctg">
+                <p class = "label-ctg" >Manufacturers:</p>
+                
+                <div id="blockspec" name = "blockspec">
+                    <select id = "ID-CAMERA-SPEC" name = "lens-camera-spec" class = "select-windows"атрибуты>
+                        {% with True as flag %}
+                            {% for c in category_camera_spec %}
+                                {% if flag %}
+                                    <option style="display:none;" id="selection" value="{{ c }}">Select Company</option>
+                                {%else%}
+                                    <option id="selection" value="{{ c }}"></option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                        </div>
+                    </select> 
+                </div>
+               
+            </div>
+            <div class = "select-ctg">
+                <div id="blockspec2" name = "blockspec2">
+                    <p class = "label-ctg" >Bayonet:</p>
+                    <select id = "ID-BAYONET" name = "bayonet-camera" class = "select-windows"атрибуты>
+                        {% with True as flag %}
+                            {% for c in category_Bayonet %}
+                                
+                                {% if flag %}
+                                
+                                    <option style="display:none;" id="selection2" value="{{ c }}">Select Company</option>
+                                
+                                {%else%}
+                                    <option id="selection2" value="{{ c }}"></option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                    </select> 
+                </div>
+            </div>
+            
+            
+            <div class = "select-ctg">
+                <p class = "label-ctg" >Matrix format:</p>
+                <select id = "ID-MATRIX_FORMAT" class = "select-windows"атрибуты>
+                    {% with True as flag %}
+                        {% for c in category_matrix_format %}
+                            {% if flag %}
+                                <option style="display:none;" value="{{ c }}">Select</option>
+                                {% update_variable False as flag %}
+                            {%else%}
+                                <option value="{{ c }}">{{ c }}</option>
+                            {%endif%}
+                        {% endfor %}
+                    {% endwith %}
+                </select> 
+            </div>
+            
+            
+            
+            <script>
+                var languagesSelect = myForm.language;
+                var a = true;
+                var selectElement = ""
+                var selectElement2 = ""
+                
+                function changeOption(){
+                    if  (a == true){
+                        a = false;
+                        selectElement = document.querySelectorAll('[name=lens-camera-spec]');
+                        selectElement2 = document.querySelectorAll('[name=bayonet-camera]');
+
+                        }
+                    let optionValues = [...selectElement[0].options].map(o => o.value)
+                    let optionValues2 = [...selectElement2[0].options].map(o => o.value)
+                    
+                    var selection = document.getElementById("selection");
+                    var selection2 = document.getElementById("selection2");
+                    
+                    var selectedOption = languagesSelect.options[languagesSelect.selectedIndex];
+                    
+                    function f1(list, selectedWord) {
+                        let result = [];
+                        var b = true
+                        for (let key in list) {
+                            var contained = (list[key].indexOf(selectedWord.text) != -1);
+                            if( contained ){    
+                                var e = JSON.stringify(list[key]);
+                                e=e.replace(/["']/g, "");
+
+                                if (list[key]== " "){
+                                    
+                                    
+                                    return
+                                }
+                                if (b == true){
+                                    b = false
+                                    result.push(" ")    
+                                }
+                                result.push(e); 
+                            }
+                        }
+                        return result;
+                    }
+                    function f2(list, selectedWord) {
+                        let result = [];
+                        var b = true
+                        for (let key in list) {
+                            var contained = (list[key].indexOf(selectedWord.text) != -1);
+                            if( contained ) {
+                                var e = JSON.stringify(list[key]);
+                                e=e.replace(/["']/g, "");
+                                
+                                if (list[key]== " "){
+                                    
+                                    return
+                                }
+                                if (b == true){
+                                    b = false
+                                    result.push(" ")    
+                                }
+                                result.push(e); 
+                            }
+                        }
+                        return result;
+                    }
+
+
+
+                    var filtered_lens = f1(optionValues, selectedOption)
+                    var filtered_b2 = f2(optionValues2, selectedOption)
+                    
+                    function removeDummy() {
+                        if (selectedOption.text == " "){
+                            returni
+                        }
+                        var elem = document.getElementById('ID-CAMERA-SPEC');
+                        elem.parentNode.removeChild(elem);
+                        return false;
+                    }
+                    
+                    function removeDummy2() {
+                        if (selectedOption.text == " "){
+                            return
+                        }
+                        var elem = document.getElementById('ID-BAYONET');
+                        elem.parentNode.removeChild(elem);
+                        return false;
+                    }
+                    
+
+                    removeDummy()
+                    removeDummy2()
+
+                    var selectList = document.createElement("select");
+                    selectList.id = "ID-CAMERA-SPEC";
+                    selectList.name = "lens-camera-spec"
+                    selectList.classList.add("select-windows");
+                    document.getElementById("blockspec").appendChild(selectList);
+                    for (var i = 0; i < filtered_lens.length; i++) {
+                        var option = document.createElement("option");
+                        if (i == 0){
+                            option.style = "display:none;"
+                            option.value = filtered_lens[i];
+                            option.text = "Select";
+                            selectList.appendChild(option);
+                        }
+                        else{
+                            option.value = filtered_lens[i];
+                            option.text = filtered_lens[i];
+                            selectList.appendChild(option);
+                        }
+                        
+                        }
+                    
+
+                    var selectList2 = document.createElement("select");
+                    selectList2.id = "ID-BAYONET";
+                    selectList2.name = "bayonet-camera";
+                    selectList2.classList.add("select-windows");
+                    document.getElementById("blockspec2").appendChild(selectList2);
+                    for (var i = 0; i < filtered_b2.length; i++) {
+                        var option = document.createElement("option");
+                        if (i == 0){
+                            option.style = "display:none;"
+                            option.value = filtered_lens[i];
+                            option.text = "Select";
+                            selectList2.appendChild(option);
+                        }
+                        else{
+                            option.value = filtered_b2[i];
+                            option.text = filtered_b2[i];
+                            selectList2.appendChild(option);
+                        }
+                        
+                        }
+                    
+
+
+                }
+                languagesSelect.addEventListener("change", changeOption);
+            </script>
+
+            <div class = "select-ctg">
+                <p class = "label-ctg" >Color:</p>
+                <select id = "ID-COLOR" class = "select-windows"атрибуты>
+                    {% with True as flag %}
+                        {% for c in category_Color %}
+                            {% if flag %}
+                                <option style="display:none;" value="{{ c }}">Select</option>
+                                {% update_variable False as flag %}
+                            {%else%}
+                                <option value="{{ c }}">{{ c }}</option>
+                            {%endif%}
+                        {% endfor %}
+                    {%endwith%}
+                </select> 
+            </div>
+            <div class= "Change-button">
+                <button class = "log-button-acc" onClick="submit()">Change</button>
+            </div>
+            <script>
+                function submit(){
+                    var a = document.getElementById("ID-CAMERA").value;
+                    var b = document.getElementById("ID-CAMERA-SPEC").value;
+                    var c = document.getElementById("ID-MATRIX_FORMAT").value;
+                    var d = document.getElementById("ID-BAYONET").value;
+                    var e = document.getElementById("ID-COLOR").value;
+                    var budjet = document.getElementById("pi_input").value;
+                    var LensisChecked = document.getElementById('ID-LENS').checked; 
+                    var isHend = document.getElementById('ID-HAND').checked; 
+                    
+                    window.location.href = "{% url 'Main:Camers_Filtred' %}" + 
+                    "?ID-CAMERA="+ a +
+                    "&ID-CAMERA-SPEC=" + 
+                    b +"&ID-MATRIX_FORMAT=" + 
+                    c +"&ID-BAYONET=" + 
+                    d +"&ID-COLOR=" + 
+                    e +"&pi_input="+
+                    budjet + "&ID-LENS=" +
+                    LensisChecked + "&ID-HAND=" + 
+                    isHend
+                    
+                    ; 
+                }
+            </script>
+        </div>
+        
+    </div>
+</div>
+
+
+{% endblock left-content-ctg %}

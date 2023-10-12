@@ -1,0 +1,186 @@
+{% extends "Main/base.html" %}
+
+
+
+
+
+{% block content %}
+{%load tegs_page%}
+
+{% if some_flag %}
+<meta http-equiv="refresh" content="0; #popup" />
+{%endif%}
+
+
+{%load static%}
+
+{% for l, form in Lens %}
+    <div class = "block-product">
+        <div class = "description-product-block">
+
+            <a href="{{l.get_absolute_url}}"><img src={{l.image.url}} height="170" style="max-width: 150px"></a>
+            <div class = "description-text-product" >
+                
+            
+            </div>
+            <div class= "buttons-buy-info-pr">
+                <div>Category: {{l.category}}</div>
+                <div>Name: {%if l.name|length > 16 %} {{l.name|slice:"0:16"}}...{%else %}{{l.name}}{%endif%} 
+                </div>
+                
+                <div>Type: {{l.type}}</div>
+
+                <div>Date of publication: {{l.created}}</div>
+                <div>Color: {{l.color}}</div>
+                
+                <div class= "buttons-buy-info-pr-2">
+                    <div class= "pr-price" >Price: {{l.price}}$</div>
+                    
+                    {% if request.user.is_authenticated %}
+                        <form action="{% url 'Cart:cart_add' l.id %}" method='post' >
+                            
+                                {% csrf_token %}
+                                {{ form }}
+                                <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
+                            </form>
+                    {% else %}
+                        <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
+                    {% endif %}
+                    <div class="info-logo-pr"><button><h3><a href="{% url "Main:Lens_product" l.id l.klass %}">Info</a></h3></button></div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endfor %}
+<div class="m" style="--m: {{ line }}" >
+</div>
+{% endblock content %}
+
+
+{% block left-content-ctg %}
+<div class = "content-ctg">
+    <div class= "label-categ-head">
+        <h1>Category</h1>
+    </div>
+    
+    <div class = "form-category">
+        <div class = "price-category">
+            <p class = "label-ctg" >Budget: <output id="value"></output>$</p>
+            <input id="pi_input" type="range" value= "7500" class = "miksher" min="0" max="15000" step="100" />
+        </div>
+
+        <div class = "select-box">
+            
+            <div class = "having-some">
+                <p class = "label-ctg-2" >Second-hand:</p>
+                <input id= "ID-HAND" type="checkbox">
+            </div>
+        </div>
+        <div class = "list-ctg">
+            
+            <div class = "select-ctg">
+                <p class = "label-ctg" >Company:</p>
+               
+                <form name="myForm">
+                    
+                    <select id = "ID-CAMERA" name="language" class = "select-windows">
+                        {% with True as flag %}
+                            {% for c in category_obj_camera %}
+                                {% if flag %}
+                                    <option style="display:none;" value="{{ c }}">Select</option>
+                                    {% update_variable False as flag %}
+                                {%else%}
+                                    <option value="{{ c }}">{{ c }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                    </select>
+                </form>
+                
+                
+                
+                
+                <!-- Достать аргумент по клику затем создать событие связывающие этот аргумент с другими элементами следующего списка -->
+            </div>
+            <div class = "select-ctg">
+                <p class = "label-ctg" >Type:</p>
+                
+                <div id="blockspec" name = "blockspec">
+                    <select id = "ID-CAMERA-SPEC" name = "lens-camera-spec" class = "select-windows"атрибуты>
+                        {% with True as flag %}
+                            {% for c in category_type %}
+                                {% if flag %}
+                                    <option style="display:none;" id="selection" value="{{ c }}">Select</option>
+                                    {% update_variable False as flag %}
+                                {%else%}
+                                    <option id="selection" value="{{ c }}">{{ c }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                        </div>
+                    </select> 
+                </div>
+               
+            </div>
+            <div class = "select-ctg">
+                <div id="blockspec2" name = "blockspec2">
+                    <p class = "label-ctg" >Color:</p>
+                    <select id = "ID-BAYONET" name = "bayonet-camera" class = "select-windows"атрибуты>
+                        {% with True as flag %}
+                            {% for c in category_Color %}
+                                
+                                {% if flag %}
+                                
+                                    <option style="display:none;" id="selection2" value="{{ c }}">Select</option>
+                                    {% update_variable False as flag %}
+                                
+                                {%else%}
+                                    <option id="selection2" value="{{ c }}">{{ c }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                    </select> 
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <div class= "Change-button">
+                <button class = "log-button-acc" onClick="submit()">Change</button>
+            </div>
+            <script>
+                function submit(){
+                    var a = document.getElementById("ID-CAMERA").value;
+                    var b = document.getElementById("ID-CAMERA-SPEC").value;
+                    var d = document.getElementById("ID-BAYONET").value;
+                    
+                    var budjet = document.getElementById("pi_input").value;
+                    
+                    var isHend = document.getElementById('ID-HAND').checked; 
+                    
+                    window.location.href = "{% url 'Main:Lens_filtred' %}" + 
+                    "?category_obj_camera="+ a +
+                    "&category_type=" + 
+                    b +"&category_Color=" + 
+                    d +"&pi_input="+
+                    budjet + "&ID-HAND=" + 
+                    isHend
+                    
+                    ; 
+                }
+            </script>
+        </div>
+        
+
+
+
+    </div>
+</div>
+
+
+{% endblock left-content-ctg %}

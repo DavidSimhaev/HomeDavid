@@ -1,0 +1,190 @@
+{% extends "Main/base.html" %}
+{% block content %}
+
+{%load static%}
+{%load tegs_page%}
+
+
+{% if some_flag %}
+<meta http-equiv="refresh" content="0; #popup" />
+{%endif%}
+{{Lens}}
+{% if Lens %}
+{% for lens, form in Lens %}
+    <div class = "block-product">
+        <div class = "description-product-block">
+            <img src={{lens.image.url}} height="170" style="max-width: 150px">
+            <div class = "description-text-product" >
+                <div>
+                    <div class= "buttons-buy-info-pr">
+                        <div>Name: {%if lens.name|length > 16 %} {{lens.name|slice:"0:16"}}...{%else %}{{lens.name}}{%endif%}</div>
+                        <div>Date of publication: {{lens.created}}</div>
+                        <div>Color: {{lens.color}}</div>
+                        <div class= "pr-price" >Price: {{lens.price}}$</div>
+                        {% if request.user.is_authenticated %}
+                            <form action="{% url 'Cart:cart_add' lens.id %}" method='post' >
+                                
+                                {% csrf_token %}
+                                {{ form }}
+                                <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
+                            </form>
+                        {% else %}
+                            <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
+                        {% endif %}
+                        <div class="info-logo-pr"><button><h3><a href="{% url "Main:Lens_product" c.id l.klass %}">Info</a></h3></button></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endfor %}
+<div class="m" style="--m: {{ line }}" > <!-- ТАКИМ ОБРАЗОМ МОЖНО ПЕРЕДАТЬ АРГУМЕНТ В CSS ПОЖАЛУЙСТА ЗАПОМНИТЬ!-->
+</div>
+
+{%else%}
+    <div></div>
+    <div class="m" style="--m: {{ 250 }}" >
+        
+        <div class = "label-center-content-nothing">The sorted data was not found</div>
+        
+        
+        
+        <!-- ТАКИМ ОБРАЗОМ МОЖНО ПЕРЕДАТЬ АРГУМЕНТ В CSS ПОЖАЛУЙСТА ЗАПОМНИТЬ!-->
+    </div>
+
+{% endif %}
+
+{% endblock content %}
+
+{% block left-content-ctg %}
+<div class = "content-ctg">
+    <div class= "label-categ-head">
+        <h1>Category</h1>
+    </div>
+    
+    <div class = "form-category">
+        <div class = "price-category">
+            <p class = "label-ctg" >Budget: <output id="value"></output>$</p>
+            <input id="pi_input" type="range" value= "7500" class = "miksher" min="0" max="15000" step="100" />
+
+        <script>
+            const value = document.querySelector("#value");
+            const input = document.querySelector("#pi_input");
+            value.textContent = input.value;
+            input.addEventListener("input", (event) => {
+            value.textContent = event.target.value;
+            });</script>
+        </div>
+
+        <div class = "select-box">
+            <div class = "having-some">
+                <p class = "label-ctg-2" >The presence of a lens:</p>
+                <input id = "ID-LENS" type="checkbox">
+            </div>
+            <div class = "having-some">
+                <p class = "label-ctg-2" >Second-hand:</p>
+                <input id= "ID-HAND" type="checkbox">
+            </div>
+        </div>
+        <div class = "list-ctg">
+            
+            <div class = "select-ctg">
+                <p class = "label-ctg" >Company:</p>
+               
+                <form name="myForm">
+                    
+                    <select id = "ID-CAMERA" name="language" class = "select-windows">
+                        {% with True as flag %}
+                            {% for c in category_obj_camera %}
+                                {% if flag %}
+                                    <option style="display:none;" value="{{ c }}">Select</option>
+                                    {% update_variable False as flag %}
+                                {%else%}
+                                    <option value="{{ c }}">{{ c }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                    </select>
+                </form>
+                
+                
+                
+                
+                <!-- Достать аргумент по клику затем создать событие связывающие этот аргумент с другими элементами следующего списка -->
+            </div>
+            
+            <div class = "select-ctg">
+                <p class = "label-ctg" >Type:</p>
+                
+                <div id="blockspec" name = "blockspec">
+                    <select id = "ID-CAMERA-SPEC" name = "lens-camera-spec" class = "select-windows"атрибуты>
+                        {% with True as flag %}
+                            {% for c in category_type %}
+                                {% if flag %}
+                                    <option style="display:none;" id="selection" value="{{ c }}">Select</option>
+                                    {% update_variable False as flag %}    
+                                {%else%}
+                                    <option id="selection" value="{{ c }}">{{ c }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                        </div>
+                    </select> 
+                </div>
+               
+            </div>
+            
+            
+            <div class = "select-ctg">
+                <p class = "label-ctg" >Color:</p>
+                <select id = "ID-COLOR" class = "select-windows"атрибуты>
+                    {% with True as flag %}
+                        {% for c in category_Color %}
+                            {% if flag %}
+                                <option style="display:none;" value="{{ c }}">Select</option>
+                                {% update_variable False as flag %}
+                            {%else%}
+                                <option value="{{ c }}">{{ c }}</option>
+                            {%endif%}
+                        {% endfor %}
+                    {%endwith%}
+                </select> 
+            </div>
+            <div class= "Change-button">
+                <button class = "log-button-acc" onClick="submit()">Change</button>
+            </div>
+            <script>
+                function submit(){
+                    var a = document.getElementById("ID-CAMERA").value;
+                    var b = document.getElementById("ID-CAMERA-SPEC").value;
+                    var e = document.getElementById("ID-COLOR").value;
+                    var budjet = document.getElementById("pi_input").value;
+                    var LensisChecked = document.getElementById('ID-LENS').checked; 
+                    var isHend = document.getElementById('ID-HAND').checked; 
+                    
+                    window.location.href = "{% url 'Main:Camers_Filtred' %}" + 
+                    "?ID-CAMERA="+ a +
+                    "&ID-CAMERA-SPEC=" + 
+                    b +"&ID-MATRIX_FORMAT=" + 
+                    c +"&ID-BAYONET=" + 
+                    d +"&ID-COLOR=" + 
+                    e +"&pi_input="+
+                    budjet + "&ID-LENS=" +
+                    LensisChecked + "&ID-HAND=" + 
+                    isHend
+                    
+                    ; 
+                }
+            </script>
+        </div>
+        
+
+
+
+    </div>
+</div>
+
+
+{% endblock left-content-ctg %}

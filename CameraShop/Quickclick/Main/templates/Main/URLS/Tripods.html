@@ -1,0 +1,53 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+
+
+{% if some_flag %}
+<meta http-equiv="refresh" content="0; #popup" />
+{%endif%}
+
+
+{%load static%}
+
+{% for T in Tripods %}
+    <div class = "block-product">
+        <div class = "description-product-block">
+
+            <a href="{{T.get_absolute_url}}"><img src={{T.image.url}} height="170" style="max-width: 150px"></a>
+            <div class = "description-text-product" >
+                <div class= "buttons-buy-info-pr">
+                
+
+
+                
+                <div>Name: {%if T.name|length > 16 %} {{T.name|slice:"0:16"}}...{%else %}{{T.name}}{%endif%} 
+                </div>
+                
+                <div>Date of publication: {{T.created}}</div>
+                <div class = "buttons-buy-info-pr-3">
+                    <div class= "pr-price" >Price: {{T.price}}$</div>
+                    {% if request.user.is_authenticated %}
+                        <form action="{% url 'Cart:cart_add' T.id %}" method='post' >
+                            
+                            {% csrf_token %}
+                            {{ FORM_TO_BACKET }}
+                            <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
+                        </form>
+                    {%else%}
+                        <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
+                    {% endif %}
+
+                    <div class="info-logo-pr"><button type="submit"><h3><a href="{% url "Main:Tripods_product" T.id T.klass %}"> Info</a></h3></button></div>
+                
+                </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+{% endfor %}
+<div class="m" style="--m: {{ line }}" >
+</div>
+{% endblock content %}
