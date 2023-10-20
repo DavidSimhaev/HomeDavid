@@ -84,4 +84,32 @@ input[type=submit] {
 	outline: none;
   }
 
+.wga{
+    width: 135px;
+}
+.button-buy-cart{
+    width: 100%;
+    text-align: center;
+}
+.button-buy-all{
+    background: rgb(97 214 97 / 42%);
+    width: 25%;
+    letter-spacing: 3px;
 
+}
+.button-continue{
+    background: rgb(42 118 185 / 42%);;
+    width: 25%;
+    letter-spacing: 3px;
+
+}
+.button-buy-all:hover{
+    background: rgba(51, 111, 51, 0.476);
+}
+
+.button-continue-1{
+    background: #00589e5c;
+    width: 100%;
+    letter-spacing: 3px;
+    color: white;
+}

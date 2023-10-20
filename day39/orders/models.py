@@ -6,10 +6,10 @@ from Shope.models import Product
 class Order(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    email =   models.EmailField()
-    address = models.CharField(max_length=250)
-    postal_code = models.CharField(max_length=30)
-    city = models.CharField(max_length=25)
+    email =   models.EmailField(max_length=50)
+    address = models.CharField(max_length=250, blank=True, null=True)
+    postal_code = models.CharField(max_length=30,  blank=True, null=True)
+    city = models.CharField(max_length=25,  blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     

@@ -2,7 +2,7 @@ from django.urls import reverse
 from turtle import delay
 from django.shortcuts import redirect, render
 from .models import Order, OrderItem, Product
-from .forms import OrderCreateForm
+from .forms import OrderCreateForm, ProfileForm
 from cart.cart import Cart
 from .tasks import order_created
 # Create your views here.
@@ -28,7 +28,10 @@ def order_create(request):
             return redirect(reverse('payment:process'))
             #return render(request, "orders/order/created.html", {"order": order})
     else:
-        form= OrderCreateForm()
+        data = {'first_name': 'Ivan', 'last_name': 'Ivanov', 'email': 'a@b.ru'}
+        
+        form = OrderCreateForm(data)
+        
     return render(request, "orders/order/create.html", {"cart": cart, "form":form})     
     
 

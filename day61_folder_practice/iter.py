@@ -24,7 +24,6 @@ for element in range(3):
         new_list.append(10 ** element)
 
 
-
 import os
 
 try:
@@ -69,7 +68,6 @@ except IOError as exception:
     
 data = bytearray(10)
 
-
 import os
 
 byte = bytearray(1)
@@ -102,6 +100,7 @@ class ASSS(Exception):
     def __str__(self) -> str:
         return "lalala"
     
-    
+b =ASSS
 
 print("atr" in ASSS.__dict__)
+print(b.__dict__)

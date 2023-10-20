@@ -5,7 +5,7 @@ class Contener():
     common_denominator= None
     array = None
     len = None
-    
+    ID = 0
    
    
     def change_des():

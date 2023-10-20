@@ -82,6 +82,7 @@ def add_cat(request):
     if request.method != "POST":
         catform = PriceForm()
     else:
+        breakpoint()
         catform = PriceForm(request.POST,  request.FILES)
         
         if catform.is_valid():

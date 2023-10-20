@@ -8,7 +8,6 @@
 {% if some_flag %}
 <meta http-equiv="refresh" content="0; #popup" />
 {%endif%}
-{{Lens}}
 {% if Lens %}
 {% for lens, form in Lens %}
     <div class = "block-product">
@@ -17,22 +16,27 @@
             <div class = "description-text-product" >
                 <div>
                     <div class= "buttons-buy-info-pr">
+                        <div>Category: {{lens.category}}</div>
+                        
                         <div>Name: {%if lens.name|length > 16 %} {{lens.name|slice:"0:16"}}...{%else %}{{lens.name}}{%endif%}</div>
+                        <div>Type: {{lens.type}}</div>
+                        
                         <div>Date of publication: {{lens.created}}</div>
                         <div>Color: {{lens.color}}</div>
-                        <div class= "pr-price" >Price: {{lens.price}}$</div>
-                        {% if request.user.is_authenticated %}
-                            <form action="{% url 'Cart:cart_add' lens.id %}" method='post' >
-                                
-                                {% csrf_token %}
-                                {{ form }}
-                                <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
-                            </form>
-                        {% else %}
-                            <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
-                        {% endif %}
-                        <div class="info-logo-pr"><button><h3><a href="{% url "Main:Lens_product" c.id l.klass %}">Info</a></h3></button></div>
-
+                        <div class= "buttons-buy-info-pr-2">
+                            <div class= "pr-price" >Price: {{lens.price}}$</div>
+                            {% if request.user.is_authenticated %}
+                                <form action="{% url 'Cart:cart_add' lens.id %}" method='post' >
+                                    
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
+                                </form>
+                            {% else %}
+                                <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
+                            {% endif %}
+                            <div class="info-logo-pr"><button><h3><a href="{% url "Main:Lens_product" lens.id lens.klass %}">Info</a></h3></button></div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -55,6 +59,7 @@
     </div>
 
 {% endif %}
+
 
 {% endblock content %}
 
@@ -79,10 +84,7 @@
         </div>
 
         <div class = "select-box">
-            <div class = "having-some">
-                <p class = "label-ctg-2" >The presence of a lens:</p>
-                <input id = "ID-LENS" type="checkbox">
-            </div>
+            
             <div class = "having-some">
                 <p class = "label-ctg-2" >Second-hand:</p>
                 <input id= "ID-HAND" type="checkbox">
@@ -97,7 +99,7 @@
                     
                     <select id = "ID-CAMERA" name="language" class = "select-windows">
                         {% with True as flag %}
-                            {% for c in category_obj_camera %}
+                            {% for c in category_camera %}
                                 {% if flag %}
                                     <option style="display:none;" value="{{ c }}">Select</option>
                                     {% update_variable False as flag %}
@@ -121,7 +123,7 @@
                 <div id="blockspec" name = "blockspec">
                     <select id = "ID-CAMERA-SPEC" name = "lens-camera-spec" class = "select-windows"атрибуты>
                         {% with True as flag %}
-                            {% for c in category_type %}
+                            {% for c in category_camera_spec %}
                                 {% if flag %}
                                     <option style="display:none;" id="selection" value="{{ c }}">Select</option>
                                     {% update_variable False as flag %}    
@@ -152,27 +154,25 @@
                     {%endwith%}
                 </select> 
             </div>
-            <div class= "Change-button">
+            <div class= "Change-button-2">
                 <button class = "log-button-acc" onClick="submit()">Change</button>
             </div>
             <script>
                 function submit(){
                     var a = document.getElementById("ID-CAMERA").value;
                     var b = document.getElementById("ID-CAMERA-SPEC").value;
-                    var e = document.getElementById("ID-COLOR").value;
+                    var d = document.getElementById("ID-BAYONET").value;
+                    
                     var budjet = document.getElementById("pi_input").value;
-                    var LensisChecked = document.getElementById('ID-LENS').checked; 
+                    
                     var isHend = document.getElementById('ID-HAND').checked; 
                     
-                    window.location.href = "{% url 'Main:Camers_Filtred' %}" + 
-                    "?ID-CAMERA="+ a +
-                    "&ID-CAMERA-SPEC=" + 
-                    b +"&ID-MATRIX_FORMAT=" + 
-                    c +"&ID-BAYONET=" + 
-                    d +"&ID-COLOR=" + 
-                    e +"&pi_input="+
-                    budjet + "&ID-LENS=" +
-                    LensisChecked + "&ID-HAND=" + 
+                    window.location.href = "{% url 'Main:Lens_filtred' %}" + 
+                    "?category_obj_camera="+ a +
+                    "&category_type=" + 
+                    b +"&category_Color=" + 
+                    d +"&pi_input="+
+                    budjet + "&ID-HAND=" + 
                     isHend
                     
                     ; 

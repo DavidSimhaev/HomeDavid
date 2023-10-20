@@ -32,16 +32,20 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     
+    "Cart",
     "Main", 
     "users",
     "bootstrap4",
+    "payment",
+    "orders",
+    
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "Cart",
+    
     
 ]
 
@@ -53,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "Main.midlleware.CurrentRequestMiddlewareUser",
 ]
 
 ROOT_URLCONF = "Quickclick.urls"
@@ -74,7 +79,11 @@ TEMPLATES = [
     },
 ]
 
+STRIPE_SECRET_KEY = "sk_test_51O2i4yIUPYa5OIhPPB3Ptnb0bioC6AJdwhStnH2JgwMGE9CITgqBmAbIXaOjYKD2pIokwG97DjqeaHRJQhzXbNVa00q5N2iwSP"
+STRIPE_API_VERSION = "2022-08-01"
 WSGI_APPLICATION = "Quickclick.wsgi.application"
+STRIPE_WEBHOOK_SECRET = 'whsec_36231f5ecf3bbfb0d6c0d30d0869668f2e3445c8ae4e9020a1647d93d8fea9a5'
+STRIPE_PUBLISHABLE_KEY = "pk_test_51O2i4yIUPYa5OIhPHpNZ7kNdNEutT7eBko4JvpZJwAmRRdN7RNthA18eiP6z6zORKLUqI0ZZEwOTYiU3I4sI3yFr006FIqlLHv"
 
 
 # Database
@@ -107,6 +116,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -123,7 +135,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = "static/"
 
@@ -132,3 +144,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templatetags')]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "192.168.8.8"
+EMAIL_PORT = 25

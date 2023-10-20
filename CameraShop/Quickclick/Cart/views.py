@@ -80,5 +80,9 @@ def cart_detail(request):
         cart.cart= ast.literal_eval(request.COOKIES.get(f'{request.user.id}'))
     except:
         pass
-    return render(request, "Cart/Cart.html", {"Cart": cart})
+    empty = False
+    if cart.cart != {'Camera': {}, 'lens': {}, 'tripods': {}, 'lightings': {}, 'Binoculars': {}}:
+        empty = True
+    
+    return render(request, "Cart/Cart.html", {"Cart": cart, "empty": empty})
     

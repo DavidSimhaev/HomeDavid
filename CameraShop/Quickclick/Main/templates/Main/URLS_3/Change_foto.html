@@ -1,0 +1,18 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+
+<form class = "obj-form" method="post" action="{% url "Main:Change_Foto" %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ FORM_FOTO.as_p }}
+    <button class = "button-form" name="sumbit"> Get data</button>
+</form>
+{% endblock content %} 
+{% block left-content-ctg %}
+<div class= "label-categ-head">
+    <h1>Category</h1>
+</div>
+<div class ="block-label-select-category">
+  <div class= "Select-category"> Select a category to sort </div>
+</div>
+{% endblock left-content-ctg %}

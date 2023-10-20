@@ -1,0 +1,58 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+
+{% if form_flag %}
+<meta http-equiv="refresh" content="0;#popup-10 " />
+{%endif%}
+
+
+
+
+{%load static%}
+{% if some_flag %}
+<meta http-equiv="refresh" content="0; #popup-8" />
+{%endif%}
+
+
+<div class = "main-info-acc" >
+    <div class= "foto-profile">
+        <div class = "block-foto-bg">
+            {% if foto %}
+            <a  class = "foto-img-pf1" href="#popup-9"><img src={{foto.image.url}} height="340" style="max-width: 280px"></a>
+            {% else %}
+            <a class = "foto-img-pf1" href="#popup-9"><img  src="{% static "Main/images/user.png" %}" height="340" style="max-width: 280px"></a>
+
+            {% endif %}
+        </div>
+    </div>
+    <div class = "detail-profile">
+        <ul>
+            
+            <li class= "obj-list-detail"> User: {{Profile_name}}</li><div class = "line-space"></div><div class = "line-space-2"></div>
+            <li class= "obj-list-detail"> First name: {{first_name}}<a href="#popup-5"><img class = "change-detail" src="{% static "Main/images/change-img.png" %}" height="30" style="max-width: 25px"></a>  </li><div class = "line-space"></div><div class = "line-space-2"></div>
+            <li class= "obj-list-detail"> Last name: {{last_name}}<a href="#popup-6"><img class = "change-detail" src="{% static "Main/images/change-img.png" %}" height="30" style="max-width: 25px"></a></li><div class = "line-space"></div><div class = "line-space-2"></div>
+            <li class= "obj-list-detail"> Email: {{email}}<a href="#popup-7"><img class = "change-detail" src="{% static "Main/images/change-img.png" %}" height="30" style="max-width: 25px"></a></li><div class = "line-space"></div><div class = "line-space-2"></div>
+            <li class= "obj-list-detail"> RHB: H1</li><div class = "line-space"></div><div class = "line-space-2"></div>
+            <li class= "obj-list-detail"> Status: {{status}}</li><div class = "line-space"></div><div class = "line-space-2"></div>
+            
+                
+            
+        </ul>
+    </div>
+</div> 
+
+{% endblock content %}
+
+{% block left-content-ctg %}
+<div class= "label-categ-head">
+    <h1>Category</h1>
+</div>
+<div class ="block-label-select-category">
+  <div class= "Select-category"> Select a category to sort </div>
+</div>
+
+
+{% endblock left-content-ctg %}
+
+

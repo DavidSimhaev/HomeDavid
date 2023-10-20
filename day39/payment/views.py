@@ -12,6 +12,7 @@ stripe.api_version = settings.STRIPE_API_VERSION
 def payment_process(request):
     order_id = request.session.get('order_id')
     order = get_object_or_404(Order, id=order_id)
+    breakpoint()
     if request.method == 'POST':
         success_url = request.build_absolute_uri(reverse('payment:completed')) # Не понял    build_absolute_uri
         cancel_url = request.build_absolute_uri(reverse('payment:canceled')) # Не понял build_absolute_uri
@@ -24,7 +25,6 @@ def payment_process(request):
             'line_items': []
         }
         for item in order.items.all(): # Не понял items.all()
-            breakpoint()
             session_data['line_items'].append(
                 {
                     'price_data': {

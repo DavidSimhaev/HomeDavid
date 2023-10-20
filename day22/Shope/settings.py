@@ -25,7 +25,6 @@ SECRET_KEY = "django-insecure-oc_x6at=fs@a6wjz2+)gpp-^8nvl$&)&$y7^yq&m@)j=3jya-j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.20.172"]
 
 import os
 MEDIA_URL = "/media/"
@@ -131,5 +130,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Heroku settings
-import django_heroku
-django_heroku.settings(locals())

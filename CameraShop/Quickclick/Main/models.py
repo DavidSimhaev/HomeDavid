@@ -57,14 +57,12 @@ class Camera(models.Model):
     is_published = models.BooleanField(default=True)
     price = models.DecimalField(decimal_places= 2, max_digits =10, default=0, null= True)
     stock = models.PositiveBigIntegerField()
-    
-    
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     
     
     
     def __str__(self):    
-        return f"OBJ: {self.id}: {self.firm} NAME: {self.name} COLOR: {self.color}"
+        return f"{self.firm} Model: {self.name}"
     
     def klass( self ):
         return self.__class__.__name__
@@ -80,23 +78,12 @@ class IMG_FILES(models.Model):
                               verbose_name='Image')
     def __str__(self):
         return f"--OBJECT: {self.post}--"
-    
-
-
-
-
-
-
-  
-    
 
 class lens(models.Model):
     category = models.ForeignKey(Category, related_name="category", on_delete=models.DO_NOTHING)
-    
     name = models.CharField(max_length=200, db_index=True)
     type = models.CharField(max_length=200, db_index=True)
     color =  models.ForeignKey(Color, related_name="lens", on_delete=models.DO_NOTHING)
-
     hand = models.BooleanField(default=False)
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
     content = models.TextField(blank= True, max_length= 1000)
@@ -107,7 +94,7 @@ class lens(models.Model):
     stock = models.PositiveBigIntegerField()
     
     def __str__(self):
-        return f"--{self.category}--, --{self.name} --{self.price}-- "
+        return f" Model:{self.category}, Name of object: {self.name} {self.color} "
     def klass( self ):
         return self.__class__.__name__
     def get_absolute_url(self):
@@ -141,7 +128,7 @@ class tripods(models.Model):
     
     stock = models.PositiveBigIntegerField()
     def __str__(self):
-        return f"Tripod: {self.name}, price: {self.price}"
+        return f"Tripod: {self.name}, {self.color}"
     def klass( self ):
         return self.__class__.__name__
     def get_absolute_url(self):
@@ -173,7 +160,7 @@ class lightings(models.Model):
     stock = models.PositiveBigIntegerField()
     
     def __str__(self):
-        return f"--{self.name} --{self.price}-- "
+        return f"{self.name} "
     def klass( self ):
         return self.__class__.__name__
     
@@ -204,7 +191,7 @@ class Binoculars(models.Model):
     stock = models.PositiveBigIntegerField()
     
     def __str__(self):
-        return f"--{self.name} --{self.price}-- "
+        return f"{self.name} "
     
     def klass( self ):
         return self.__class__.__name__
@@ -217,6 +204,7 @@ class IMG_FILES_BINOCULARS(models.Model):
     post = models.ForeignKey(Binoculars, default=None, on_delete=models.DO_NOTHING)
     image = models.ImageField(upload_to="post_images/",
                               verbose_name='Image')
+    
     def __str__(self):
         return f"--OBJECT: {self.post}--"
       
@@ -227,3 +215,15 @@ class account_data(models.Model):
     value = models.CharField(max_length=30, null=True, blank=True)
     class Meta:
         unique_together = ("username", "key")
+        
+class PROFILE_IMG(models.Model):
+    post = models.ForeignKey(User, default=None, on_delete=models.DO_NOTHING, null=True, blank=True )
+    image = models.FileField(upload_to="post_images/", null=True, max_length=255,
+                              verbose_name='Image')
+    
+    def __repr__(self):
+        return 'Resume(%s, %s)' % (self.file)
+    
+    def __str__(self):
+        return f"--OBJECT: {self.post}--"
+    

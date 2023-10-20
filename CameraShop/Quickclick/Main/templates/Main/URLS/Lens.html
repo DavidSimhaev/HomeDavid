@@ -70,6 +70,13 @@
         <div class = "price-category">
             <p class = "label-ctg" >Budget: <output id="value"></output>$</p>
             <input id="pi_input" type="range" value= "7500" class = "miksher" min="0" max="15000" step="100" />
+            <script>
+                const value = document.querySelector("#value");
+                const input = document.querySelector("#pi_input");
+                value.textContent = input.value;
+                input.addEventListener("input", (event) => {
+                value.textContent = event.target.value;
+                });</script>
         </div>
 
         <div class = "select-box">
@@ -126,7 +133,7 @@
                
             </div>
             <div class = "select-ctg">
-                <div id="blockspec2" name = "blockspec2">
+                <div id="blockspec" name = "blockspec">
                     <p class = "label-ctg" >Color:</p>
                     <select id = "ID-BAYONET" name = "bayonet-camera" class = "select-windows"атрибуты>
                         {% with True as flag %}
@@ -150,7 +157,7 @@
             
             
             
-            <div class= "Change-button">
+            <div class= "Change-button-2">
                 <button class = "log-button-acc" onClick="submit()">Change</button>
             </div>
             <script>

@@ -4,14 +4,14 @@
 {% block content %}
   <form class="login-form" method="POST">
     {% csrf_token %}
+
     <div class="row">
+      {% block message_main %}
       <div class="col-md-12">
         {% if form.errors %}
           {% for field in form %}
             {% for error in field.errors %}
               <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-                <strong>{{ field|escape }}</strong>
               </div>
             {% endfor %}
           {% endfor %}
@@ -22,7 +22,7 @@
           {% endfor %}
         {% endif %}
       </div>
-
+      {% endblock message_main %} 
 
 
 
@@ -117,7 +117,7 @@
                 <div class="form-group">
                 <div class="custom-control">
                     {{ form.check }}
-                    <label>I Accept <a href="{% url 'Main:Main' %}" class="text-primary">Terms And Condition</a></label>
+                    <label>I Accept <a href="#popup-3" class="text-primary">Terms And Condition</a></label>
                 </div>
                 {% if form.check.errors %}
                     {% for error in form.check.errors %}

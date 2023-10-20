@@ -2,12 +2,10 @@
 
 
 <html>
-
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-       
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
         <title> Quickclick </title>
-        <link rel ="stylesheet" type="text/css" href= "{% static "Main/css/base.css" %}?ver=121"> 
+        <link rel ="stylesheet" type="text/css" href= "{% static "Main/css/base.css" %}?ver=141"> 
     </head>
     <body>
         <div id = "wrapper">
@@ -143,12 +141,14 @@
                                     <h1 >Welcome, {{user.username}} </h1>
                                     <ul class = "menu-user">
                                         <button class = "log-button-acc-2"><a href="{% url "Cart:cart_detail" %}">Basket</a></button>
-                                        <button class = "log-button-acc-2"><a href="#">Settings </a></button>
+                                        <button class = "log-button-acc-2"><a href="{% url "Main:Profile" %}">Profile </a></button>
                                         <button class = "log-button-acc-2"><a href="#">Support </a></button>
-                                        <button class = "log-button-acc-2"><a href="#">Coupons</a></button> 
+                                        <button class = "log-button-acc-2"><a href="#">Settings</a></button> 
                                         <button class = "log-button-acc-2"><a href="#">Coupons</a></button> 
 
                                         <button class = "log-button-acc-2"><a href = "{% url "Main:logout" %}"> Logout</a></button>
+                                        
+                                        
                                     </ul>
                                 </div>
                                 
@@ -164,10 +164,10 @@
 
 
 
-                                <button class = "log-button-acc" onClick="submit()">Login</button>
+                                <button class = "log-button-acc" onClick="submit1()">Login</button>
                                 
                                 <script>
-                                    function submit(){
+                                    function submit1(){
                                         var a = document.getElementById("u-form").value;
                                         var b = document.getElementById("p-form").value;
                                         
@@ -189,16 +189,7 @@
                                          }
                                        }
                                 </script>
-
                                 <button class = "reg-button-acc"><a href="{% url "users:register"%}">Registration</a></button>
-                                
-                                
-                                
-                                
-                                
-
-
-
                             {%endif%}
                             {% endblock login_logout %}
                         </div>
@@ -210,10 +201,7 @@
                                 <h1>Category</h1>
                             </div>
                             {% endblock left-content-ctg %}
-                            
                         </div>
-                            
-                        
                         <div class = "useful-link" ></div>
                     </div>
                 </div>  <!-- Конец окна меню -->
@@ -248,12 +236,11 @@
                         </li>
                     </ul>
                 </div>
-                
-
             </div>
 
         </div>
     </div>
+    
 
     <div id = "popup-2" class= "popup">
         <a href="#header" class = "popup__area" ></a>
@@ -264,15 +251,257 @@
                 <div class= "popup__text">
                     Please register and then add the product to the cart
                 </div>
+            </div>
+        </div>
+    </div>
+    <div id = "popup-5" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite-1"> Changing profile data. </div>
+                <div class= "popup__text">
+                    Would you like to change name?
+                </div>
+                <a href="#popup-5-change"><button class = "reg-button-acc-3">Yes</button></a>
+                <a href="#header"><button class = "reg-button-acc-4">No</button></a>
+            </div>
+        </div>
+    </div>
+    <div id = "popup-5-change" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite-1"> Changing profile data. </div>
+                <div class= "popup__text">
+                    <div  class = "text-change-data-pr">
+                        <input id = "name-change-id" type="text" value={{user.first_name}}>
+                    </div>
+                </div>
+                <a><button class = "reg-button-acc-3" onClick="submit2()" >Accept </button></a>
+                <a href="#header"><button class = "reg-button-acc-4">Cancel</button></a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function submit2(){
+            var a = document.getElementById("name-change-id").value;
+            window.location.href = "{% url 'Main:Change_Name' %}" + 
+            "?name-change="+ a
+            ; 
+        }
+    </script>
+    <div id = "popup-6" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite-1"> Changing profile data. </div>
+                <div class= "popup__text">
+                    Would you like to change last name?
+                </div>
+                <a href="#popup-6-change"><button class = "reg-button-acc-3">Yes</button></a>
+                <a href="#header"><button class = "reg-button-acc-4">No</button></a>
+            </div>
+        </div>
+    </div>
+    <div id = "popup-6-change" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite-1"> Changing profile data. </div>
+                <div class= "popup__text">
+                    <div  class = "text-change-data-pr">
+                        <input id= "last-change-id" type="text" value={{user.last_name}}>
+                    </div>
+                </div>
+                
+                <a><button class = "reg-button-acc-3" onClick="submit3()" >Accept</button></a>
+                <a href="#header"><button class = "reg-button-acc-4">Cancel</button></a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function submit3(){
+            var a = document.getElementById("last-change-id").value;
+            window.location.href = "{% url 'Main:Change_Last' %}" + 
+            "?name-change="+ a
+            ; 
+        }
+    </script>
+    
+    <div id = "popup-7" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite-1"> Changing profile data. </div>
+                <div class= "popup__text">
+                    Would you like to change email?<br>
+                    Please note that all payments and receipts will be sent to the changed email address , make sure that the entered data is correct , also that you have access to electronic mail
+                </div>
+                <a href="#popup-7-change"><button class = "reg-button-acc-3">Yes</button></a>
+                <a href="#header"><button class = "reg-button-acc-4">No</button></a>
+            </div>
+        </div>
+    </div>
+    <div id = "popup-7-change" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite-1"> Changing profile data. </div>
+                <div class= "popup__text">
+                    <div  class = "text-change-data-pr">
+                        <input id= "email-change-id"type="text" value={{user.email}}>
+                    </div>
+                </div>
+                
+                <a><button class = "reg-button-acc-3" onClick="submit4()" >Accept</button></a>
+                <a href="#header"><button class = "reg-button-acc-4">Cancel</button></a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function submit4(){
+            var a = document.getElementById("email-change-id").value;
+            window.location.href = "{% url 'Main:Change_Email' %}" + 
+            "?name-change="+ a
+            ; 
+        }
+    </script>
+    <div id = "popup-8" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite"> Data entered incorrectly! </div>
+                <div class= "popup__text">
+                    Please enter the correct email address as in the example: pc01@server.domen
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id = "popup-9" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite-1"> Changing profile data. </div>
+                <div class= "popup__text">
+                    Would you like to change the user's photo?
+                </div>
+                <!--Здесь форма -->
+                <a href ="{% url "Main:Change_Foto" %}"><button class = "reg-button-acc-5">Yes</button></a>
+                <a href="#header"><button class = "reg-button-acc-6">No</button></a>
+            </div>
+        </div>
+    </div>
+    
+    <div id = "popup-3" class= "popup">
+        <a href="#header" class = "popup__area" ></a>
+        <div class ="popup__body">
+            <div class = "popup__content">
+                <a href="#header" class= "popup__close">X</a>
+                <div class= "popup__tite"> 
+                    Terms of use
+                </div>
+                
+                <div class= "popup__text">
+                    This User Agreement (hereinafter referred to as the Agreement) governs the relationship between the owner of Quickclick.com (hereinafter referred to as Quickclick or Administration) on the one hand and the user of the site on the other.
+                    The Quickclick site is not a media outlet.
+
+                    By using the site, you agree to the terms of this agreement.
+                    If you do not agree to the terms of this agreement, do not use the Quickclick website!
+
+                    Subject of the agreement
+                    The administration grants the user the right to post the following information on the website:
+                </div>
                 
                 
 
+                <div class= "popup__tite">
+                    Subject of the agreement
+                </div>
+
+                <div class= "popup__text">
+                    The administration grants the user the right to post the following information on the website:
+                </div>
+                
+                <div class= "popup__tite">
+                    Subject of the agreement
+                </div>
+                <div class= "popup__text">
+                    The administration grants the user the right to post the following information on the website:
+                    - Text information
+                    - Audio materials
+                    - Video materials
+                    - Photo materials
+                    - Links to materials posted on other sites
+                </div>
+
+                
+                <div class= "popup__tite">
+                    Rights and obligations of the parties
+                </div>
+                
+                <div class= "popup__text">
+                    The user has the right:
+                    - search for information on the site
+                    - receive information on the site
+                    - create information for the site
+                    - distribute information on the site
+                    - comment on content posted on the site
+                    - change user ratings
+                    - copy information to other sites with the permission of the site Administration
+                    - copy information to other sites with the permission of the copyright holder
+                    - use the site information for personal non-commercial purposes
+                    - use site information for commercial purposes without special permission
+
+                    The administration has the right:
+                    - at your own discretion and need to create, change, cancel rules
+                    - restrict access to any information on the site
+                    - create, change, delete information
+                    - refuse registration without explanation
+
+                    The user undertakes:
+                    - ensure the reliability of the information provided
+                    - ensure the safety of personal data from access by third parties
+                    - update the Personal data provided during registration if they change
+                    - do not copy information from other sources
+                    - when copying information from other sources, include information about the author
+                    - do not disseminate information that is aimed at promoting war, inciting national, racial or religious hatred and enmity, as well as other information for the dissemination of which criminal or administrative liability is provided
+                    - do not disrupt the functionality of the site
+                    - do not take actions aimed at misleading other Users
+                    - do not post materials of an advertising, erotic, pornographic or offensive nature, as well as other information, the placement of which is prohibited or contrary to the norms of the current legislation of the Russian Federation
+                    - do not use scripts (programs) for automated collection of information and/or interaction with the Site and its Services
+
+                                        
+                    The administration undertakes:
+                    - maintain the functionality of the site except in cases where this is impossible for reasons beyond the control of the Administration.
+                    - carry out comprehensive protection of the User account
+                    - protect information the distribution of which is limited or prohibited by law by issuing a warning or deleting the account of a user who has violated the rules
+
+                    Responsibility of the parties
+                    - the user personally bears full responsibility for the information he disseminates
+                    - the administration is not responsible for the discrepancy between the services expected by the User and the services actually received
+                    - the administration does not bear any responsibility for services provided by third parties
+                    - in the event of a force majeure situation (combat operations, state of emergency, natural disaster, etc.), the Administration does not guarantee the safety of information posted by the User, as well as the uninterrupted operation of the information resource
+
+                    Terms of the Agreement
+                    This Agreement comes into force upon registration on the site.
+                    The agreement ceases to be valid when a new version appears.
+                    The administration reserves the right to unilaterally change this agreement at its discretion.
+                    If there is any change to this agreement, the administration will notify users in a way convenient for it.
+
+                </div>
+                <button class = "reg-button-acc-2"><a href="#header">I'm aware</a></button>
+                
+                
             </div>
 
         </div>
     </div>
-
-
-
-    
 </html>
