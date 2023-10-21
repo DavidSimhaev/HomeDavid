@@ -1,5 +1,5 @@
 from django.urls import reverse
-from turtle import delay
+#from turtle import delay
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Order, OrderItem
 from .forms import OrderCreateForm
@@ -35,7 +35,7 @@ def order_create(request):
             cart.clear()
             
                                  
-            order_created.delay(order.id)
+            #order_created.delay(order.id)
             request.session['order_id'] = order.id # Что то связанно с почтой
             
             order_id = request.session.get('order_id')
