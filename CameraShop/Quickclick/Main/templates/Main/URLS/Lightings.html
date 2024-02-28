@@ -19,16 +19,17 @@
             <a href="{{l.get_absolute_url}}"><img src={{l.image.url}} height="170" style="max-width: 150px"></a>
             <div class = "description-text-product" >
                 <div class= "buttons-buy-info-pr">
-                <div>lens for {{l.lens}}</div>
-                
-                
-                <div>Name: {%if l.name|length > 16 %} {{l.name|slice:"0:16"}}...{%else %}{{l.name}}{%endif%} 
-                </div>
+                <div>Name: {%if l.name|length > 16 %} {{l.name|slice:"0:16"}}...{%else %}{{l.name}}{%endif%}</div>
                 <div>Supports {{l.power}} charging</div>
                 <div>Charging time: {{l.time_power}}</div>
                 <div>Date of publication: {{l.created}}</div>
-                <div class = "buttons-buy-info-pr-4">
-                    <div class= "pr-price" >Price: {{l.price}}$</div>
+                </div>
+            </div>
+        </div>
+                
+        <div class = 'copyright'>
+
+            <div class= "pr-price" >Price: {{l.price}}$</div>
                     {% if request.user.is_authenticated %}
                         <form action="{% url 'Cart:cart_add' l.id %}" method='post' >
                             {% csrf_token %}
@@ -39,11 +40,8 @@
                         <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
                     {% endif %}
                     <div class="info-logo-pr"><button type="submit"><h3><a href="{% url "Main:Lightings_product" l.id l.klass %}"> Info</a></h3></button></div>
-                
-                </div>
-                </div>
-                
-            </div>
+
+
         </div>
     </div>
     

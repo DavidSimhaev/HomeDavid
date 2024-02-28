@@ -5,7 +5,7 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
         <title> Quickclick </title>
-        <link rel ="stylesheet" type="text/css" href= "{% static "Main/css/base.css" %}?ver=142"> 
+        <link rel ="stylesheet" type="text/css" href= "{% static "Main/css/base.css" %}?ver=150">
     </head>
     <body>
         <div id = "wrapper">
@@ -94,7 +94,7 @@
                                 
                                     Binoculars</a></li>
 
-                                <li class = "last"><a href="#">
+                                <li class = "last"><a href="{% url "Main:AboutUs"%}">
                                     <span class = "button__line button__line--top"></span>
                                     <span class = "button__line button__line--right"></span>
                                     <span class = "button__line button__line--bottom"></span>
@@ -102,11 +102,31 @@
                                     
                                     About us</a></li>
                             </ul>
+                            
                             <div class = "search">  
-                                <input type = "text" value ="Search" name= "form-search" class = "search-form"/>
-
+                                <input type="text" placeholder="Search" style = 'margin-top: -35px;'id="u-search" onkeypress="KeyPress(event)" class = "search-form">
                             </div> 
-                        
+                            <input class= 'search-img'  onclick="submitSearch()", id = 'u-search' onkeypress="submitSearch()" >
+                            </div>
+
+                            <script>
+                                // МЫШЬ
+                                function submitSearch(){
+                                    var a = document.getElementById("u-search").value;
+                                    window.location.href = "{% url 'Main:SearchAll' %}" + "?search="+ a;
+                                }
+                            </script>
+
+                            <script>
+                                // КЛАВИША
+                                function KeyPress(e){
+                                    var key=e.keyCode || e.which;
+                                     if (key === 13){ // Клавиша Enter
+                                        var a = document.getElementById("u-search").value;
+                                        window.location.href = "{% url 'Main:SearchAll' %}" + "?search="+ a; 
+                                     }
+                                   }
+                            </script>
                         </div>
                     </div>
                 </div>

@@ -476,7 +476,7 @@ button {
 .block-product{
 	width: 223px;
 	height: 435px;
-	
+	position: relative;
 	margin-left: 5px;
 	margin-top: 5px;
 	background: url(../images/block-product_2-7.png);
@@ -493,6 +493,8 @@ button {
 	margin-top: 5px;	
 }
 .pr-price{
+	font-size: 21px;
+	padding-left: 11px;
 	color:#bbb2bb;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	margin-top: 3px;	
@@ -511,10 +513,6 @@ button {
 }
 
 
-.buy-logo{
-	margin-left: -10px;
-
-}
 
 
 
@@ -1033,4 +1031,40 @@ button {
     margin-left: 100px;
     padding-top: 3px;
     padding-bottom: 39px;
+}
+
+.info-addres{
+	padding-left: 55px;
+    padding-top: 36px;
+    float: left;
+}
+
+
+.buy-logo-3 button{
+	background: rgb(4 136 4);
+}
+
+.buy-logo-3 button:hover{
+	background: rgba(13, 127, 0, 0.62)
+	
+}
+
+.copyright {
+    position: absolute;
+    bottom: 12;
+}
+
+.search-img{
+	margin-left: 1212px;
+    margin-top: -37px;
+    width: 40px;
+    height: 70px;
+    background: url(../images/serch-img-2.png) no-repeat;
+	cursor:pointer;
+}
+
+.search-img:hover{
+	transition: 0.90s;
+	background: url(../images/serch-img-3.png) no-repeat;	
+	
 }

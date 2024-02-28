@@ -22,15 +22,7 @@ class Example(tk.Frame):
     local_url = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
     def __init__(self):
         super().__init__()
-        
-        """self.img_logo_rus = Image.open(f"{self.local_url}/image/logo_rus.png")
-        self.img_logo_eng = Image.open(f"{self.local_url}/image/logo_england.png")
-        self.img_logo_he = Image.open(f"{self.local_url}/image/logo_he.png" )
-        
-        self.img_rus = ImageTk.PhotoImage(self.img_logo_rus)
-        self.img_eng = ImageTk.PhotoImage(self.img_logo_eng)
-        self.img_he = ImageTk.PhotoImage(self.img_logo_he)"""
-        
+      
         
         self.light = tk.PhotoImage(file=rf"{self.local_url}/image/white_bg.png").subsample(1,1)
         self.dark = tk.PhotoImage(file=rf"{self.local_url}/image/black_bg.png").subsample(1,1)
@@ -506,7 +498,7 @@ class Example(tk.Frame):
             
             
             def TXT_file(event):
-                Files = [('Text Document', '*.txt')]
+                Files = [('JPG', '*.jpg')]
                 file = filedialog.asksaveasfile(filetypes = Files, defaultextension = Files)
                 with open(file.name, "w",  encoding= "utf-8") as f:
                     f.write(txt_res)

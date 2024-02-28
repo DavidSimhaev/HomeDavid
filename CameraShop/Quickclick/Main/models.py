@@ -62,7 +62,11 @@ class Camera(models.Model):
     
     
     def __str__(self):    
-        return f"{self.firm} Model: {self.name}"
+        return f"{self.firm}/ {self.name}/ {self.type}/ {self.Matrix_format}/ {self.Bayonet}/ {self.Image_Stabilizer}/ {self.category}"
+    
+    def attribute_cls(self):
+        return ['name','firm', 'type', 'Matrix_format', 'Bayonet', 'Image_Stabilizer', 'color']
+    
     
     def klass( self ):
         return self.__class__.__name__
@@ -94,11 +98,17 @@ class lens(models.Model):
     stock = models.PositiveBigIntegerField()
     
     def __str__(self):
-        return f" Model:{self.category}, Name of object: {self.name} {self.color} "
+        return f"{self.category}/ {self.name}/ {self.type} "
     def klass( self ):
         return self.__class__.__name__
     def get_absolute_url(self):
         return reverse('Main:Lens_product', args=[self.id, self.klass()]  )
+    def attribute_cls(self):
+        return ['name','category','type','hand','created' ,'color']
+    def get_price(self):
+        return 'price'
+    def get_image(self):
+        return 'image.url'
     
 
 class IMG_FILES_LENS(models.Model):
@@ -109,16 +119,12 @@ class IMG_FILES_LENS(models.Model):
         return f"--OBJECT: {self.post}--"
     
 
-
-    
-    
-    
-    
 class tripods(models.Model):
     name = models.CharField(max_length=10, db_index=True)
     content = models.TextField(blank= True, max_length= 1000)
     color =  models.ForeignKey(Color, related_name="tripods", on_delete=models.DO_NOTHING)
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
+    hand = models.BooleanField(default=True)
     
     price = models.DecimalField(max_digits=10, decimal_places=2)
     
@@ -128,12 +134,14 @@ class tripods(models.Model):
     
     stock = models.PositiveBigIntegerField()
     def __str__(self):
-        return f"Tripod: {self.name}, {self.color}"
+        return f"{self.name}/ {self.color}"
     def klass( self ):
         return self.__class__.__name__
     def get_absolute_url(self):
         return reverse('Main:Tripods_product', args=[self.id, self.klass()]  )
-
+    def attribute_cls(self):
+        return ['name', 'color']
+    
 
 class IMG_FILES_TRIPODS(models.Model):
     post = models.ForeignKey(tripods, default=None, on_delete=models.DO_NOTHING)
@@ -156,8 +164,11 @@ class lightings(models.Model):
     is_published = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    hand = models.BooleanField(default=False)
     
     stock = models.PositiveBigIntegerField()
+    def attribute_cls(self):
+        return ['name', 'power']
     
     def __str__(self):
         return f"{self.name} "
@@ -180,6 +191,7 @@ class Binoculars(models.Model):
     material = models.CharField(max_length=30, db_index=True)
     range = models.CharField(max_length=30, db_index=True)
     color =  models.ForeignKey(Color, related_name="Binoculars", on_delete=models.DO_NOTHING)
+    hand = models.BooleanField(default=False)
     
     content = models.TextField(blank= True, max_length= 3000)
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
@@ -191,11 +203,12 @@ class Binoculars(models.Model):
     stock = models.PositiveBigIntegerField()
     
     def __str__(self):
-        return f"{self.name} "
+        return f"{self.name}/ {self.material} "
     
     def klass( self ):
         return self.__class__.__name__
-    
+    def attribute_cls(self):
+        return ['name','material']
     
     def get_absolute_url(self):
         return reverse('Main:binoculars_product', args=[self.id, self.klass()]  )

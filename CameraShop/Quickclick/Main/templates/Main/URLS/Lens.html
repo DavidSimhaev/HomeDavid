@@ -20,38 +20,36 @@
 
             <a href="{{l.get_absolute_url}}"><img src={{l.image.url}} height="170" style="max-width: 150px"></a>
             <div class = "description-text-product" >
-                
-            
             </div>
             <div class= "buttons-buy-info-pr">
-                <div>Category: {{l.category}}</div>
                 <div>Name: {%if l.name|length > 16 %} {{l.name|slice:"0:16"}}...{%else %}{{l.name}}{%endif%} 
                 </div>
-                
+                <div>Category: {{l.category}}</div>
+
                 <div>Type: {{l.type}}</div>
+                <div> Hand: {%if l.hand%} Usefull {%else%} Original {%endif%}</div>
 
                 <div>Date of publication: {{l.created}}</div>
                 <div>Color: {{l.color}}</div>
                 
-                <div class= "buttons-buy-info-pr-2">
-                    <div class= "pr-price" >Price: {{l.price}}$</div>
-                    
-                    {% if request.user.is_authenticated %}
-                        <form action="{% url 'Cart:cart_add' l.id %}" method='post' >
-                            
-                                {% csrf_token %}
-                                {{ form }}
-                                <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
-                            </form>
-                    {% else %}
-                        <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
-                    {% endif %}
-                    <div class="info-logo-pr"><button><h3><a href="{% url "Main:Lens_product" l.id l.klass %}">Info</a></h3></button></div>
-
-
-                </div>
+                
             </div>
         </div>
+    <div class = 'copyright'>                     
+        {% if request.user.is_authenticated %}
+            <form action="{% url 'Cart:cart_add' l.id %}" method='post' >
+                    {% csrf_token %}
+                    {{ form }}
+                    <div class= "buttons-buy-info-pr-2">
+                    <div class= "pr-price" >Price: {{l.price}}$</div>
+                    </div>
+                    <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
+                </form>
+        {% else %}
+            <div class= "pr-price" >Price: {{l.price}}$</div>
+            <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
+        {% endif %}
+        <div class="info-logo-pr"><button><h3><a href="{% url "Main:Lens_product" l.id l.klass %}">Info</a></h3></button></div> </div>
     </div>
     
 {% endfor %}

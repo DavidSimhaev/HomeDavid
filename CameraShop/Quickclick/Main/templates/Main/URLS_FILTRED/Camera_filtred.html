@@ -23,7 +23,15 @@
                     <div>Bayonet: {{c.Bayonet}}</div>
                     <div>Stabilizer: {{c.Image_Stabilizer}}</div>
                     <div>Color: {{c.color}}</div>
-                    <div class= "pr-price" >Price: {{c.price}}$</div>
+                
+                    
+                </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class = 'copyright'>
+            <div class= "pr-price" >Price: {{c.price}}$</div>
                     {% if request.user.is_authenticated %}
                         <form action="{% url 'Cart:cart_add' c.id %}" method='post' >
                             {% csrf_token %}
@@ -34,9 +42,8 @@
                         <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
                     {% endif %}
                     <div class="info-logo-pr"><button type="submit"><h3><a href="{% url "Main:Camers_product" c.id c.klass %}"> Info</a></h3></button></div>
-                </div>
-                </div>
-            </div>
+
+
         </div>
     </div>
     

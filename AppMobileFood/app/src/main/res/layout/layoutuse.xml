@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.floatingactionbutton.FloatingActionButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/custom_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="start"
+    android:layout_weight="1"
+    app:backgroundTint="#5900D8"
+    app:srcCompat="?attr/actionModeCloseDrawable"
+    app:tint="@android:color/white"
+    app:useCompatPadding="false" />
+

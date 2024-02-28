@@ -5,3 +5,5 @@ for i in t:
     if i[b].isdigit():
         print("yes")
     b +=1
+    
+    

@@ -2,20 +2,26 @@
 from .models import Order
 import smtplib
 from email.mime.text import MIMEText
-import os
-def order_created(order_id):
+
+def order_created(order_id, mail, cart):
     sender = "davidlung822@gmail.com"
     password = "bpvfadsexrgihbbg"
     order = Order.objects.get(id=order_id)
-    subject = f"Номер заказа: {order_id}"
-    message = f"Уважаемый(ая) {order.first_name}, \n\n Ваш заказ получен и мы приступаем к сборке. Номер заказа:{order_id}\n"
+    
+    message = f"Dear {order.first_name}, \n\nYour order has been received and we are starting the assembly. Order number:{order_id}\n\n"
+    message = message + "\nOrder Details:\n"
+    for elem in cart:
+        message+= "Product:"+ str(elem["product"]) +"\t" + "Unit price:" +"\t" + str(elem["price"]) + "\t" + "Quantity:" + str(elem["quantity"]) + "\n"
+    message += "\nThank you for choosing us!"
+    
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
+    
     try:
         server.login(sender, password)
         msg = MIMEText(message)
-        msg["Subject"] = "CLICK ME PLEASE"
-        server.sendmail(sender, "davidlunga822@gmail.com", msg.as_string())
+        msg["Subject"] = f"Successful Quickclick order confirmation. Number order {order_id}"
+        server.sendmail(sender, mail, msg.as_string())
         
         return 'The message was sent successfully'
     except Exception as _ex:

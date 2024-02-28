@@ -1,0 +1,120 @@
+{% extends "Main/base.html" %}
+{% block content %}
+
+{%load static%}
+{%load tegs_page%}
+
+{% if some_flag %}
+<meta http-equiv="refresh" content="0; #popup" />
+{%endif%}
+
+<div style="
+height: 500px;"> 
+    <div style="
+    background: #27273345;
+    padding-left: 81px;
+    font: 30;
+    color: #b3b3e0;
+    text-align: red;
+    font-size: 57px;
+    font-family: system-ui;
+" >About Us</div>
+
+    <div class = 'info-addres'>
+        <img src=  "{% static "Main/images/qeq.jpg" %}" height="350" style="border-radius: 60px;max-width: 350px;"></a>
+    
+    </div>
+    <div style="
+    color: #ffffff;
+    font-size: 28px;
+    padding-top: 63px;
+    padding-left: 466px;
+">
+        <div>
+            <div style="font-size: 50px;">Digital Camera Store</div>
+            <br>
+            Here you can choose a professional camera and evaluate its characteristics. And also to purchase additional equipment for professional shooting. We offer a 10% discount on more than 3,000 dollars
+        </div>
+    </div>
+</div>
+
+<div style="height: 465px;;background: #aa3ca105;/* padding-left: 81px; */font: 30;/* color: #b3b3e0; */text-align: red;font-size: 57px;/* font-family: system-ui; */">
+    <div class = 'info-addres'>
+    </div>
+    <div style="
+    color: #ffffff;
+    font-size: 28px;
+    padding-top: 63px;
+    
+">
+        <div style="    width: 465px;
+        float: left;
+        padding-left: 53px;
+        padding-top: 10px;
+
+    ">
+            <div style="font-size: 45px;">Don't know where to start? It doesn't matter!</div>
+            <br>
+            Our experts will help you make your choice and adjust it according to your search criteria
+        <div class="buy-logo-3"><button style="font-size: 14px;
+            margin-top: 16px;
+            width: 437px;" name="submit" ><h3> Make an appointment for a consultation </h3></button></div>
+
+        </div>
+        
+        <div style="padding-left: 536px;">
+            <img src=  "{% static "Main/images/qeq2.jpg" %}" height="350" style="border-radius: 60px;max-width: 350px;"></a>
+        </div>
+        
+    </div>
+</div>
+
+<div style="height: 465px;
+background: #74718417;
+/* padding-left: 81px; */
+font: 30;
+/* color: #b3b3e0; */
+text-align: red;
+font-size: 57px;">
+    <div class = 'info-addres'>
+    </div>
+    <div style="
+    color: #ffffff;
+    font-size: 28px;
+    padding-top: 63px;
+    
+">
+        <div style="padding-left: 55px; float: left;">
+            <img src=  "{% static "Main/images/subway.webp" %}" height="350" style="border-radius: 60px;max-width: 350px;"></a>
+        </div>
+        <div style="
+    
+        color: #ffffff;
+        font-size: 28px;
+        padding-top: 29px;
+        padding-left: 460px;
+    
+">
+        <div>
+            <div style="font-size: 50px;">Address of stay</div>
+            <br>
+            Our main branch is located opposite 23 Wall Street station, London. <br>Aria Shopping Center, building B, 4th floor.
+        </div>
+    </div>
+        
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+{% block left-content-ctg %}
+<div class= "label-categ-head">
+    <h1>Category</h1>
+</div>
+<div class ="block-label-select-category">
+  <div class= "Select-category"> There are no categories in this section </div>
+</div>
+{% endblock left-content-ctg %}

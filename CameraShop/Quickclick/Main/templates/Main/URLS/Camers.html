@@ -15,32 +15,36 @@
             <a href="{{c.get_absolute_url}}">
             <img src={{c.image.url}} height="170" style="max-width: 150px"></a>
             <div class = "description-text-product" >
-                <div>
                 <div class= "buttons-buy-info-pr">
-                    <div>Brand: {{c.firm}}</div>
                     <div>Name: {%if c.name|length > 16 %} {{c.name|slice:"0:16"}}...{%else %}{{c.name}}{%endif%}</div>
+                    <div>Brand: {{c.firm}}</div>
                     <div style="font-size: 15px;">Type: {{c.type}}</div>
+                    <div> Hand: {%if c.hand%} Usefull {%else%} Original {%endif%}</div>
+                    
                     <div>Matrix: {{c.Matrix_format}}</div>
                     <div>Bayonet: {{c.Bayonet}}</div>
                     <div>Stabilizer: {{c.Image_Stabilizer}}</div>
                     <div>Color: {{c.color}}</div>
-                    <div class= "pr-price" >Price: {{c.price}}$</div>
-
-                    {% if request.user.is_authenticated %}
-                        <form class = "text-form-in" action="{% url 'Cart:cart_add' c.id %}" method='post' >
-                            {% csrf_token %}
-                            {{ form }}
-                            <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
-                        </form>
-                    {% else %}
-                        <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
-                    {% endif %}
-                    <div class="info-logo-pr"><button type="submit"><h3><a href="{% url "Main:Camers_product" c.id c.klass %}"> Info</a></h3></button></div>
-                
-                </div>
                 </div>
             </div>
         </div>
+        <div class="copyright">
+            {% if request.user.is_authenticated %}
+                <form class = "text-form-in" action="{% url 'Cart:cart_add' c.id %}" method='post' >
+                    {% csrf_token %}
+                    {{ form }}
+                    <div class= "buttons-buy-info-pr-2">
+                        <div class= "pr-price" >Price: {{c.price}}$</div>
+                    </div>
+                    <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
+                </form>
+            {% else %}
+                <div class= "pr-price" >Price: {{c.price}}$</div>
+                <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
+            {% endif %}
+                <div class="info-logo-pr"><button type="submit"><h3><a href="{% url "Main:Camers_product" c.id c.klass %}"> Info</a></h3></button></div>
+        </div>
+       
     </div>
     
 {% endfor %}
@@ -101,9 +105,6 @@
                     </select>
                 </form>
                 
-                
-                
-                
                 <!-- Достать аргумент по клику затем создать событие связывающие этот аргумент с другими элементами следующего списка -->
             </div>
             <div class = "select-ctg">
@@ -161,8 +162,6 @@
                     {% endwith %}
                 </select> 
             </div>
-            
-            
             
             <script>
                 var languagesSelect = myForm.language;

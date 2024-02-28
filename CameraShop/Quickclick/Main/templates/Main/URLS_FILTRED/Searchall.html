@@ -1,0 +1,90 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+{%load static%}
+{%load tegs_page%}
+
+{% if some_flag %}
+<meta http-equiv="refresh" content="0; #popup" />
+{%endif%}
+
+
+
+{% for c, form, keys in serchobject%}
+    <div class = "block-product">
+        <div class = "description-product-block">
+            <a href="{{c.get_absolute_url}}"><img src={{c.image.url}} height="170" style="max-width: 150px"></a>
+        <div class = "description-text-product" >
+        </div>
+        <div class= "buttons-buy-info-pr">
+            Name: {{c.name}}
+            {% if c.klass == 'Camera' %}<br>
+            Brand: {{c.firm}}<br>
+            Type: {{c.type}}<br>
+            Matrix: {{c.Matrix_format}}<br>
+            Bayonet: {{c.Bayonet}}<br>
+            Stabilizer: {{c.Image_Stabilizer}}<br>
+            Color: {{c.color}}<br>
+            <div style="float: left;">Hand : </div> {%if c.hand%} <div style="color: rosybrown;">Usefull</div> {%else%} <div style="color: green;"> Original</div> {%endif%}
+            {% endif %}
+            {% if c.klass == 'lens' %}
+            Category: {{c.category}}<br>
+            Type: {{c.type}}<br>
+            Date of publication: {{c.created}}<br>
+            Color: {{c.color}}<br>
+            <div style="float: left;">Hand : </div> {%if c.hand%} <div style="color: rosybrown;">Usefull</div> {%else%} <div style="color: green;"> Original</div> {%endif%}
+            {%endif%}
+            {% if c.klass == 'tripods' %}
+            Color: {{c.color}}<br>
+            Date of publication: {{c.created}}<br>
+            <div style="float: left;">Hand : </div> {%if c.hand%} <div style="color: rosybrown;">Usefull</div> {%else%} <div style="color: green;"> Original</div> {%endif%}
+            {% endif %}
+            {% if c.klass == 'lightings' %}
+            Time power: {{c.time_power}}<br>
+            Power: {{c.power}}<br>
+            Charging time: {{c.Charging_time}}<br>
+            Color: {{c.color}}<br>
+            Date of publication: {{c.created}}<br>
+            <div style="float: left;">Hand : </div> {%if c.hand%} <div style="color: rosybrown;">Usefull</div> {%else%} <div style="color: green;"> Original</div> {%endif%}
+            {% endif %}
+            {% if c.klass == 'Binoculars' %}
+            Material: {{c.material}}
+            Range: {{c.range}}<br>
+            Color: {{c.color}}<br>
+            <div style="float: left;">Hand : </div> {%if c.hand%} <div style="color: rosybrown;">Usefull</div> {%else%} <div style="color: green;"> Original</div> {%endif%}
+            {% endif %}
+        </div>
+        </div>
+        <div class="copyright">
+            {% if request.user.is_authenticated %}
+                <form class = "text-form-in" action="{% url 'Cart:cart_add' c.id %}" method='post' >
+                    {% csrf_token %}
+                    {{ form }}
+                    <div class= "buttons-buy-info-pr-2">
+                        <div class= "pr-price" >Price: {{c.price}}$</div>
+                    </div>
+                    <div class="buy-logo"><button name="submit" ><h3> Into a basket </h3></button></div>
+                </form>
+            {% else %}
+                <div class= "pr-price" >Price: {{c.price}}$</div>
+                <div class="buy-logo"><button name="submit" ><h3><a href= "#popup-2">Into a basket</a></h3></button></div>
+            {% endif %}
+                <div class="info-logo-pr"><button type="submit"><h3><a href="{% url "Main:Camers_product" c.id c.klass %}"> Info</a></h3></button></div>
+        </div>
+        
+    </div>
+    
+{% endfor %}
+<div class="m" style="--m: {{ line }}" > <!-- ТАКИМ ОБРАЗОМ МОЖНО ПЕРЕДАТЬ АРГУМЕНТ В CSS ПОЖАЛУЙСТА ЗАПОМНИТЬ!-->
+</div>
+
+{% endblock %}
+
+{% block left-content-ctg %}
+<div class= "label-categ-head">
+    <h1>Category</h1>
+</div>
+<div class ="block-label-select-category">
+  <div class= "Select-category"> There are no categories in this section </div>
+</div>
+{% endblock left-content-ctg %}

@@ -51,13 +51,13 @@ input[name=r] {
 }
 
 .slides {
-  width: 400%;
+  width: 300%;
   height: 100%;
   display: flex;
 }
 
 .slide {
-  width: 25%;
+  width: 33%;
   transition: all 0.6s ease;
 }
 
@@ -71,15 +71,11 @@ input[name=r] {
 }
 
 #r2:checked ~ .s1 {
-  margin-left: -25%;
+  margin-left: -33%;
 }
 
 #r3:checked ~ .s1 {
-  margin-left: -50%;
-}
-
-#r4:checked ~ .s1 {
-  margin-left: -75%;
+  margin-left: -66%;
 }
 
 .block-right-pr {

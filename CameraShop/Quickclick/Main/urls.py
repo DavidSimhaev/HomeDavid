@@ -26,9 +26,12 @@ urlpatterns = [
     path("Change_process-2/", views.Change_Profile_Last, name = "Change_Last"),
     path("Change_process-3/", views.Change_Profile_Email, name = "Change_Email"),
     path("Change_process-4/", views.Change_Profile_Foto, name = "Change_Foto"),
-   
     path("ErrorNoGetData", views.ErrorGetData, name="ErrorGetData"),
+    path('AboutUs/', views.AboutUs, name='AboutUs'),
+    path(r'^SearchAll/', views.SearchAll, name='SearchAll'),
+    
     path('logout/', views.logout_view, name='logout'),
+    
     # Home Page
 ]
 #url(r'^result/(?P<result>[^\/]*)/$', views.result, name='result'),

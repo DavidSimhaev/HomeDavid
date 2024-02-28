@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Фоновый рисунок для нажатия кнопки -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#E82B2B" /> <!-- Цвет фона для нажатия -->
+            <corners android:radius="16dp" /> <!-- Радиус скругления углов -->
+        </shape>
+    </item>
+    <!-- Фоновый рисунок для обычного состояния кнопки -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#D12121" /> <!-- Цвет фона для обычного состояния -->
+            <corners android:radius="16dp" /> <!-- Радиус скругления углов -->
+        </shape>
+    </item>
+</selector>

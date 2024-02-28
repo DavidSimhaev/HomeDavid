@@ -14,15 +14,21 @@
     <div class = "block-product">
         <div class = "description-product-block">
 
-            <a href="{{c.get_absolute_url}}"><img src={{B.image.url}} height="170" style="max-width: 150px"></a>
+            <a href="{{B.get_absolute_url}}"><img src={{B.image.url}} height="170" style="max-width: 150px"></a>
             <div class = "description-text-product" >
                 <div class= "buttons-buy-info-pr">
                 <div>Name: {{B.name}}</div>
                 <div>Material: {{B.material}}</div>
                 <div>Range: {{B.range}}</div>
                 <div>Date of publication: {{B.created}}</div>
-                <div class= "buttons-buy-info-pr-5">
-                    <div class= "pr-price" >Price: {{B.price}}$</div>
+                
+                </div>
+                
+            </div>
+        </div>
+
+        <div class = 'copyright'> 
+            <div class= "pr-price" >Price: {{B.price}}$</div>
                     {% if request.user.is_authenticated %}
                         <form action="{% url 'Cart:cart_add' B.id %}" method='post' >
                             
@@ -35,12 +41,9 @@
                     {% endif %}
                     
                     <div class="info-logo-pr"><button type="submit"><h3><a href="{% url "Main:binoculars_product" B.id B.klass %}"> Info</a></h3></button></div>
-                
-                </div>
-                </div>
-                
-            </div>
         </div>
+
+
     </div>
     
 {% endfor %}

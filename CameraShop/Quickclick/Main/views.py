@@ -1,5 +1,6 @@
 from mixer.backend.django import mixer
 from django.contrib.auth.models import User
+import ast
 user = mixer.blend(User)
 from .superclass import Contener
 from django.shortcuts import render, redirect, get_object_or_404
@@ -147,8 +148,6 @@ def Camers(request):
     if CONTENT_FLAG == True:
         content['some_flag'] = True
         CONTENT_FLAG = False
-    
-        
         
     return render(request, "Main/URLS/Camers.html", content )
   
@@ -1010,7 +1009,69 @@ def Change_Profile_Foto(request):
 
     return render(request, "Main/URLS_3/Change_foto.html", mapper)
 
- 
-    
 def ErrorGetData(request):
     return render(request, "Main/product/error.html")    
+
+
+def AboutUs(request):
+    return render(request, 'Main/URLS_3/AboutUs.html')
+
+def SearchAll(request):
+    
+    
+    result = []
+    __search = request.GET.get('search').lower()
+    for cls in [Camera,lens, tripods, lightings, Binoculars]:
+        for obj in cls.objects.all():
+            if __search in str(obj).lower():
+                result.append(obj)
+
+    line = (len(result)//4+1)
+    if len(result) % 4 == 0:
+        line = line -1
+    
+    quant = []
+    cart_product_form = []
+    for elem in result:    
+        if elem.stock < 21:
+            pquant = elem.stock + 1
+        
+            cart_product_form.append(CartAddProductsForm(pquant=pquant))
+        else:
+            pquant = 21
+            cart_product_form.append(CartAddProductsForm())
+            
+        quant.append(Cart(request).productq(str(elem.id), elem.klass()))
+    
+    if result == []:
+        mylist = False
+    else:
+        
+        dictatr ={}
+        for index in range(len(result)):
+            dictatr[str(result[index])] = {}
+            for atr in result[index].attribute_cls():
+                dictatr[str(result[index])][atr] =  getattr(result[index], atr)
+        
+    alist= []
+    blist = []
+    for key in dictatr:
+        alist.append(dictatr[key])
+        blist.append(dictatr[key].keys())
+    le= str(blist).replace('dict_keys(', '').replace(')','')
+    res = ast.literal_eval(le)
+    
+    mylist = zip(result, cart_product_form, res)
+    mapper = {'serchobject': mylist,
+              "line": 440* line,
+               "quant": quant,
+               
+               
+              }
+    global CONTENT_FLAG
+    if CONTENT_FLAG == True:
+        mapper['some_flag'] = True
+        CONTENT_FLAG = False
+    
+    return render(request, 'Main/URLS_FILTRED/Searchall.html', mapper)
+  
