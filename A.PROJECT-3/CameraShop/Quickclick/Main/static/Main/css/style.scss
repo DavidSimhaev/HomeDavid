@@ -1,0 +1,194 @@
+
+        .fitst-content{
+            width: 100%;
+            height: 450px;
+        
+        }
+        
+        .block-left-pr{
+            width: 59%;
+            height: 450px;
+            float: left;
+            
+        }
+        
+        .slider{
+            margin-left: 14px;
+            width: 490px;
+            height: 400px;
+            border: 3px solid #242424;
+            overflow: hidden;
+        }
+        
+        .middle {
+            position: absolute;
+            margin-top: 2%;
+        }
+        
+        
+        
+        
+        
+        .navigation-1{
+            position: absolute;
+            bottom: 2%;
+            left: 33%;
+            display: flex;
+        }
+        
+        
+        .bar{
+            height: 8px;
+            width: 30px;
+            margin: 6px;
+            cursor: pointer;
+            background-color: rgb(202, 202, 202);
+            opacity: .5;
+            border-radius: 10px;
+            transition: all .4s ease;
+        }
+        
+        .bar:hover {
+            opacity: 0.8;
+            transform:scale(1,1);
+        }
+        
+        input[name="r"] {
+            position: absolute;
+            visibility: hidden;
+        }
+        
+        .slides{
+            width: 000%;
+            height: 100%;
+            display: flex;
+        }
+        
+        .slide{
+            width: 1%;
+            transition: all .6s ease;
+        }
+        
+        .slide img{
+            width: 100%;
+            height: 100%;
+        }
+        
+        @for $i from 1 through 0{
+            #r#{$i}:checked ~ .s1{
+            margin-left: -$i*1%+1%;
+            }
+        }
+
+
+
+        
+        .block-right-pr{
+            position: relative;
+            float: left;
+            padding-top: 15px;
+            height: 415px;
+            width: 365px;
+        
+        }
+        
+        .Name-pr{
+            font: 20px Verdana;
+            color: #b3b3e0;
+        }
+        .Description{
+            color: #e3e3f3;;
+            
+            
+        }
+        
+        
+        .info-pr h1{
+            padding-top: 10px;
+            font: 18px Verdana;
+            color: #c6c6e5;
+        
+        }
+        .line-space{
+            margin-top: 2px;
+            float: left;
+            height: 1px;
+            width: 180px;
+            
+            background: linear-gradient(90deg, transparent, #2196f3);
+        }
+        .line-space-2{
+            margin-top: 2px;
+            float: left;
+            height: 1px;
+            width: 180px;
+            
+            background: linear-gradient(270deg, transparent, #2196f3);
+        }
+        
+        .Rating-pr a{
+            text-decoration: none;  
+            letter-spacing: 2px;
+        }
+        
+        .buy-block-product{
+            width: 365px;
+            position: absolute;
+            bottom: 0;
+        }
+        
+        .buy-block-product form label{
+            color: #b3b3e0;
+            padding-left: 50px;
+        }
+        
+        .buy-block-product-2{
+            margin-top: 140px;
+        }
+        
+        .pr-price-2{
+            float: left;
+            color:#bbb2bb;
+            font-size: 24px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin-top: 28px;	
+            margin-left: 10px;
+        }
+        
+        
+        .second-content{
+            width: 890px;
+            height: 600px;
+        
+        }
+        .Product-Description{
+            float: left;
+            margin-left: 14px;
+            width: 890px;
+            height: 500px;
+        
+        }
+        
+        
+        
+        .Description-pr{
+            margin-left: 10px;
+            width: 870px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, rgb(29, 29, 43) 0%, rgb(18, 18, 21) 100%);
+            height: 500px;
+        }
+        
+        .Description-label{
+            margin-left: 10px;
+            padding-top: 20px;
+            color: #b3b3e0;
+            font-size: 25px;
+        }
+        .Description-2{
+            margin-left: 10px;
+            color: #a0a0b7;;
+        }
+        
+        
+        

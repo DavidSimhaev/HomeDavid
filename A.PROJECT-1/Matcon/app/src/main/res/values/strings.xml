@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">מתכון</string>
+    <string name="navigation_drawer_open">מגירת ניווט פתוחה</string>
+    <string name="navigation_drawer_close">סגור את מגירת הניווט</string>
+    <string name="nav_header_title">מתכון</string>
+    <string name="nav_header_subtitle">לינק לאתר דוגמה</string>
+    <string name="nav_header_desc">כותרת ניווט</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="mainlabel">בחר או הוסף מתכון להמשך</string>
+    <string name="filetext">העלה תמונה:</string>
+    <string name="strform">מלא את הטופס</string>
+    <string name="matcon">מתכונים</string>
+    <string name="test_name">name-test</string>
+    <string name="data_save">נתונים שהועלו בהצלחה</string>
+    <string name="data_del">הרשומה נמחקה בהצלחה</string>
+    <string name="data_change_get">רשומה השתנה בהצלחה</string>
+
+    <string name="test5"> Test </string>
+    <string name="name_rec">שם מתכון:</string>
+    <string name="ditail_rec">תיאור המתכון:</string>
+
+    <string name="menu_home">בית</string>
+    <string name="menu_gallery">מתכונים</string>
+    <string name="menu_slideshow">יצירת מתכון</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Wallet activity -->
+    <string name="title_activity_detail_object"> </string>
+    <string name="add_to_google_wallet_button_content_description">Add to Google Wallet</string>
+    <string name="sample_pass" translatable="false">Sample Pass</string>
+
+    <string name="send" translatable="false">לשתף</string>
+
+    <string name="google_wallet_status_unavailable" translatable="false">Unfortunately, Google
+        Wallet is not available on this phone.
+    </string>
+    <string name="add_google_wallet_success" translatable="false">The pass was added successfully!
+    </string>
+    <string name="add_google_wallet_cancelled" translatable="false">The user cancelled adding the
+        pass to Google Wallet.
+    </string>
+    <string name="add_google_wallet_unknown_error" translatable="false">An unknown error occurred
+        when adding pass to Google Wallet.
+    </string>
+    <string name="title_activity_deletedata">deletedata</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>
