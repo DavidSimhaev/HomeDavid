@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+{% load static %}
+<html>
+	<head>
+		<title>Enjoy Dead Sea</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href= "{% static "Main/css/main.css" %}?ver=8" />
+		<noscript><link rel="stylesheet" href="{% static "Main/css/noscript.css"%}?ver=8" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<!-- Note: The "styleN" class below should match that of the banner element. -->
+					<header id="header" class="alt">
+						<a href="{% url "Main:Main"%}" class="logo"><img src="{% static "Main/images/Enjoy-Dead-sea.png"%}"></strong></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="{% url "Main:Main"%}">Home</a></li>
+							<li><a href="{% url "Main:FunDay"%}">Current events</a></li>
+							<li><a href="generic.html">Organization</a></li>
+							<li><a href="elements.html">Fun Days</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="#" class="button primary fit">Get Started</a></li>
+							<li><a href="#" class="button fit">Log In</a></li>
+						</ul>
+					</nav>
+
+				<!-- Banner -->
+				<!-- Note: The "styleN" class below should match that of the header element. -->
+					<section id="banner" class="style2">
+						<div class="inner">
+							<span class="image">
+								<img src="{% static "Main/images/deas.jpg"%}" alt="" />
+							</span>
+							<header class="major">
+								<h1>Landing</h1>
+							</header>
+							<div class="content">
+								<p>Lorem ipsum dolor sit amet nullam consequat<br />
+								sed veroeros. tempus adipiscing nulla.</p>
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									
+									<p>
+										<header class="major">
+											<h2>Contact information</h2>
+										</header>
+									<div class="table-wrapper">
+										<h4 id = 'Date' style="display: none">{{Date}}</h4>
+										<h4 id = 'date_lab' style="padding-left: 10px;">{{Date_Label}}</h4>
+										<table class="fl-table">
+											<thead>
+											<tr>
+												<th>First Name</th>
+												<th>Last name</th>
+												<th>Mail</th>
+												<th>Passport</th>
+												<th>Number</th>
+												
+											</tr>
+											</thead>
+											<tbody>
+											<tr>
+												<td id = 'name_ID'>{{name}}</td>
+												<td id = 'last_ID'>{{last}}</td>
+												<td id = 'mail_ID'>{{mail}}</td>
+												<td id = 'passport_id'>{{passport_id}}</td>
+												<th id = 'phone_ID'>{{numberID}}</th>
+											</tr>
+											<tbody>
+										</table>
+										
+										<header class="major">
+											<h2>Order Information</h2>
+										</header>
+										<table class="fl-table">
+											<thead>
+											<tr>
+												<th>People</th>
+												<th>Meal</th>
+												<th>Massage</th>
+												<th>Children</th>
+												<th>Price</th>
+											</tr>
+											</thead>
+											<tbody>
+											<tr>
+												<td id = 'people_ID'>{{people}}</td>
+												<td id = 'food_ID'>{{meal}}</td>
+												<td id = 'massage_ID'>{{massage}} minutes</td>
+												<td id = 'children_ID'>{{children}}</td>
+												<td id = 'price_ID'>{{price}} ₪</td>
+											</tr>
+											<tbody>
+										</table>
+											<!--<button class = "button-buy-all" >Buy</button>-->
+										<div style="text-align: center;"> 
+											<button id = 'sbttButton' onclick="submit()" >Confirm</button>
+										</div>
+										<script>
+											var inputElement = document.getElementById('sbttButton');
+											inputElement.addEventListener("click", function() {
+												var select1 = document.getElementById('food_ID').textContent;
+												var select2 = document.getElementById('massage_ID').textContent;
+												var select3 = document.getElementById('people_ID').textContent;
+												var select4 = document.getElementById('children_ID').textContent;
+												var name_var = document.getElementById('name_ID').textContent;
+												var last_var = document.getElementById('last_ID').textContent;
+												var mail_var = document.getElementById('mail_ID').textContent;
+												var date_lab = document.getElementById('date_lab').textContent;
+												var Date = document.getElementById('Date').textContent;
+
+												var phone_ID = document.getElementById('phone_ID').textContent;
+												var price_ID = document.getElementById('price_ID').textContent;
+												alert(price_ID)
+												window.location.href = "{% url 'Main:PaymentProcces' %}" + 
+												"?select1="+ select1 
+												+"&select2=" + select2 
+												+"&select3=" + select3 
+												+"&select4=" + select4 
+												+ "&id_name=" + name_var 
+												+"&id_last=" + last_var
+												+ "&mail_var=" + mail_var 
+												+"&date_lab=" + date_lab
+												+"&Date=" + Date
+												+"&numberID=" +phone_ID
+												+"&price_ID=" +price_ID
+												+"&passport_id=" + passport_id
+												
+												
+												
+											});
+										</script>
+
+
+									</div>
+
+
+
+									</p>
+										<div id = 'ctnID' class = 'ctn-calendar' style="text-align: center;">
+										
+										</div>
+										
+								</div>
+							</section>
+							
+
+						<!-- Two -->
+							
+
+						<!-- Three -->
+						
+					</div>
+
+				<!-- Contact -->
+					
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+		
+
+			<script src="{% static "Main/js/jquery.min.js"%}"></script>
+			<script src="{% static "Main/js/jquery.scrolly.min.js"%}"></script>
+			<script src="{% static "Main/js/jquery.scrollex.min.js"%}"></script>
+			<script src="{% static "Main/js/browser.min.js"%}"></script>
+			<script src="{% static "Main/js/breakpoints.min.js"%}"></script>
+			<script src="{% static "Main/js/util.js"%}"></script>
+			<script src="{% static "Main/js/main.js"%}"></script>
+
+	</body>
+</html>

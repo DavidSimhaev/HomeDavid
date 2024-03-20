@@ -27,16 +27,17 @@ body{
 }
 
 .wrapp-head-line{
-	background: url(../images/head/head.png) repeat-x;
-	padding-left: 120px;
-	width: 1450px;
-	height: 150px;
-	margin: 0 auto;
+	display: flex;
+    justify-content: center;
+    background: url(../images/head/head.png) repeat-x;
+    height: 150px;
+    margin: 0 auto;
 }
 
-#head-menu{
+.head-menu{
+	transition: 0.90s;
 	height: 55px;
-	background: url(../images/head-menu-v5.png) repeat-x;
+	background-image: linear-gradient(to bottom, #0c0c11, #222633);
 	
 }
 
@@ -45,26 +46,24 @@ body{
 }
 
 .navigation{
-	width: 1200px;
 	height: 55px;
 	margin: 0 auto;
 
-	background: url(../images/head-menu-v5.png) repeat-x;
 	
 }
 
 .top-menu{
-	width: 900px;
 	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
 	height: 55px;
-	padding-left: 63px;
-	float: left;
-
+	justify-content: center;
 }
 
 .top-menu li{
 	float: left;
-	
+	cursor: pointer;
 }
 
 
@@ -145,10 +144,10 @@ body{
 
 
 .search{
-	width: 175px;
-	height: 40px ;
-	margin-left: 900px ;
-	padding-top: 13px;
+	padding-left: 38px;
+    padding-top: 18px;
+    height: 55px;
+    cursor: default;
 }
 
 .search-form{
@@ -156,7 +155,6 @@ body{
 	height: 25px;
 	border:  1px solid #000000;
 	padding-left: 20px;
-	margin-top: -41px
 }
 
 
@@ -168,11 +166,10 @@ body{
 
 
 .logo{
-	margin-left: 115px;
-	width: 366px;
-	height: 149px;
-	background: url(../images/logo.png) no-repeat;
-	float: left;
+		width: 351px;
+		height: 149px;
+		background: url(../images/logo.png) no-repeat;
+		float: left;
 }
 
 
@@ -181,11 +178,11 @@ body{
 
 
 .info-contact{
-	
 	float: left;
-	font: 18px Verdana;
-	margin-left: 30px;
-	margin-top: 50px;
+    font: 18px Verdana;
+    /* margin-left: 30px; */
+    padding-top: 50px;
+	padding-left: 11px;
 }
 
 .info-contact h5{
@@ -197,9 +194,10 @@ body{
 
 .info-contact-2{
 	float: left;
-	margin-left: 30px;
-	margin-top: 50px;
-	font: 18px Verdana;	
+	padding-right: 20px;
+    padding-left: 30px;
+	padding-top: 50px;
+    font: 18px Verdana;
 }
 
 .info-contact-2 h5{
@@ -210,11 +208,11 @@ body{
 
 .logo-phone{
 	float: left;
-	margin-top: 60px;
-	margin-left: 15px;
-	width: 50px;
-	height: 50px;
-	background: url(../images/logo_phone.png) no-repeat;
+    margin-top: 60px;
+    /* padding-left: 15px; */
+    width: 50px;
+    height: 50px;
+    background: url(../images/logo_phone.png) no-repeat;
 }
 
 .logo-phone:hover{
@@ -226,11 +224,11 @@ body{
 
 .logo-telegram{
 	float: left;
-	margin-top: 60px;
-	margin-left: 15px;
-	width: 50px;
-	height: 50px;
-	background: url(../images/telegram-logo.png) no-repeat;
+    margin-top: 60px;
+    /* margin-left: 15px; */
+    width: 50px;
+    height: 50px;
+    background: url(../images/telegram-logo.png) no-repeat;
 }
 
 .logo-telegram:hover{
@@ -240,13 +238,17 @@ body{
 	transition-delay: 0,25;
 }
 
+.text-info-about-site{
+
+	font-size: 14px;
+}
 .logo-facebook{
 	float: left;
-	margin-top: 60px;
-	margin-left: 15px;
-	width: 50px;
-	height: 50px;
-	background: url(../images/logo-facebook.png) no-repeat;
+    margin-top: 60px;
+    /* margin-left: 15px; */
+    width: 50px;
+    height: 50px;
+    background: url(../images/logo-facebook.png) no-repeat;
 }
 
 .logo-facebook:hover{
@@ -260,14 +262,14 @@ body{
 
 
 .all_wrap{
-	margin: 0 auto;
-	width: 1450px;
+	padding: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }
 
 #right-sidebar{
-	width: 916px;
 	margin-top: 15px;
-	margin-left: 185px;
 	float: left;
 	
 }
@@ -327,7 +329,7 @@ button {
 	cursor: pointer;
 }
 
-#left-sidebar{
+.left-sidebar{
 	width: 215px;
 	margin-top: 15px;
 	margin-left: 12px;
@@ -794,6 +796,8 @@ button {
 .miksher{
 	width: 93%;
 }
+
+
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     input[type='range'] {
       overflow: hidden;
@@ -1055,13 +1059,294 @@ button {
 }
 
 .search-img{
-	margin-left: 1212px;
-    margin-top: -37px;
+	margin-left: 12px;
+    margin-top: 12px;
     width: 40px;
-    height: 70px;
+    height: 55px;
     background: url(../images/serch-img-2.png) no-repeat;
-	cursor:pointer;
+    cursor: pointer;
 }
+
+.text-label-about-us{
+  
+	color: #ffffff;
+	font-size: 28px;
+	padding-top: 63px;
+	padding-left: 466px;
+  
+  }
+
+@media (max-width: 1176px) {
+	.info-contact{
+		display: none;
+	}
+}
+
+@media (max-width: 1100px){
+
+
+.block-content-top {
+	width: 815px;
+}
+
+.block-content-center{
+	width: 815px;
+}
+.block-content-botton{
+	width: 815px;
+}
+
+}
+.img-resize-t{
+	border-radius: 60px;
+	max-width: 370px;
+}
+.pll{
+	padding-left: 536px;
+}
+.btn-call{
+		
+	font-size: 14px;
+	margin-top: 16px;
+	width: 437px;
+}
+
+.text-label-about-us-2{
+	width: 390px;
+    float: left;
+    padding-left: 53px;
+    padding-top: 10px;
+}
+
+
+.label-about-stan{
+	font-size: 50px;
+}
+@media (max-width: 870px){
+.text-info-about-site{
+	font-size: 13px;
+	}
+}
+@media (max-width: 847px){
+	.text-info-about-site{
+		font-size: 12px;
+		}
+	.label-about-stan{
+		font-size: 44px;
+	}
+	.text-label-about-us{
+		font-size: 23px;
+
+
+	}
+	.btn-call{
+		
+		font-size: 14px;
+		margin-top: 16px;
+		width: 353px;
+	}
+	.img-resize-t{
+		border-radius: 60px;
+		max-width: 350px;
+	}
+	
+	
+}
+
+
+@media (max-width: 825px){
+	
+	
+	.text-info-about-site{
+		font-size: 10;
+		}
+	
+	.block-content-top {
+		width: 740px;
+	}
+	
+	.block-content-center{
+		width: 740px;
+	}
+	.block-content-botton{
+		width: 740px;
+	}
+	
+	}
+@media (max-width: 825px){
+	.text-info-about-site{
+		display: none;
+		}
+	}
+
+
+@media (max-width: 1100px){
+	.btn-call {
+    font-size: 14px;
+    margin-top: 16px;
+    width: 367px;
+}
+	.pll{
+		padding-left: 453px;
+	}
+	/* Скрыть список при ширине окна меньше 400px */
+.search {
+	display: none;
+}
+.search-img {
+	display: none;
+	}
+
+.left-sidebar {
+	display: none;
+	}
+}
+
+
+@media (max-width: 752px){
+
+	.block-content-top {
+		width: 660px;
+	}
+	
+	.block-content-center{
+		width: 660px;
+	}
+	.block-content-botton{
+		width: 660px;
+	}
+	
+	}
+
+@media (max-width: 580px){
+	.logo-facebook{
+		display: none;
+		}
+	}
+
+	
+
+@media (max-width: 580px){
+	.logo-telegram{
+		display: none;
+		}
+	}
+
+
+@media (max-width: 450px){
+.logo-phone{
+	display: none;
+	}
+}
+@media (max-width: 410px){
+	.logo{
+		background-size: 320px;
+		}
+	}
+	@media (max-width: 360px){
+		.logo{
+			background-size: 220px;
+			}
+		}
+
+	/* Скрыть список при ширине окна меньше 400px */
+.last {
+	display: none;
+}
+
+@media (max-width: 650px){
+
+	.block-content-top {
+		width: 430px;
+	}
+	
+	.block-content-center{
+		width: 430px;
+	}
+	.block-content-botton{
+		width: 430px;
+	}
+
+
+
+}
+
+	/* Скрыть список при ширине окна меньше 400px */
+.last {
+	display: none;
+}
+
+
+@media (max-width: 625px){
+	/* Скрыть список при ширине окна меньше 400px */
+.item_menu {
+	display: none;
+}
+.top-menu {
+	padding: 0;
+	margin: 0;
+	display: "flex";
+	height: 55px;
+	padding: 0;
+	margin: 0;
+	display: "flex";
+	height: 55px;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.menu-logo-lines {
+	height: 55px;
+    background: url(../images/menu_logo_mob_v.3.png) no-repeat;
+	cursor: pointer;
+}
+
+.menu-logo-lines:hover,
+.menu-logo-lines.hovered {
+	transition: 0.90s;
+	background: url(../images/menu_logo_mob_v.1.png) no-repeat;	
+	background-position: center;
+	cursor: pointer;
+}
+
+
+.menu-logo-lines:not(:hover), .menu-logo-lines.clicked {
+	transition: 1s ease;
+	transition: 0.90s;
+
+}
+
+.menu-logo-lines.clicked {
+	transition: 0.90s;
+
+	/* Ваши стили для кнопки в состоянии 'clicked' */
+	background: url(../images/menu_logo_mob_v.1.png) no-repeat;
+	background-position: center;
+	cursor: pointer;
+  }
+  
+  .menu-logo-lines.clicked:hover {
+	/* Ваши стили для кнопки в состоянии 'clicked' при наведении */
+	background: url(../images/menu_logo_mob_v.1.png) no-repeat;
+	background-position: center;
+	cursor: pointer;
+  }
+  
+
+.head-size-act{
+	height: 460px;
+	transition: 0.90s;
+
+}
+.show-menu {
+	transition: 0.90s;
+	display: block;
+	float: none;
+}
+
+}
+
+
 
 .search-img:hover{
 	transition: 0.90s;

@@ -134,9 +134,9 @@ def Camers(request):
             mylist = False
     else:
         mylist = zip(product, cart_product_form)
-    
     content = {"Camers":mylist, 
                "line": 440* line,
+               'len_prod': len(product),
                "quant": quant,
                "category_camera": category_camera.keys(),
                "category_camera_spec": category_camera_spec.keys(), 
@@ -310,7 +310,11 @@ def Camers_filtred(request):
             mylist = zip(result, cart_product_form)
             
         content = {"Camers":mylist, 
+                   'count_pr': len(mylist),
+                   
                "line": 440* line,
+               'len_prod': len(result),
+               
                "FORM_TO_BACKET":cart_product_form,
                "category_camera": category_camera.keys(),
                "category_camera_spec": category_camera_spec.keys(), 
@@ -361,6 +365,8 @@ def Camers_filtred(request):
         
         content = {"Camers":mylist, 
                "line": 440* line,
+               'len_prod': len(result),
+               
                "FORM_TO_BACKET":cart_product_form,
                "category_camera": category_camera.keys(),
                "category_camera_spec": category_camera_spec.keys(), 
@@ -406,6 +412,8 @@ def Lens(request):
     mylist = zip(product, cart_product_form)
     content = {"Lens": mylist,
                "line": 440* line,
+               'len_prod': len(product),
+               
                "category_obj_camera": category_obj_camera.keys(), 
                "category_type": category_type.keys(),
                "category_Color": category_Color.keys()
@@ -570,6 +578,8 @@ def Lens_filtred(request):
         print(result)
         content = {"Lens":mylist, 
                "line": 440* line,
+               'len_prod': len(result),
+               
                "category_camera": category_camera.keys(),
                "category_camera_spec": category_camera_spec.keys(), 
                
@@ -620,6 +630,8 @@ def Lens_filtred(request):
             mylist = zip(result, cart_product_form)
         content = {"Lens":mylist, 
                "line": 440* line,
+               'len_prod': len(result),
+               
                "FORM_TO_BACKET":cart_product_form,
                "category_camera": category_camera.keys(),
                "category_camera_spec": category_camera_spec.keys(), 
@@ -641,7 +653,10 @@ def Lighting(request):
         line = line -1
     
     cart_product_form = CartAddProductsForm(pquant=1)    
-    content = {"Lightings": product, "line": 440* line, "FORM_TO_BACKET": cart_product_form}
+    content = {"Lightings": product,
+               'len_prod': len(product),
+               
+               "line": 440* line, "FORM_TO_BACKET": cart_product_form}
 
     global CONTENT_FLAG
     if CONTENT_FLAG == True:
@@ -661,7 +676,10 @@ def Tripods(request):
     
     cart_product_form = CartAddProductsForm(pquant=1)
     
-    content = {"Tripods": product, "line": 440* line, "FORM_TO_BACKET": cart_product_form}
+    content = {"Tripods": product, 
+               "line": 440* line, 
+               'len_prod': len(product),
+               "FORM_TO_BACKET": cart_product_form}
     
     global CONTENT_FLAG
     if CONTENT_FLAG == True:
@@ -681,7 +699,9 @@ def binoculars(request):
         
     cart_product_form = CartAddProductsForm(pquant=1)
     
-    content = {"Binoculars": product, "line": 440* line, "FORM_TO_BACKET": cart_product_form}
+    content = {"Binoculars": product, 
+               'len_prod': len(product),
+               "line": 440* line, "FORM_TO_BACKET": cart_product_form}
     
     global CONTENT_FLAG
     if CONTENT_FLAG == True:
@@ -1065,6 +1085,7 @@ def SearchAll(request):
     mapper = {'serchobject': mylist,
               "line": 440* line,
                "quant": quant,
+               'len_prod': len(result),
                
                
               }

@@ -47,8 +47,61 @@
     </div>
     
 {% endfor %}
-<div class="m" style="--m: {{ line }}" >
+
+
+<div class="m" id = 'elemID' data-myvariable = "{{len_prod}}" > <!-- ТАКИМ ОБРАЗОМ МОЖНО ПЕРЕДАТЬ АРГУМЕНТ В CSS ПОЖАЛУЙСТА ЗАПОМНИТЬ!-->
 </div>
+<script>
+    var RowContentWidthFir = document.getElementById('Content_id').clientWidth
+    if (RowContentWidthFir == '915' ){
+        var ElementSizeFir = '880' 
+    }
+    if (RowContentWidthFir == '815' ){
+        var ElementSizeFir = '660' 
+    }
+    if (RowContentWidthFir == '740' ){
+        var ElementSizeFir = '660' 
+    }
+    if (RowContentWidthFir == '660' ){
+        var ElementSizeFir = '440' 
+    }
+    if (RowContentWidthFir == '430' ){
+        var ElementSizeFir = '220' 
+    }
+    var MyVariableFir = document.getElementById('elemID').getAttribute("data-myvariable");
+        var LinesInRowFir =  Math.ceil(MyVariableFir * 220 / ElementSizeFir) * 440
+        let outputFir = document.getElementById('elemID');
+        let resFir = "--m";
+        let valueFir = LinesInRowFir.toString() + "px"; // добавляем "px", чтобы указать единицы измерения
+        outputFir.style.setProperty(resFir, valueFir);
+</script>
+<script>
+    window.addEventListener('resize', function() {
+        var RowContentWidth = document.getElementById('Content_id').clientWidth
+        if (RowContentWidth == '915' ){
+            var ElementSize = '880' 
+        }
+        if (RowContentWidth == '815' ){
+            var ElementSize = '660' 
+        }
+        if (RowContentWidth == '740' ){
+            var ElementSize = '660' 
+        }
+        if (RowContentWidth == '660' ){
+            var ElementSize = '440' 
+        }
+        if (RowContentWidth == '430' ){
+            var ElementSize = '220' 
+        }
+        var MyVariable = document.getElementById('elemID').getAttribute("data-myvariable");
+        var LinesInRow =  Math.ceil(MyVariable * 220 / ElementSize) * 440
+        let output = document.getElementById('elemID');
+        let resss = "--m";
+        let value131 = LinesInRow.toString() + "px"; // добавляем "px", чтобы указать единицы измерения
+        output.style.setProperty(resss, value131);
+    });
+</script>
+
 {% endblock content %}
 {% block left-content-ctg %}
 <div class= "label-categ-head">

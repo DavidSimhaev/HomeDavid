@@ -5,7 +5,7 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
         <title> Quickclick </title>
-        <link rel ="stylesheet" type="text/css" href= "{% static "Main/css/base.css" %}?ver=150">
+        <link rel ="stylesheet" type="text/css" href= "{% static "Main/css/base.css" %}?ver=207">
     </head>
     <body>
         <div id = "wrapper">
@@ -18,29 +18,28 @@
                         <div class = "site-label">
                         </div>
                         <div class = "info-contact">
-                            <h5> Address 1: London Wall Street 23 </h5>
-                            <h5> Address 2: London Boughton Rd 95 Street </h5>
+                            <h5 class = 'text-info-about-site'> Address 1: London Wall Street 23 </h5>
+                            <h5 class = 'text-info-about-site'> Address 2: London Boughton Rd 95 Street </h5>
                         </div>
                         <div class = "info-contact-2" >
-                            <h5> From Mon to Fri from 10:00 to 22:00 </h5>
-                            <h5> Contact details: +000-00-000-0000 </h5>
+                            <h5 class = 'text-info-about-site'> From Mon to Fri from 10:00 to 22:00 </h5>
+                            <h5  class = 'text-info-about-site'> Contact details: +000-00-000-0000 </h5>
                         </div>
 
-                        <div class = "logo-phone" >
+                        <div style="padding-left: 10px;" class = "logo-phone" >
                         </div>
-                        <div class = "logo-telegram" >
+                        <div style="padding-left: 10px;" class = "logo-telegram" >
                         </div>
-                        <div class = "logo-facebook" >
+                        <div style="padding-left: 10px;" class = "logo-facebook" >
                         </div>
                     </div>
                 </div>
-                <div id = "head-menu">
+                <div class = "head-menu">
                     <div class = "wrapp-head-menu" >
-                        <div class = "navigation">
-                            <ul class = "top-menu">
-
-                                <li><a href="{% url "Main:Main"%}">
-                                    
+                        <div class = "navigation" id = 'nav_id_t'>
+                            <ul class = "top-menu" id = "id_menu_test">
+                                
+                                <li class = 'item_menu'><a href="{% url "Main:Main"%}">
                                     <span class = "button__line button__line--top"></span>
                                     <span class = "button__line button__line--right"></span>
                                     <span class = "button__line button__line--bottom"></span>
@@ -49,7 +48,7 @@
                                     Home</a></li>
 
 
-                                <li><a href="{% url "Main:Camers"%}">
+                                <li class = 'item_menu' ><a href="{% url "Main:Camers"%}">
                                 
                                     <span class = "button__line button__line--top"></span>
                                     <span class = "button__line button__line--right"></span>
@@ -59,7 +58,7 @@
 
                                     Cameras</a></li>
 
-                                <li><a href="{% url "Main:Lens"%}">
+                                <li class = 'item_menu'><a href="{% url "Main:Lens"%}">
                                     
                                     <span class = "button__line button__line--top"></span>
                                     <span class = "button__line button__line--right"></span>
@@ -68,7 +67,7 @@
                                 
                                     Lenses</a></li>
 
-                                <li><a href="{% url "Main:Tripods"%}">
+                                <li class = 'item_menu'><a href="{% url "Main:Tripods"%}">
                                     
                                     <span class = "button__line button__line--top"></span>
                                     <span class = "button__line button__line--right"></span>
@@ -76,7 +75,7 @@
                                     <span class = "button__line button__line--left"></span>
                                 
                                     Tripods</a></li>
-                                <li><a href="{% url "Main:Lightings"%}">
+                                <li class = 'item_menu'><a href="{% url "Main:Lightings"%}">
                                     <span class = "button__line button__line--top"></span>
                                     <span class = "button__line button__line--right"></span>
                                     <span class = "button__line button__line--bottom"></span>
@@ -85,7 +84,7 @@
                                     
                                     Lighting</a></li>
                                 
-                                <li><a href="{% url "Main:binoculars"%}">
+                                <li class = 'item_menu' ><a href="{% url "Main:binoculars"%}">
                                     
                                     <span class = "button__line button__line--top"></span>
                                     <span class = "button__line button__line--right"></span>
@@ -94,25 +93,85 @@
                                 
                                     Binoculars</a></li>
 
-                                <li class = "last"><a href="{% url "Main:AboutUs"%}">
+                                <li class = "item_menu"><a href="{% url "Main:AboutUs"%}">
                                     <span class = "button__line button__line--top"></span>
                                     <span class = "button__line button__line--right"></span>
                                     <span class = "button__line button__line--bottom"></span>
                                     <span class = "button__line button__line--left"></span>
                                     
                                     About us</a></li>
-                            </ul>
                             
-                            <div class = "search">  
-                                <input type="text" placeholder="Search" style = 'margin-top: -35px;'id="u-search" onkeypress="KeyPress(event)" class = "search-form">
-                            </div> 
-                            <input class= 'search-img'  onclick="submitSearch()", id = 'u-search' onkeypress="submitSearch()" >
-                            </div>
+                                <li class = 'item_menu'>
+                                            
+                                    <div class = "search">  
+                                        <input style = 'color: white;' type="text" placeholder="Search" id="u-search-1" onkeypress="KeyPress(event)" class = "search-form">
+                                    </div>
+                                </li>
 
+                                <li class = 'item_menu'>
+                                    <input class= 'search-img'  onclick="submitSearch()", id = 'u-search' onkeypress="submitSearch()" >
+                                </li>
+
+                                </ul>
+                            
+                            </div>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    var topMenu = document.querySelector('.top-menu');
+                                    topMenu.addEventListener('click', function() {
+                                      topMenu.classList.toggle('clicked');
+                                    });
+                                  });
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    var myElement = document.getElementById('id_menu_test');
+                                    var valNew = document.getElementById("nav_id_t");
+                                    var textValNew = document.createElement("div");
+                                    textValNew.classList.add('menu-logo-lines');
+                                    firstElem= valNew.firstChild;
+                                    valNew.insertBefore(textValNew, firstElem)
+                                    
+                                    textValNew.addEventListener('click', function() {
+                                        var headItem = document.querySelector('.head-menu');
+                                        headItem.classList.toggle('head-size-act')
+                                        var menuItems = document.querySelectorAll('.item_menu');
+                                        menuItems.forEach(function(menuItem) {
+                                            menuItem.classList.toggle('show-menu');})
+                                        textValNew.classList.toggle('clicked');
+
+                                        
+                                        
+                                        // Добавляем другие стили, которые нужно изменить
+                                        
+                                        // Если нужно удалить стиль, можно сделать так:
+                                        // myElement.style.backgroundColor = '';
+
+
+                                    });
+                                    
+                                    
+                                    textValNew.addEventListener('mouseover', function() {
+                                        if (textValNew.classList.contains('clicked')) {
+                                            textValNew.classList.add('hovered');
+                                        }
+                                    });
+                                    textValNew.addEventListener('mouseout', function() {
+                                        textValNew.classList.remove('hovered');
+                                    });
+                                    
+
+
+                                    });
+                                
+                            </script>
+
+                           
+
+
+                            
                             <script>
                                 // МЫШЬ
                                 function submitSearch(){
-                                    var a = document.getElementById("u-search").value;
+                                    var a = document.getElementById("u-search-1").value;
                                     window.location.href = "{% url 'Main:SearchAll' %}" + "?search="+ a;
                                 }
                             </script>
@@ -140,7 +199,7 @@
                         <div class ="block-content-top">
                             
                         </div>
-                        <div class ="block-content-center">
+                        <div id = 'Content_id' class ="block-content-center">
                             {% block content %}
                             {% endblock content%}
                             
@@ -151,7 +210,7 @@
                     </div>
                 </div>  <!-- Конец контента-->
                 
-                <div id = "left-sidebar"> <!-- Начало окна меню -->
+                <div class = "left-sidebar"> <!-- Начало окна меню -->
                     <div class = "main-menu"   >
                         
                         <div class = "user-login" >

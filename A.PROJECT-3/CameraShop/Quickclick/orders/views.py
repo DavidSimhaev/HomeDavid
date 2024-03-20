@@ -16,7 +16,6 @@ stripe.api_version = settings.STRIPE_API_VERSION
 # Create your views here.
 def order_create(request):
     cart= Cart(request)
-   
     if request.method == "POST":
         form= OrderCreateForm(request.POST)
         if form.is_valid():
@@ -27,14 +26,14 @@ def order_create(request):
                 OrderItem.objects.create(order=order, product= item["product"], price=item["price"], quantity=item["quantity"] )
                 p = item["product"]
                 p.stock-= item["quantity"]
+                
                 if p.stock == 0 or p.stock < 0:
                     return redirect("Main:ErrorGetData")
                 p.save()
             
            
             cart.clear()
-            
-                                 
+                
             order_created(order.id, order.email, cart )
             request.session['order_id'] = order.id # Что то связанно с почтой
             

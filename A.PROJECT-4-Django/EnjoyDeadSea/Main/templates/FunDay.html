@@ -1,0 +1,890 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+{% load static %}
+<html>
+	<head>
+		<title>Enjoy Dead Sea</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href= "{% static "Main/css/main.css" %}?ver=11" />
+		<noscript><link rel="stylesheet" href="{% static "Main/css/noscript.css"%}?ver=11" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<!-- Note: The "styleN" class below should match that of the banner element. -->
+					<header id="header" class="alt">
+						<a href="{% url "Main:Main"%}" class="logo"><img src="{% static "Main/images/Enjoy-Dead-sea.png"%}"></strong></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="{% url "Main:Main"%}">Home</a></li>
+							<li><a href="{% url "Main:FunDay"%}">Current events</a></li>
+							<li><a href="generic.html">Organization</a></li>
+							<li><a href="elements.html">Fun Days</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="#" class="button primary fit">Get Started</a></li>
+							<li><a href="#" class="button fit">Log In</a></li>
+						</ul>
+					</nav>
+
+				<!-- Banner -->
+				<!-- Note: The "styleN" class below should match that of the header element. -->
+					<section id="banner" class="style2">
+						<div class="inner">
+							<span class="image">
+								<img src="{% static "Main/images/deas.jpg"%}" alt="" />
+							</span>
+							<header class="major">
+								<h1>Spa Day
+								</h1>
+							</header>
+							<div class="content">
+								<p>A day of relaxation at the hotel</p>
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h2>Buy a Fun Day </h2>
+									</header>
+									<p>The Enjoy Dead Sea Hotel invites you to a day of leisure and relaxation in one of the world's most unique locations. The hotel staff will welcome and guide you through a day filled with spa treatments, gym sessions, and a mouth-watering lunch at the hotel restaurant. A day of relaxation at the hotel includes
+										access to the dry and wet saunas, Jacuzzi, Dead Sea water pool, cold and hot streaming pools and lunch at the hotel restaurant.</p>
+									<div class = 'cld'> 
+										<div id = 'ctnID' class = 'ctn-calendar' style="text-align: center;">
+											
+										<input type="date" lang="en" name="calendar" style= 'color: black; text-align: center;'
+										max="2025-01-01" min="2024-01-01">
+										<script>
+											var tomorrow = new Date();
+											tomorrow.setDate(tomorrow.getDate() + 1);
+											document.getElementsByName('calendar')[0].min = tomorrow.toISOString().split('T')[0];
+											var maxDate = new Date(tomorrow.getFullYear() + 1, tomorrow.getMonth(), tomorrow.getDate());
+											document.getElementsByName('calendar')[0].max = maxDate.toISOString().split('T')[0];
+										</script>
+										
+											
+											
+										<div style= 'padding-top: 50px;'>
+											<h2 id="NlabelID1"class = 'head-date-label'>First name: *</h2>
+											<input id="id_name" type="text" maxlength="30" name="first_name" style="display: none; margin-top: 10px;">
+
+
+											<h2 id="NlabelID2" class = 'head-date-label'>Last name: *</h2>
+											<input id="id_last" type="text" maxlength="30" name="last_name"  style="display: none; margin-top: 10px;">
+
+
+											<h2 id="NlabelID3" class = 'head-date-label'>Mail: *</h2>
+											<input id="mail_last" type="text" maxlength="100" name="mail_last" style="display: none; margin-top: 10px;">
+											<h2 id="NlabelID5" class = 'head-date-label'>ID: *</h2>
+											<input id="passport_id" type="number" maxlength="100" name="mail_last" style="display: none; margin-top: 10px;">
+
+											<h2 id="NlabelID4" class = 'head-date-label'>Phone number: *</h2>
+											
+											<div>
+												<br>
+												<br>
+											
+											<select onchange="validatePhoneNumber()" id = 'codeCountry' name="countryCode" style="
+											margin-top: -10px; display: none;float: left;width: 20%;" id="countryCode" required>
+												<option data-countryCode="US" value="972">Israel (+972)</option>
+												<optgroup label="Other countries">
+													<option data-countryCode="DZ" value="213">Algeria (+213)</option>
+													<option data-countryCode="AD" value="376">Andorra (+376)</option>
+													<option data-countryCode="AO" value="244">Angola (+244)</option>
+													<option data-countryCode="AI" value="1264">Anguilla (+1264)</option>
+													<option data-countryCode="AG" value="1268">Antigua &amp; Barbuda (+1268)</option>
+													<option data-countryCode="AR" value="54">Argentina (+54)</option>
+													<option data-countryCode="AM" value="374">Armenia (+374)</option>
+													<option data-countryCode="AW" value="297">Aruba (+297)</option>
+													<option data-countryCode="AU" value="61">Australia (+61)</option>
+													<option data-countryCode="AT" value="43">Austria (+43)</option>
+													<option data-countryCode="AZ" value="994">Azerbaijan (+994)</option>
+													<option data-countryCode="BS" value="1242">Bahamas (+1242)</option>
+													<option data-countryCode="BH" value="973">Bahrain (+973)</option>
+													<option data-countryCode="BD" value="880">Bangladesh (+880)</option>
+													<option data-countryCode="BB" value="1246">Barbados (+1246)</option>
+													<option data-countryCode="BY" value="375">Belarus (+375)</option>
+													<option data-countryCode="BE" value="32">Belgium (+32)</option>
+													<option data-countryCode="BZ" value="501">Belize (+501)</option>
+													<option data-countryCode="BJ" value="229">Benin (+229)</option>
+													<option data-countryCode="BM" value="1441">Bermuda (+1441)</option>
+													<option data-countryCode="BT" value="975">Bhutan (+975)</option>
+													<option data-countryCode="BO" value="591">Bolivia (+591)</option>
+													<option data-countryCode="BA" value="387">Bosnia Herzegovina (+387)</option>
+													<option data-countryCode="BW" value="267">Botswana (+267)</option>
+													<option data-countryCode="BR" value="55">Brazil (+55)</option>
+													<option data-countryCode="BN" value="673">Brunei (+673)</option>
+													<option data-countryCode="BG" value="359">Bulgaria (+359)</option>
+													<option data-countryCode="BF" value="226">Burkina Faso (+226)</option>
+													<option data-countryCode="BI" value="257">Burundi (+257)</option>
+													<option data-countryCode="KH" value="855">Cambodia (+855)</option>
+													<option data-countryCode="CM" value="237">Cameroon (+237)</option>
+													<option data-countryCode="CA" value="1">Canada (+1)</option>
+													<option data-countryCode="CV" value="238">Cape Verde Islands (+238)</option>
+													<option data-countryCode="KY" value="1345">Cayman Islands (+1345)</option>
+													<option data-countryCode="CF" value="236">Central African Republic (+236)</option>
+													<option data-countryCode="CL" value="56">Chile (+56)</option>
+													<option data-countryCode="CN" value="86">China (+86)</option>
+													<option data-countryCode="CO" value="57">Colombia (+57)</option>
+													<option data-countryCode="KM" value="269">Comoros (+269)</option>
+													<option data-countryCode="CG" value="242">Congo (+242)</option>
+													<option data-countryCode="CK" value="682">Cook Islands (+682)</option>
+													<option data-countryCode="CR" value="506">Costa Rica (+506)</option>
+													<option data-countryCode="HR" value="385">Croatia (+385)</option>
+													<option data-countryCode="CU" value="53">Cuba (+53)</option>
+													<option data-countryCode="CY" value="90392">Cyprus North (+90392)</option>
+													<option data-countryCode="CY" value="357">Cyprus South (+357)</option>
+													<option data-countryCode="CZ" value="42">Czech Republic (+42)</option>
+													<option data-countryCode="DK" value="45">Denmark (+45)</option>
+													<option data-countryCode="DJ" value="253">Djibouti (+253)</option>
+													<option data-countryCode="DM" value="1809">Dominica (+1809)</option>
+													<option data-countryCode="DO" value="1809">Dominican Republic (+1809)</option>
+													<option data-countryCode="EC" value="593">Ecuador (+593)</option>
+													<option data-countryCode="EG" value="20">Egypt (+20)</option>
+													<option data-countryCode="SV" value="503">El Salvador (+503)</option>
+													<option data-countryCode="GQ" value="240">Equatorial Guinea (+240)</option>
+													<option data-countryCode="ER" value="291">Eritrea (+291)</option>
+													<option data-countryCode="EE" value="372">Estonia (+372)</option>
+													<option data-countryCode="ET" value="251">Ethiopia (+251)</option>
+													<option data-countryCode="FK" value="500">Falkland Islands (+500)</option>
+													<option data-countryCode="FO" value="298">Faroe Islands (+298)</option>
+													<option data-countryCode="FJ" value="679">Fiji (+679)</option>
+													<option data-countryCode="FI" value="358">Finland (+358)</option>
+													<option data-countryCode="FR" value="33">France (+33)</option>
+													<option data-countryCode="GF" value="594">French Guiana (+594)</option>
+													<option data-countryCode="PF" value="689">French Polynesia (+689)</option>
+													<option data-countryCode="GA" value="241">Gabon (+241)</option>
+													<option data-countryCode="GM" value="220">Gambia (+220)</option>
+													<option data-countryCode="GE" value="7880">Georgia (+7880)</option>
+													<option data-countryCode="DE" value="49">Germany (+49)</option>
+													<option data-countryCode="GH" value="233">Ghana (+233)</option>
+													<option data-countryCode="GI" value="350">Gibraltar (+350)</option>
+													<option data-countryCode="GR" value="30">Greece (+30)</option>
+													<option data-countryCode="GL" value="299">Greenland (+299)</option>
+													<option data-countryCode="GD" value="1473">Grenada (+1473)</option>
+													<option data-countryCode="GP" value="590">Guadeloupe (+590)</option>
+													<option data-countryCode="GU" value="671">Guam (+671)</option>
+													<option data-countryCode="GT" value="502">Guatemala (+502)</option>
+													<option data-countryCode="GN" value="224">Guinea (+224)</option>
+													<option data-countryCode="GW" value="245">Guinea - Bissau (+245)</option>
+													<option data-countryCode="GY" value="592">Guyana (+592)</option>
+													<option data-countryCode="HT" value="509">Haiti (+509)</option>
+													<option data-countryCode="HN" value="504">Honduras (+504)</option>
+													<option data-countryCode="HK" value="852">Hong Kong (+852)</option>
+													<option data-countryCode="HU" value="36">Hungary (+36)</option>
+													<option data-countryCode="IS" value="354">Iceland (+354)</option>
+													<option data-countryCode="IN" value="91">India (+91)</option>
+													<option data-countryCode="ID" value="62">Indonesia (+62)</option>
+													<option data-countryCode="IR" value="98">Iran (+98)</option>
+													<option data-countryCode="IQ" value="964">Iraq (+964)</option>
+													<option data-countryCode="IE" value="353">Ireland (+353)</option>
+													<option data-countryCode="IL" value="972">Israel (+972)</option>
+													<option data-countryCode="IT" value="39">Italy (+39)</option>
+													<option data-countryCode="JM" value="1876">Jamaica (+1876)</option>
+													<option data-countryCode="JP" value="81">Japan (+81)</option>
+													<option data-countryCode="JO" value="962">Jordan (+962)</option>
+													<option data-countryCode="KZ" value="7">Kazakhstan (+7)</option>
+													<option data-countryCode="KE" value="254">Kenya (+254)</option>
+													<option data-countryCode="KI" value="686">Kiribati (+686)</option>
+													<option data-countryCode="KP" value="850">Korea North (+850)</option>
+													<option data-countryCode="KR" value="82">Korea South (+82)</option>
+													<option data-countryCode="KW" value="965">Kuwait (+965)</option>
+													<option data-countryCode="KG" value="996">Kyrgyzstan (+996)</option>
+													<option data-countryCode="LA" value="856">Laos (+856)</option>
+													<option data-countryCode="LV" value="371">Latvia (+371)</option>
+													<option data-countryCode="LB" value="961">Lebanon (+961)</option>
+													<option data-countryCode="LS" value="266">Lesotho (+266)</option>
+													<option data-countryCode="LR" value="231">Liberia (+231)</option>
+													<option data-countryCode="LY" value="218">Libya (+218)</option>
+													<option data-countryCode="LI" value="417">Liechtenstein (+417)</option>
+													<option data-countryCode="LT" value="370">Lithuania (+370)</option>
+													<option data-countryCode="LU" value="352">Luxembourg (+352)</option>
+													<option data-countryCode="MO" value="853">Macao (+853)</option>
+													<option data-countryCode="MK" value="389">Macedonia (+389)</option>
+													<option data-countryCode="MG" value="261">Madagascar (+261)</option>
+													<option data-countryCode="MW" value="265">Malawi (+265)</option>
+													<option data-countryCode="MY" value="60">Malaysia (+60)</option>
+													<option data-countryCode="MV" value="960">Maldives (+960)</option>
+													<option data-countryCode="ML" value="223">Mali (+223)</option>
+													<option data-countryCode="MT" value="356">Malta (+356)</option>
+													<option data-countryCode="MH" value="692">Marshall Islands (+692)</option>
+													<option data-countryCode="MQ" value="596">Martinique (+596)</option>
+													<option data-countryCode="MR" value="222">Mauritania (+222)</option>
+													<option data-countryCode="YT" value="269">Mayotte (+269)</option>
+													<option data-countryCode="MX" value="52">Mexico (+52)</option>
+													<option data-countryCode="FM" value="691">Micronesia (+691)</option>
+													<option data-countryCode="MD" value="373">Moldova (+373)</option>
+													<option data-countryCode="MC" value="377">Monaco (+377)</option>
+													<option data-countryCode="MN" value="976">Mongolia (+976)</option>
+													<option data-countryCode="MS" value="1664">Montserrat (+1664)</option>
+													<option data-countryCode="MA" value="212">Morocco (+212)</option>
+													<option data-countryCode="MZ" value="258">Mozambique (+258)</option>
+													<option data-countryCode="MN" value="95">Myanmar (+95)</option>
+													<option data-countryCode="NA" value="264">Namibia (+264)</option>
+													<option data-countryCode="NR" value="674">Nauru (+674)</option>
+													<option data-countryCode="NP" value="977">Nepal (+977)</option>
+													<option data-countryCode="NL" value="31">Netherlands (+31)</option>
+													<option data-countryCode="NC" value="687">New Caledonia (+687)</option>
+													<option data-countryCode="NZ" value="64">New Zealand (+64)</option>
+													<option data-countryCode="NI" value="505">Nicaragua (+505)</option>
+													<option data-countryCode="NE" value="227">Niger (+227)</option>
+													<option data-countryCode="NG" value="234">Nigeria (+234)</option>
+													<option data-countryCode="NU" value="683">Niue (+683)</option>
+													<option data-countryCode="NF" value="672">Norfolk Islands (+672)</option>
+													<option data-countryCode="NP" value="670">Northern Marianas (+670)</option>
+													<option data-countryCode="NO" value="47">Norway (+47)</option>
+													<option data-countryCode="OM" value="968">Oman (+968)</option>
+													<option data-countryCode="PW" value="680">Palau (+680)</option>
+													<option data-countryCode="PA" value="507">Panama (+507)</option>
+													<option data-countryCode="PG" value="675">Papua New Guinea (+675)</option>
+													<option data-countryCode="PY" value="595">Paraguay (+595)</option>
+													<option data-countryCode="PE" value="51">Peru (+51)</option>
+													<option data-countryCode="PH" value="63">Philippines (+63)</option>
+													<option data-countryCode="PL" value="48">Poland (+48)</option>
+													<option data-countryCode="PT" value="351">Portugal (+351)</option>
+													<option data-countryCode="PR" value="1787">Puerto Rico (+1787)</option>
+													<option data-countryCode="QA" value="974">Qatar (+974)</option>
+													<option data-countryCode="RE" value="262">Reunion (+262)</option>
+													<option data-countryCode="RO" value="40">Romania (+40)</option>
+													<option data-countryCode="RU" value="7">Russia (+7)</option>
+													<option data-countryCode="RW" value="250">Rwanda (+250)</option>
+													<option data-countryCode="SM" value="378">San Marino (+378)</option>
+													<option data-countryCode="ST" value="239">Sao Tome &amp; Principe (+239)</option>
+													<option data-countryCode="SA" value="966">Saudi Arabia (+966)</option>
+													<option data-countryCode="SN" value="221">Senegal (+221)</option>
+													<option data-countryCode="CS" value="381">Serbia (+381)</option>
+													<option data-countryCode="SC" value="248">Seychelles (+248)</option>
+													<option data-countryCode="SL" value="232">Sierra Leone (+232)</option>
+													<option data-countryCode="SG" value="65">Singapore (+65)</option>
+													<option data-countryCode="SK" value="421">Slovak Republic (+421)</option>
+													<option data-countryCode="SI" value="386">Slovenia (+386)</option>
+													<option data-countryCode="SB" value="677">Solomon Islands (+677)</option>
+													<option data-countryCode="SO" value="252">Somalia (+252)</option>
+													<option data-countryCode="ZA" value="27">South Africa (+27)</option>
+													<option data-countryCode="ES" value="34">Spain (+34)</option>
+													<option data-countryCode="LK" value="94">Sri Lanka (+94)</option>
+													<option data-countryCode="SH" value="290">St. Helena (+290)</option>
+													<option data-countryCode="KN" value="1869">St. Kitts (+1869)</option>
+													<option data-countryCode="SC" value="1758">St. Lucia (+1758)</option>
+													<option data-countryCode="SD" value="249">Sudan (+249)</option>
+													<option data-countryCode="SR" value="597">Suriname (+597)</option>
+													<option data-countryCode="SZ" value="268">Swaziland (+268)</option>
+													<option data-countryCode="SE" value="46">Sweden (+46)</option>
+													<option data-countryCode="CH" value="41">Switzerland (+41)</option>
+													<option data-countryCode="SI" value="963">Syria (+963)</option>
+													<option data-countryCode="TW" value="886">Taiwan (+886)</option>
+													<option data-countryCode="TJ" value="7">Tajikstan (+7)</option>
+													<option data-countryCode="TH" value="66">Thailand (+66)</option>
+													<option data-countryCode="TG" value="228">Togo (+228)</option>
+													<option data-countryCode="TO" value="676">Tonga (+676)</option>
+													<option data-countryCode="TT" value="1868">Trinidad &amp; Tobago (+1868)</option>
+													<option data-countryCode="TN" value="216">Tunisia (+216)</option>
+													<option data-countryCode="TR" value="90">Turkey (+90)</option>
+													<option data-countryCode="TM" value="7">Turkmenistan (+7)</option>
+													<option data-countryCode="TM" value="993">Turkmenistan (+993)</option>
+													<option data-countryCode="TC" value="1649">Turks &amp; Caicos Islands (+1649)</option>
+													<option data-countryCode="TV" value="688">Tuvalu (+688)</option>
+													<option data-countryCode="UG" value="256">Uganda (+256)</option>
+													<!-- <option data-countryCode="GB" value="44">UK (+44)</option> -->
+													<option data-countryCode="UA" value="380">Ukraine (+380)</option>
+													<option data-countryCode="AE" value="971">United Arab Emirates (+971)</option>
+													<option data-countryCode="UY" value="598">Uruguay (+598)</option>
+													<!-- <option data-countryCode="US" value="1">USA (+1)</option> -->
+													<option data-countryCode="UZ" value="7">Uzbekistan (+7)</option>
+													<option data-countryCode="VU" value="678">Vanuatu (+678)</option>
+													<option data-countryCode="VA" value="379">Vatican City (+379)</option>
+													<option data-countryCode="VE" value="58">Venezuela (+58)</option>
+													<option data-countryCode="VN" value="84">Vietnam (+84)</option>
+													<option data-countryCode="VG" value="84">Virgin Islands - British (+1284)</option>
+													<option data-countryCode="VI" value="84">Virgin Islands - US (+1340)</option>
+													<option data-countryCode="WF" value="681">Wallis &amp; Futuna (+681)</option>
+													<option data-countryCode="YE" value="969">Yemen (North)(+969)</option>
+													<option data-countryCode="YE" value="967">Yemen (South)(+967)</option>
+													<option data-countryCode="ZM" value="260">Zambia (+260)</option>
+													<option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+												</optgroup>
+											</select>
+											<input id="numberID" type="number"  min = '0' max="4" maxLength = '9'  name="numberID"  style="width: 80%;
+											display: none; margin-top: -10px;">
+											</div>
+
+											
+											<h2 id = 'head-dateId' class = 'head-date-label' >Quantity of people: *</h2>
+
+											<script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.9.18/libphonenumber-js.min.js"></script>
+											<select  id="selectionList3" style="display: none; margin-top: 10px;">
+												<option value="" hidden>Select...</option>
+												<option value="1">1 person: (160₪)</option>
+												<option value="2">2 people: (300₪)</option>
+												<option value="3">3 people: (450₪)</option>
+												<option value="4">4 people: (600₪)</option>
+												<option value="5">5 people: (750₪)</option>
+												<option value="6">6 people: (900₪)</option>
+											</select>
+											
+
+
+											<h2 id = 'head-dateId2' class = 'head-date-label'>Quantity of children: </h2>
+											<select id="selectionList4" style="display: none; margin-top: 10px;">
+												<option value="" hidden>Select...</option>
+												<option value="1">1 child: 80₪ </option>
+												<option value="2">2 children: 160₪ </option>
+												<option value="3">3 children: 240₪</option>
+												<option value="4">4 children: 320₪</option>
+												<option value="5">5 children: 400₪</option>
+												<option value="6">6 children: 480₪</option>
+												<option value="No">No</option>
+											</select>
+											<h2 id = 'head-dateId3' class = 'head-date-label'>Meal: *</h2>
+											<select id="selectionList" style="display: none; margin-top: 10px;">
+												<option value="" hidden>Select...</option>
+												
+												{% for food in listFood%}
+												<option value={{food}}>{{food}}</option>
+												{% endfor %}
+											</select>
+											<h2 id = 'head-dateId4' class = 'head-date-label'>Massage:</h2>
+											<select id="selectionList2" style="display: none; margin-top: 10px;">
+												<option value="" hidden>Select...</option>
+												{% for massage in listMassage%}
+												<option value={{massage}}>{{massage}}</option>
+												
+												{% endfor %}
+											</select>
+										</div>
+										
+										<script>
+											var BoolFirst = true;
+											var Max_digits = 0;
+										</script>
+										<script>
+											document.getElementById("passport_id").addEventListener("input", function() {
+												
+												if (this.value.length > 9) {
+													this.value = this.value.slice(0, 9); // Обрезаем введенное значение до 9 символов
+													this.style.backgroundColor = "rgb(30 255 0 / 9%)";
+												}else{
+													var bg_name = window.getComputedStyle(document.getElementById('passport_id')).backgroundColor;
+													//this.style.backgroundColor != "rgb(30 255 0 / 9%)"
+													if (bg_name != 'rgba(212, 212, 255, 0.035)'){
+														this.style.backgroundColor = "#ff000017"
+													}
+												}
+											});
+
+										</script>
+										<script>
+											var maxLengths = {
+												"DZ": 10, // Алжир
+												"AD": 9, // Андорра
+												"AO": 9, // Ангола
+												"AI": 10, // Ангилья
+												"AG": 10, // Антигуа и Барбуда
+												"AR": 10, // Аргентина
+												"AM": 8, // Армения
+												"AW": 7, // Аруба
+												"AU": 9, // Австралия
+												"AT": 12, // Австрия
+												"AZ": 9, // Азербайджан
+												"BS": 10, // Багамские острова
+												"BH": 8, // Бахрейн
+												"BD": 10, // Бангладеш
+												"BB": 7, // Барбадос
+												"BY": 9, // Беларусь
+												"BE": 9, // Бельгия
+												"BZ": 7, // Белиз
+												"BJ": 8, // Бенин
+												"BM": 10, // Бермуды
+												"BT": 9, // Бутан
+												"BO": 8, // Боливия
+												"BA": 8, // Босния и Герцеговина
+												"BW": 8, // Ботсвана
+												"BR": 11, // Бразилия
+												"BN": 7, // Бруней
+												"BG": 9, // Болгария
+												"BF": 8, // Буркина-Фасо
+												"BI": 8, // Бурунди
+												"KH": 8, // Камбоджа
+												"CM": 9, // Камерун
+												"CA": 10, // Канада
+												"CV": 7, // Кабо-Верде
+												"KY": 7, // Острова Кайман
+												"CF": 8, // Центральноафриканская Республика
+												"CL": 9, // Чили
+												"CN": 11, // Китай
+												"CO": 10, // Колумбия
+												"KM": 9, // Коморские острова
+												"CG": 9, // Конго
+												"CK": 7, // Острова Кука
+												"CR": 8, // Коста-Рика
+												"HR": 8, // Хорватия
+												"CU": 8, // Куба
+												"CY": 9, // Кипр
+												"CZ": 9, // Чехия
+												"DK": 8, // Дания
+												"DJ": 8, // Джибути
+												"DM": 10, // Доминика
+												"DO": 10, // Доминиканская Республика
+												"EC": 9, // Эквадор
+												"EG": 9, // Египет
+												"SV": 8, // Сальвадор
+												"GQ": 9, // Экваториальная Гвинея
+												"ER": 8, // Эритрея
+												"EE": 8, // Эстония
+												"ET": 9, // Эфиопия
+												"FK": 9, // Фолклендские острова
+												"FO": 6, // Фарерские острова
+												"FJ": 7, // Фиджи
+												"FI": 9, // Финляндия
+												"FR": 10, // Франция
+												"GF": 9, // Французская Гвиана
+												"PF": 8, // Французская Полинезия
+												"GA": 9, // Габон
+												"GM": 8, // Гамбия
+												"GE": 9, // Грузия
+												"DE": 9, // Германия
+												"GH": 10, // Гана
+												"GI": 9, // Гибралтар
+												"GR": 10, // Греция
+												"GL": 6, // Гренландия
+												"GD": 10, // Гренада
+												"GP": 9, // Гваделупа
+												"GU": 7, // Гуам
+												"GT": 8, // Гватемала
+												"GN": 8, // Гвинея
+												"GW": 8, // Гвинея-Бисау
+												"GY": 8, // Гайана
+												"HT": 8, // Гаити
+												"HN": 8, // Гондурас
+												"HK": 8, // Гонконг
+												"HU": 9, // Венгрия
+												"IS": 7, // Исландия
+												"IN": 10, // Индия
+												"ID": 11, // Индонезия
+												"IR": 10, // Иран
+												"IQ": 10, // Ирак
+												"IE": 10, // Ирландия
+												"IL": 9, // Израиль
+												"IT": 10, // Италия
+												"JM": 10, // Ямайка
+												"JP": 11, // Япония
+												"JO": 10, // Иордания
+												"KZ": 10, // Казахстан
+												"KE": 10, // Кения
+												"KI": 5, // Кирибати
+												"KP": 10, // Северная Корея
+												"KR": 10, // Южная Корея
+												"KW": 8, // Кувейт
+												"KG": 9, // Киргизия
+												"LA": 8, // Лаос
+												"LV": 8, // Латвия
+												"LB": 8, // Ливан
+												"LS": 8, // Лесото
+												"LR": 8, // Либерия
+												"LY": 9, // Ливия
+												"LI": 7, // Лихтенштейн
+												"LT": 8, // Литва
+												"LU": 8, // Люксембург
+												"MO": 8, // Макао
+												"MK": 9, // Северная Македония
+												"MG": 9, // Мадагаскар
+												"MW": 9, // Малави
+												"MY": 10, // Малайзия
+												"MV": 7, // Мальдивы
+												"ML": 8, // Мали
+												"MT": 8, // Мальта
+												"MH": 7, // Маршалловы Острова
+												"MQ": 9, // Мартиника
+												"MR": 9, // Мавритания
+												"YT": 9, // Майотта
+												"MX": 10, // Мексика
+												"FM": 7, // Микронезия
+												"MD": 8, // Молдова
+												"MC": 8, // Монако
+												"MN": 8, // Монголия
+												"MS": 10, // Монтсеррат
+												"MA": 10, // Марокко
+												"MZ": 9, // Мозамбик
+												"MN": 8, // Мьянма
+												"IQ": 10, // Ирак
+												"IE": 10, // Ирландия
+												"IL": 9, // Израиль
+												"IT": 10, // Италия
+												"JM": 10, // Ямайка
+												"JP": 11, // Япония
+												"JO": 10, // Иордания
+												"KZ": 10, // Казахстан
+												"KE": 10, // Кения
+												"KI": 5, // Кирибати
+												"KP": 10, // Северная Корея
+												"KR": 10, // Южная Корея
+												"KW": 8, // Кувейт
+												"KG": 9, // Киргизия
+												"LA": 8, // Лаос
+												"LV": 8, // Латвия
+												"LB": 8, // Ливан
+												"LS": 8, // Лесото
+												"LR": 8, // Либерия
+												"LY": 9, // Ливия
+												"LI": 7, // Лихтенштейн
+												"LT": 8, // Литва
+												"LU": 8, // Люксембург
+												"MO": 8, // Макао
+												"MK": 9, // Северная Македония
+												"MG": 9, // Мадагаскар
+												"MW": 9, // Малави
+												"MY": 10, // Малайзия
+												"MV": 7, // Мальдивы
+												"ML": 8, // Мали
+												"MT": 8, // Мальта
+												"MH": 7, // Маршалловы Острова
+												"MQ": 9, // Мартиника
+												"MR": 9, // Мавритания
+												"YT": 9, // Майотта
+												"MX": 10, // Мексика
+												"FM": 7, // Микронезия
+												"MD": 8, // Молдова
+												"MC": 8, // Монако
+												"MN": 8, // Монголия
+												"MS": 10, // Монтсеррат
+												"MA": 10, // Марокко
+												"MZ": 9, // Мозамбик
+												"MN": 8, // Мьянма
+												"NA": 10, // Намибия
+												"NR": 7, // Науру
+												"NP": 10, // Непал
+												"NL": 9, // Нидерланды
+												"NC": 6, // Новая Каледония
+												"NZ": 9, // Новая Зеландия
+												"NI": 8, // Никарагуа
+												"NE": 8, // Нигер
+												"NG": 10, // Нигерия
+												"NU": 4, // Ниуэ
+												"NF": 6, // Норфолк
+												"NP": 10, // Северные Марианские острова
+												"NO": 8, // Норвегия
+												"OM": 8, // Оман
+												"PW": 7, // Палау
+												"PA": 8, // Панама
+												"PG": 8, // Папуа-Новая Гвинея
+												"PY": 9, // Парагвай
+												"PE": 9, // Перу
+												"PH": 10, // Филиппины
+												"PL": 9, // Польша
+												"PT": 9, // Португалия
+												"PR": 10, // Пуэрто-Рико
+												"QA": 8, // Катар
+												"RE": 9, // Реюньон
+												"RO": 9, // Румыния
+												"RU": 10, // Россия
+												"RW": 9, // Руан
+												"SM": 10, // Сан-Марино
+												"ST": 10, // Сан-Томе и Принсипи
+												"SA": 9, // Саудовская Аравия
+												"SN": 9, // Сенегал
+												"CS": 9, // Сербия
+												"SC": 9, // Сейшельские острова
+												"SL": 9, // Сьерра-Леоне
+												"SG": 8, // Сингапур
+												"SK": 10, // Словакия
+												"SI": 8, // Словения
+												"SB": 9, // Соломоновы Острова
+												"SO": 10, // Сомали
+												"ZA": 9, // Южно-Африканская Республика
+												"ES": 9, // Испания
+												"LK": 9, // Шри-Ланка
+												"SH": 10, // Остров Святой Елены
+												"KN": 10, // Сент-Китс и Невис
+												"SC": 10, // Сент-Люсия
+												"SD": 10, // Судан
+												"SR": 9, // Суринам
+												"SZ": 9, // Свазиленд
+												"SE": 9, // Швеция
+												"CH": 9, // Швейцария
+												"SY": 9, // Сирия
+												"TW": 10, // Тайвань
+												"TJ": 10, // Таджикистан
+												"TH": 9, // Таиланд
+												"TG": 8, // Того
+												"TO": 9, // Тонга
+												"TT": 10, // Тринидад и Тобаго
+												"TN": 9, // Тунис
+												"TR": 9, // Турция
+												"TM": 10, // Туркменистан
+												"TC": 10, // Теркс и Кайкос
+												"TV": 9, // Тувалу
+												"UG": 9, // Уганда
+												"UA": 9, // Украина
+												"AE": 9, // ОАЭ
+												"UY": 10, // Уругвай
+												"UZ": 10, // Узбекистан
+												"VU": 10, // Вануату
+												"VA": 9, // Ватикан
+												"VE": 9, // Венесуэла
+												"VN": 8, // Вьетнам
+												"VG": 13, // Виргинские острова (Великобритания)
+												"VI": 13, // Виргинские острова (США)
+												"WF": 9, // Уоллис и Футуна
+												"YE": 10, // Йемен (Север)
+												"YE": 10, // Йемен (Юг)
+												"ZM": 9, // Замбия
+												"ZW": 9 // Зимбабве
+											};
+											document.getElementById("numberID").addEventListener("input", function() {
+												var selectedOption = document.getElementById("codeCountry");
+												var countryCode = selectedOption.options[selectedOption.selectedIndex].getAttribute("data-countryCode");
+												if (BoolFirst){
+													var maxLength = 9;
+													Max_digits = 9;
+													if (this.value.length > 9) {
+														this.value = this.value.slice(0, 9); // Обрезаем введенное значение до 9 символов
+														document.getElementById('numberID').style.backgroundColor = "rgb(30 255 0 / 9%)";
+													}
+												} else{ 
+													var maxLength = maxLengths[countryCode];
+													if (this.value.length > maxLength) {
+														this.value = this.value.slice(0, maxLength); // Обрезаем введенное значение до 9 символов
+														Max_digits = maxLength;
+													}
+												}
+											});
+											function updateMaxLength() {
+												document.getElementById("numberID").value = '';
+												BoolFirst = false
+											}
+											document.getElementsByName('calendar')[0].addEventListener('change', function() {
+											document.getElementById('head-dateId').style.display = 'block';
+											var text1 = document.getElementById('head-dateId').innerText;
+											document.getElementById('head-dateId').innerHTML = text1.slice(0, -1) + "<span style='color:red;'>" + '*' + "</span>";
+											
+											document.getElementById('head-dateId2').style.display = 'block';
+											document.getElementById('head-dateId3').style.display = 'block';
+											var text1 = document.getElementById('head-dateId3').innerText;
+											document.getElementById('head-dateId3').innerHTML = text1.slice(0, -1) + "<span style='color:red;'>" + '*' + "</span>";
+											
+											document.getElementById('head-dateId4').style.display = 'block';
+											document.getElementById('selectionList').style.display = 'block';
+											document.getElementById('selectionList2').style.display = 'block';
+											document.getElementById('selectionList3').style.display = 'block';
+											document.getElementById('selectionList4').style.display = 'block';
+											document.getElementById('NlabelID1').style.display = 'block';
+											var text = document.getElementById('NlabelID1').innerText;
+											var lastChar = text.slice(-1);
+											document.getElementById('NlabelID1').innerHTML = text.slice(0, -1) + "<span style='color:red;'>" + lastChar + "</span>";
+											document.getElementById('id_name').style.display = 'block';
+											document.getElementById('NlabelID2').style.display = 'block';
+											var text = document.getElementById('NlabelID2').innerText;
+											document.getElementById('NlabelID2').innerHTML = text.slice(0, -1) + "<span style='color:red;'>" + lastChar + "</span>";
+											document.getElementById('id_last').style.display = 'block';
+											document.getElementById('NlabelID3').style.display = 'block';
+											var text = document.getElementById('NlabelID3').innerText;
+											document.getElementById('NlabelID3').innerHTML = text.slice(0, -1) + "<span style='color:red;'>" + lastChar + "</span>";
+											
+											document.getElementById('mail_last').style.display = 'block';
+											document.getElementById('NlabelID4').style.display = 'block';
+											var text = document.getElementById('NlabelID4').innerText;
+											document.getElementById('NlabelID4').innerHTML = text.slice(0, -1) + "<span style='color:red;'>" + lastChar + "</span>";
+											
+											document.getElementById('codeCountry').style.display = 'block';
+											document.getElementById("codeCountry").onchange = updateMaxLength;
+											document.getElementById('numberID').style.display = 'block';
+											document.getElementById('NlabelID5').style.display = 'block';
+											var text = document.getElementById('NlabelID5').innerText;
+											document.getElementById('NlabelID5').innerHTML = text.slice(0, -1) + "<span style='color:red;'>" + lastChar + "</span>";
+											
+											document.getElementById('passport_id').style.display = 'block';
+										});
+										</script>
+										<script>
+											function isValidEmail(email) {
+												// Регулярное выражение для проверки адреса электронной почты
+												var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+												return emailRegex.test(email);
+											}
+											function checkAllSelected() {
+												var select1 = document.getElementById('selectionList').value; 
+												var select2 = document.getElementById('selectionList2').value;
+												var select3 = document.getElementById('selectionList3').value;
+												var select4 = document.getElementById('selectionList4').value;
+												var id_name = document.getElementById('id_name').value;
+												var id_last = document.getElementById('id_last').value;
+												var id_mail = document.getElementById('mail_last').value;
+												var numberID = document.getElementById('numberID').value;
+												var passport_id = document.getElementById('passport_id').value;
+												if (isValidEmail(id_mail)){
+													BoolCheck = false
+													document.getElementById('mail_last').style.backgroundColor = "rgb(30 255 0 / 9%)"
+												}else { 
+													//'rgba(212, 212, 255, 0.035)
+													var bg = window.getComputedStyle(document.getElementById('mail_last')).backgroundColor;
+													if (id_mail == '' && bg == 'rgba(212, 212, 255, 0.035)' ){
+													} else {
+														BoolCheck = true
+														document.getElementById('mail_last').style.backgroundColor = "#ff000017"}
+													}
+												numberVal = document.getElementById('numberID');
+												var length = numberVal.value.toString().length
+												if (Max_digits != length ) {
+													document.getElementById('numberID').style.backgroundColor = "#ff000017";
+													BoolCheck = true
+													//подсказка	
+												}
+												else{ 
+													var bg = window.getComputedStyle(numberVal).backgroundColor;
+													if (bg == 'rgba(255, 0, 0, 0.09)'){
+														BoolCheck = false
+													document.getElementById('numberID').style.backgroundColor = "rgb(30 255 0 / 9%)";}
+												}
+												var bg_name = window.getComputedStyle(document.getElementById('id_name')).backgroundColor;
+												if (id_name == '' && bg_name != 'rgba(212, 212, 255, 0.035)'){
+													document.getElementById('id_name').style.backgroundColor = "#ff000017"
+													var BoolCheck = true											
+												} else {
+													if (bg_name == 'rgba(212, 212, 255, 0.035)' && id_name == ''){
+													} else{
+														BoolCheck = false
+													document.getElementById('id_name').style.backgroundColor = "rgb(30 255 0 / 9%)"
+												}
+												}
+												var bg_last = window.getComputedStyle(document.getElementById('id_last')).backgroundColor;
+												if (id_last == '' && bg_last != 'rgba(212, 212, 255, 0.035)'){
+													document.getElementById('id_last').style.backgroundColor = "#ff000017"
+													var BoolCheck = true											
+												} else {
+													if (bg_last == 'rgba(212, 212, 255, 0.035)' && id_last == ''){
+													} else{
+														BoolCheck = false
+													document.getElementById('id_last').style.backgroundColor = "rgb(30 255 0 / 9%)"
+												}
+												}
+												if (BoolCheck){
+													return
+												}
+												if (select1 && select3 && id_name && id_last && id_mail && numberID && passport_id ) {
+													var BoolCheck = false											
+													var DateVal = document.getElementsByName("calendar")[0].value;
+													var ctnID = document.getElementById('ctnID');
+													var inputElement = document.getElementById('submitButton');
+													if (inputElement) {
+													} else {
+														inputElement = document.createElement('input');
+														inputElement.type = 'submit';
+														inputElement.id = 'submitButton';
+														inputElement.name = 'dynamicInput';
+														inputElement.value = "get";
+														inputElement.onclick = "submit()"
+														inputElement.style.marginTop = "30px";
+														ctnID.appendChild(inputElement);
+														inputElement.addEventListener('click', submit);
+													}
+												}
+											}
+											var selectsAndInputs = document.querySelectorAll('select, input');
+											selectsAndInputs.forEach(function(element) {
+												element.addEventListener('change', checkAllSelected);
+											});
+										</script>
+										<script>
+											var inputElement = document.getElementById('submitButton');
+											function submit(){
+												var select1 = document.getElementById('selectionList').value;
+												var select1 = "";
+												var selectedOption = document.querySelector('#selectionList option:checked');
+												if (selectedOption) {
+													select1 = selectedOption.textContent.trim();
+												}
+												var dateEvent = document.getElementsByName('calendar')[0].value
+												var selectedDate = new Date(dateEvent);
+												var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+												var dayOfWeek = days[selectedDate.getDay()];
+												var selectedDate = new Date(dateEvent);
+												// Извлекаем год, месяц и день из объекта Date
+												var year = selectedDate.getFullYear();
+												var month = selectedDate.getMonth() + 1; // Месяцы в JavaScript начинаются с 0
+												var day = selectedDate.getDate();
+												var Date_Label = day.toString()+ '.' + month.toString() + '.' + year
+												var select2 = document.getElementById('selectionList2').value;
+												var select3 = document.getElementById('selectionList3').value;
+												var select4 = document.getElementById('selectionList4').value;
+												var id_name = document.getElementById('id_name').value;
+												var id_last = document.getElementById('id_last').value;
+												var mail_last = document.getElementById('mail_last').value;
+												var codeCountry = document.getElementById('codeCountry').value;
+												var numberID = '+' + codeCountry+ document.getElementById('numberID').value;
+												var passport_id = document.getElementById('passport_id').value;
+												var inputElement = document.getElementById('submitButton');
+												window.location.href = "{% url 'Main:WriteDateCustemer' %}" + 
+												"?select1="+ select1 
+												+"&select2=" + select2 
+												+"&select3=" + select3 
+												+"&select4=" + select4 
+												+ "&id_name=" + id_name 
+												+"&id_last=" + id_last
+												+ "&id_mail=" + mail_last 
+												+"&dateEvent=" + dateEvent
+												+"&Date_Label=" + Date_Label
+												+"&dateEventHolidayOrNot=" + dayOfWeek
+												+"&numberID=" +numberID
+												+ "&passport_id="+ passport_id
+												; 
+											}
+										</script>
+										
+										</div></div>
+								</div>
+							</section>
+							
+
+						<!-- Two -->
+							
+
+						<!-- Three -->
+						
+					</div>
+				<!-- Contact -->
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+			</div>
+		<!-- Scripts -->
+			<script src="{% static "Main/js/jquery.min.js"%}"></script>
+			<script src="{% static "Main/js/jquery.scrolly.min.js"%}"></script>
+			<script src="{% static "Main/js/jquery.scrollex.min.js"%}"></script>
+			<script src="{% static "Main/js/browser.min.js"%}"></script>
+			<script src="{% static "Main/js/breakpoints.min.js"%}"></script>
+			<script src="{% static "Main/js/util.js"%}"></script>
+			<script src="{% static "Main/js/main.js"%}"></script>
+	</body>
+</html>
